@@ -164,7 +164,8 @@ namespace AppEL.Controllers
                 Title = lesson.Title,
                 Description = lesson.Description,
                 Order = lesson.Order,
-                IsPublished = lesson.IsPublished
+                IsPublished = lesson.IsPublished,
+                VideoPath = lesson.VideoPath // Ensure VideoPath is populated
             };
 
             return View(viewModel);
@@ -219,7 +220,7 @@ namespace AppEL.Controllers
                         // Delete old video if exists
                         if (!string.IsNullOrEmpty(lesson.VideoPath))
                         {
-                            var oldVideoPath = Path.Combine(_webHostEnvironment.WebRootPath, lesson.VideoPath.TrimStart('/'));
+                            var oldVideoPath = Path.Combine(_webHostEnvironment.ContentRootPath, lesson.VideoPath.TrimStart('/')); // Use ContentRootPath
                             if (System.IO.File.Exists(oldVideoPath))
                             {
                                 System.IO.File.Delete(oldVideoPath);
@@ -282,10 +283,18 @@ namespace AppEL.Controllers
                 // Delete video if exists
                 if (!string.IsNullOrEmpty(lesson.VideoPath))
                 {
-                    var videoPath = Path.Combine(_webHostEnvironment.WebRootPath, lesson.VideoPath.TrimStart('/'));
-                    if (System.IO.File.Exists(videoPath))
+                    try
                     {
-                        System.IO.File.Delete(videoPath);
+                        var videoPath = Path.Combine(_webHostEnvironment.ContentRootPath, lesson.VideoPath.TrimStart('/'));
+                        if (System.IO.File.Exists(videoPath))
+                        {
+                            System.IO.File.Delete(videoPath);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogWarning(ex, "Could not delete video file for lesson {LessonId}", id);
+                        // Continue with lesson deletion even if video file deletion fails
                     }
                 }
 
@@ -293,7 +302,8 @@ namespace AppEL.Controllers
                 _jsonFileService.SaveCourses(courses);
 
                 _logger.LogInformation("Lesson {LessonId} deleted from course {CourseId}", id, courseId);
-                return Json(new { success = true });
+                TempData["SuccessMessage"] = $"Bài học '{lesson.Title}' đã được xóa thành công!";
+                return Json(new { success = true, message = $"Bài học '{lesson.Title}' đã được xóa thành công!" });
             }
             catch (Exception ex)
             {

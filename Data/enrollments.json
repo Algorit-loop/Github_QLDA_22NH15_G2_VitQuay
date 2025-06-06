@@ -230,5 +230,89 @@
       "EnrollmentCount": 0,
       "Rating": 0
     }
+  },
+  {
+    "Id": "4189dd9b-3925-4909-a2c1-e295651fdd68",
+    "UserId": "25023525-29be-49d6-bee5-8c809fd0bdfd",
+    "UserName": "Tr\u1ECBnh Minh \u0110\u1EA1t",
+    "CourseId": "7874cf7b-dc31-4215-baf8-08bb4ca9899c",
+    "EnrolledAt": "2025-06-06T18:32:34.1183535+07:00",
+    "CompletedAt": null,
+    "CompletedLessons": [],
+    "Progress": 0,
+    "Course": {
+      "Id": "7874cf7b-dc31-4215-baf8-08bb4ca9899c",
+      "Title": "abc23",
+      "Description": "zxcc",
+      "ShortDescription": "zxxcz",
+      "Lessons": [
+        {
+          "Id": "417accf6-857b-4db8-bdb8-63cfe65c9449",
+          "CourseId": "7874cf7b-dc31-4215-baf8-08bb4ca9899c",
+          "Title": "zccc",
+          "Description": "qeqwe",
+          "VideoPath": "/Data/coursevideo/7874cf7b-dc31-4215-baf8-08bb4ca9899c/417accf6-857b-4db8-bdb8-63cfe65c9449.webm",
+          "Order": 1,
+          "CreatedAt": "2025-06-05T17:25:49.8961597+07:00",
+          "UpdatedAt": null,
+          "IsPublished": true,
+          "Duration": "00:00:00"
+        }
+      ],
+      "Price": 20000,
+      "InstructorId": "admin-123",
+      "InstructorName": "Administrator",
+      "ImageUrl": "/uploads/courses/f6a2dd87-eb73-4dee-821c-15b6e32d19e9.png",
+      "Level": "Advanced",
+      "Category": "Programming",
+      "Duration": 2,
+      "CreatedAt": "2025-06-05T17:25:35.3402936+07:00",
+      "UpdatedAt": null,
+      "IsPublished": true,
+      "EnrollmentCount": 1,
+      "Rating": 0
+    }
+  },
+  {
+    "Id": "b276d7ba-325f-499e-a50b-c26d37c8abb8",
+    "UserId": "25023525-29be-49d6-bee5-8c809fd0bdfd",
+    "UserName": "Tr\u1ECBnh Minh \u0110\u1EA1t",
+    "CourseId": "2290ec75-85ed-4772-91bd-1e135710bd96",
+    "EnrolledAt": "2025-06-06T22:30:29.0491541+07:00",
+    "CompletedAt": null,
+    "CompletedLessons": [],
+    "Progress": 0,
+    "Course": {
+      "Id": "2290ec75-85ed-4772-91bd-1e135710bd96",
+      "Title": "zczc",
+      "Description": "xczx",
+      "ShortDescription": "xcc",
+      "Lessons": [
+        {
+          "Id": "f2f16c1a-7f28-4aab-9e21-79fbe73482d7",
+          "CourseId": "2290ec75-85ed-4772-91bd-1e135710bd96",
+          "Title": "zc",
+          "Description": "\u0111a",
+          "VideoPath": "/Data/coursevideo/2290ec75-85ed-4772-91bd-1e135710bd96/f2f16c1a-7f28-4aab-9e21-79fbe73482d7.mp4",
+          "Order": 1,
+          "CreatedAt": "2025-06-05T15:14:25.0411653+07:00",
+          "UpdatedAt": "2025-06-06T18:57:40.5711056+07:00",
+          "IsPublished": true,
+          "Duration": "00:00:00"
+        }
+      ],
+      "Price": 100,
+      "InstructorId": "admin-123",
+      "InstructorName": "Administrator",
+      "ImageUrl": "/uploads/courses/bebcefef-f6c9-4bd6-846a-66708d7ab55f.png",
+      "Level": "Intermediate",
+      "Category": "Programming",
+      "Duration": 100,
+      "CreatedAt": "2025-06-05T13:48:42.9094498+07:00",
+      "UpdatedAt": "2025-06-05T13:55:00+07:00",
+      "IsPublished": true,
+      "EnrollmentCount": 2,
+      "Rating": 0
+    }
   }
 ]

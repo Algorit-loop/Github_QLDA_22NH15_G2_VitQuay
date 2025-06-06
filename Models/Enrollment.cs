@@ -5,15 +5,13 @@ namespace AppEL.Models
     public class Enrollment
     {
         public string Id { get; set; } = Guid.NewGuid().ToString();
-        public string UserId { get; set; }
-        public string UserName { get; set; }
-        public string CourseId { get; set; }
+        public required string UserId { get; set; }
+        public required string UserName { get; set; }
+        public required string CourseId { get; set; }
         public DateTime EnrolledAt { get; set; } = DateTime.Now;
         public DateTime? CompletedAt { get; set; }
         public List<string> CompletedLessons { get; set; } = new();
-        public float Progress => Course?.Lessons?.Count > 0 
-            ? (float)CompletedLessons.Count / Course.Lessons.Count * 100 
-            : 0;
-        public Course Course { get; set; }
+        public double Progress { get; set; } = 0; // Changed to a settable property, type double for precision
+        public required Course Course { get; set; }
     }
 }

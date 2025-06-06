@@ -1,0 +1,221 @@
+@model AppEL.ViewModels.ChooseRoleExternalViewModel
+
+@{
+    ViewData["Title"] = "Chọn vai trò của bạn";
+}
+
+<div class="auth-page py-5" data-aos="fade-up">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="auth-wrapper">
+                    <div class="row g-0">
+                        <div class="col-lg-6 d-none d-lg-block">
+                            <div class="auth-image-wrapper">
+                                <div class="auth-image">
+                                    <div class="overlay"></div>
+                                    <div class="auth-quote">
+                                        <div class="quote-icon">
+                                            <i class="fas fa-quote-left"></i>
+                                        </div>
+                                        <p class="quote-text">Giáo dục là vũ khí mạnh nhất mà bạn có thể sử dụng để thay đổi thế giới</p>
+                                        <p class="quote-author">- Nelson Mandela</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-6">
+                            <div class="auth-form-container">
+                                <div class="auth-header text-center mb-4">
+                                    <h2 class="auth-title">@ViewData["Title"]</h2>
+                                    <p class="auth-subtitle">Một bước cuối cùng để hoàn tất đăng ký</p>
+                                </div>
+                                
+                                <div class="text-center mb-4">
+                                    <div class="user-avatar mx-auto mb-3">
+                                        <i class="fas fa-user-circle fa-5x text-primary"></i>
+                                    </div>
+                                    <h5 class="welcome-text">Chào mừng, <span class="text-primary">@Model.FullName</span>!</h5>
+                                    <p class="email-text"><i class="fas fa-envelope me-2"></i>@Model.Email</p>
+                                    <div class="provider-badge my-2">
+                                        <span class="badge bg-light text-dark">
+                                            <i class="fab fa-google text-danger me-2"></i>Tài khoản @Model.LoginProvider
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <form asp-action="ChooseRoleExternal" method="post" class="auth-form">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <input type="hidden" asp-for="Email" />
+                                    <input type="hidden" asp-for="FullName" />
+                                    <input type="hidden" asp-for="LoginProvider" />
+                                    <input type="hidden" asp-for="ProviderKey" />
+
+                                    <div class="mb-4">
+                                        <p class="fw-bold mb-3">Vai trò của bạn trong E-Learning là gì?</p>
+                                        
+                                        <div class="role-selection">
+                                            <div class="role-options">
+                                                <div class="form-check role-card mb-3">
+                                                    <input class="form-check-input" type="radio" name="SelectedRole" id="teacher-role" value="1">
+                                                    <label class="form-check-label role-label d-flex align-items-center" for="teacher-role">
+                                                        <div class="role-icon me-3">
+                                                            <i class="fas fa-chalkboard-teacher"></i>
+                                                        </div>
+                                                        <div class="role-info">
+                                                            <span class="role-title">Giáo viên</span>
+                                                            <span class="role-desc">Tôi muốn tạo khóa học và giảng dạy</span>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check role-card">
+                                                    <input class="form-check-input" type="radio" name="SelectedRole" id="student-role" value="2" checked>
+                                                    <label class="form-check-label role-label d-flex align-items-center" for="student-role">
+                                                        <div class="role-icon me-3">
+                                                            <i class="fas fa-user-graduate"></i>
+                                                        </div>
+                                                        <div class="role-info">
+                                                            <span class="role-title">Học sinh</span>
+                                                            <span class="role-desc">Tôi muốn học và khám phá khóa học</span>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <span asp-validation-for="SelectedRole" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary btn-block w-100">
+                                            <i class="fas fa-check-circle me-2"></i>Hoàn tất đăng ký
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        // Hiệu ứng khi chọn vai trò
+        document.addEventListener('DOMContentLoaded', function() {
+            const roleCards = document.querySelectorAll('.role-card');
+            
+            roleCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // Xóa lớp active từ tất cả thẻ
+                    roleCards.forEach(c => c.classList.remove('active'));
+                    // Thêm lớp active vào thẻ được chọn
+                    this.classList.add('active');
+                    // Đảm bảo radio button được chọn
+                    this.querySelector('input[type="radio"]').checked = true;
+                });
+                
+                // Đánh dấu active ban đầu dựa trên input đã chọn
+                const radio = card.querySelector('input[type="radio"]');
+                if (radio.checked) {
+                    card.classList.add('active');
+                }
+            });
+        });
+    </script>
+}
+
+<style>
+    .user-avatar {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto;
+        background-color: #f5f8ff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .welcome-text {
+        font-size: 1.25rem;
+        font-weight: 600;
+    }
+    
+    .email-text {
+        color: #6c757d;
+        font-size: 0.9rem;
+    }
+    
+    .role-selection {
+        margin: 1rem 0;
+    }
+    
+    .role-card {
+        padding: 1rem;
+        border: 1px solid #e0e0e0;
+        border-radius: 0.5rem;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        margin-bottom: 1rem;
+    }
+    
+    .role-card.active {
+        border-color: var(--primary);
+        background-color: rgba(67, 97, 238, 0.05);
+        box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+    }
+    
+    .role-card:hover {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.1);
+    }
+    
+    .role-label {
+        width: 100%;
+        cursor: pointer;
+    }
+    
+    .role-icon {
+        font-size: 1.5rem;
+        width: 50px;
+        height: 50px;
+        background-color: #f5f8ff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary);
+    }
+    
+    .role-info {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .role-title {
+        font-weight: 600;
+        font-size: 1rem;
+    }
+    
+    .role-desc {
+        font-size: 0.85rem;
+        color: #6c757d;
+    }
+    
+    .form-check-input {
+        margin-top: 1.1rem;
+    }
+    
+    .provider-badge {
+        display: inline-block;
+    }
+    
+    .provider-badge .badge {
+        padding: 0.5rem 1rem;
+        box-shadow: var(--shadow-sm);
+    }
+</style>

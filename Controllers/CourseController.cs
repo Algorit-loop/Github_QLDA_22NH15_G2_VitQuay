@@ -414,11 +414,21 @@ namespace AppEL.Controllers
                 var userId = User.FindFirst("UserId")?.Value;
                 if (string.IsNullOrEmpty(userId))
                 {
-                    return BadRequest("User ID not found");
+                    return Json(new { success = false, message = "User ID not found" });
                 }
 
                 await _enrollmentService.MarkLessonComplete(userId, courseId, lessonId);
-                return Json(new { success = true });
+                var enrollment = _enrollmentService.GetEnrollment(userId, courseId);
+                var course = _jsonFileService.GetCourses().FirstOrDefault(c => c.Id == courseId);
+                var totalLessonsCount = course?.Lessons.Count(l => l.IsPublished) ?? 0;
+
+                return Json(new { 
+                    success = true, 
+                    message = "Bài học đã được đánh dấu hoàn thành.", 
+                    progress = enrollment.Progress,
+                    completedLessonsCount = enrollment.CompletedLessons.Count,
+                    totalLessonsCount = totalLessonsCount
+                });
             }
             catch (Exception ex)
             {
@@ -436,11 +446,21 @@ namespace AppEL.Controllers
                 var userId = User.FindFirst("UserId")?.Value;
                 if (string.IsNullOrEmpty(userId))
                 {
-                    return BadRequest("User ID not found");
+                    return Json(new { success = false, message = "User ID not found" });
                 }
 
                 await _enrollmentService.UnmarkLessonComplete(userId, courseId, lessonId);
-                return Json(new { success = true });
+                var enrollment = _enrollmentService.GetEnrollment(userId, courseId);
+                var course = _jsonFileService.GetCourses().FirstOrDefault(c => c.Id == courseId);
+                var totalLessonsCount = course?.Lessons.Count(l => l.IsPublished) ?? 0;
+                
+                return Json(new { 
+                    success = true, 
+                    message = "Đã bỏ đánh dấu hoàn thành bài học.", 
+                    progress = enrollment.Progress,
+                    completedLessonsCount = enrollment.CompletedLessons.Count,
+                    totalLessonsCount = totalLessonsCount
+                });
             }
             catch (Exception ex)
             {

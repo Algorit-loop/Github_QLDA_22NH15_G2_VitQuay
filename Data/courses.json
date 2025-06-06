@@ -10,22 +10,10 @@
         "CourseId": "2290ec75-85ed-4772-91bd-1e135710bd96",
         "Title": "zc",
         "Description": "\u0111a",
-        "VideoPath": "/Data/coursevideo/2290ec75-85ed-4772-91bd-1e135710bd96/f2f16c1a-7f28-4aab-9e21-79fbe73482d7.webm",
+        "VideoPath": "/Data/coursevideo/2290ec75-85ed-4772-91bd-1e135710bd96/f2f16c1a-7f28-4aab-9e21-79fbe73482d7.mp4",
         "Order": 1,
         "CreatedAt": "2025-06-05T15:14:25.0411653+07:00",
-        "UpdatedAt": null,
-        "IsPublished": true,
-        "Duration": "00:00:00"
-      },
-      {
-        "Id": "76909a4f-d642-443c-98e7-e5249472eac1",
-        "CourseId": "2290ec75-85ed-4772-91bd-1e135710bd96",
-        "Title": "\u00E1dsad",
-        "Description": "\u0111\u00E1",
-        "VideoPath": "/Data/coursevideo/2290ec75-85ed-4772-91bd-1e135710bd96/76909a4f-d642-443c-98e7-e5249472eac1.webm",
-        "Order": 2,
-        "CreatedAt": "2025-06-05T15:35:03.6914202+07:00",
-        "UpdatedAt": "2025-06-05T15:35:21.2917873+07:00",
+        "UpdatedAt": "2025-06-06T18:57:40.5711056+07:00",
         "IsPublished": true,
         "Duration": "00:00:00"
       }
@@ -40,7 +28,7 @@
     "CreatedAt": "2025-06-05T13:48:42.9094498+07:00",
     "UpdatedAt": "2025-06-05T13:55:00+07:00",
     "IsPublished": true,
-    "EnrollmentCount": 2,
+    "EnrollmentCount": 3,
     "Rating": 0
   },
   {
@@ -48,20 +36,7 @@
     "Title": "aaaaa",
     "Description": "aaaaa",
     "ShortDescription": "\u00E2",
-    "Lessons": [
-      {
-        "Id": "1958895c-7a38-44f6-a057-72cac77ab6fa",
-        "CourseId": "4ab07b96-6c56-463d-b75b-d0164daf5ae7",
-        "Title": "C\u00E1ch bay l\u00EAn tr\u1EDDi",
-        "Description": "1 2 3 zo",
-        "VideoPath": "/Data/coursevideo/4ab07b96-6c56-463d-b75b-d0164daf5ae7/1958895c-7a38-44f6-a057-72cac77ab6fa.webm",
-        "Order": 1,
-        "CreatedAt": "2025-06-05T17:01:57.3691976+07:00",
-        "UpdatedAt": "2025-06-05T17:11:52.2438803+07:00",
-        "IsPublished": true,
-        "Duration": "00:00:00"
-      }
-    ],
+    "Lessons": [],
     "Price": 500000,
     "InstructorId": "admin-123",
     "InstructorName": "Administrator",
@@ -95,51 +70,31 @@
     "Rating": 0
   },
   {
-    "Id": "dbd17b42-ad41-4f45-b0a4-a4077ba70854",
-    "Title": "lz",
-    "Description": "\u00E2csd",
-    "ShortDescription": "zxc",
-    "Lessons": [
-      {
-        "Id": "ae04070a-63e7-449d-a01e-bad16eb7ca6c",
-        "CourseId": "dbd17b42-ad41-4f45-b0a4-a4077ba70854",
-        "Title": "123",
-        "Description": "3123",
-        "VideoPath": "/Data/coursevideo/dbd17b42-ad41-4f45-b0a4-a4077ba70854/ae04070a-63e7-449d-a01e-bad16eb7ca6c.webm",
-        "Order": 1,
-        "CreatedAt": "2025-06-05T17:24:21.2637588+07:00",
-        "UpdatedAt": null,
-        "IsPublished": true,
-        "Duration": "00:00:00"
-      }
-    ],
-    "Price": 1000000,
-    "InstructorId": "admin-123",
-    "InstructorName": "Administrator",
-    "ImageUrl": "/uploads/courses/1df2d1b6-e3a3-447f-816b-ee3f73318e8b.png",
-    "Level": "Advanced",
-    "Category": "Programming",
-    "Duration": 10,
-    "CreatedAt": "2025-06-05T17:23:33.2889887+07:00",
-    "UpdatedAt": "2025-06-05T17:23:43.1029218+07:00",
-    "IsPublished": true,
-    "EnrollmentCount": 1,
-    "Rating": 0
-  },
-  {
     "Id": "7874cf7b-dc31-4215-baf8-08bb4ca9899c",
     "Title": "abc23",
     "Description": "zxcc",
     "ShortDescription": "zxxcz",
     "Lessons": [
       {
-        "Id": "417accf6-857b-4db8-bdb8-63cfe65c9449",
+        "Id": "fdc971ad-1c4f-4892-ba75-b79c599f8aae",
         "CourseId": "7874cf7b-dc31-4215-baf8-08bb4ca9899c",
-        "Title": "zccc",
-        "Description": "qeqwe",
-        "VideoPath": "/Data/coursevideo/7874cf7b-dc31-4215-baf8-08bb4ca9899c/417accf6-857b-4db8-bdb8-63cfe65c9449.webm",
-        "Order": 1,
-        "CreatedAt": "2025-06-05T17:25:49.8961597+07:00",
+        "Title": "1231e",
+        "Description": "1221e",
+        "VideoPath": "/Data/coursevideo/7874cf7b-dc31-4215-baf8-08bb4ca9899c/fdc971ad-1c4f-4892-ba75-b79c599f8aae.mp4",
+        "Order": 2,
+        "CreatedAt": "2025-06-06T21:03:34.1366514+07:00",
+        "UpdatedAt": "2025-06-06T22:29:07.1224019+07:00",
+        "IsPublished": true,
+        "Duration": "00:00:00"
+      },
+      {
+        "Id": "2e661ad7-1f44-468e-b822-de90784b8fbb",
+        "CourseId": "7874cf7b-dc31-4215-baf8-08bb4ca9899c",
+        "Title": "e121",
+        "Description": "e1rer",
+        "VideoPath": "/Data/coursevideo/7874cf7b-dc31-4215-baf8-08bb4ca9899c/2e661ad7-1f44-468e-b822-de90784b8fbb.mp4",
+        "Order": 2,
+        "CreatedAt": "2025-06-06T22:11:07.0279642+07:00",
         "UpdatedAt": null,
         "IsPublished": true,
         "Duration": "00:00:00"
@@ -155,7 +110,7 @@
     "CreatedAt": "2025-06-05T17:25:35.3402936+07:00",
     "UpdatedAt": null,
     "IsPublished": true,
-    "EnrollmentCount": 1,
+    "EnrollmentCount": 2,
     "Rating": 0
   }
 ]

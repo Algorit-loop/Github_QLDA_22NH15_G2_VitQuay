@@ -14,5 +14,7 @@ namespace AppEL.Models
         [Required(ErrorMessage = "Vui lòng nhập mô tả")]
         [StringLength(500, ErrorMessage = "Mô tả không được vượt quá 500 ký tự")]
         public string Description { get; set; } = string.Empty;
+        
+        public bool IsFeatured { get; set; } = false;
     }
 }

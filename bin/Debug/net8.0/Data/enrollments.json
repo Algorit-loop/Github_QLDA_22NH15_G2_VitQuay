@@ -164,10 +164,8 @@
     "UserName": "ppp",
     "CourseId": "dbd17b42-ad41-4f45-b0a4-a4077ba70854",
     "EnrolledAt": "2025-06-05T17:23:57.9824332+07:00",
-    "CompletedAt": "2025-06-05T17:24:56.8851355+07:00",
-    "CompletedLessons": [
-      "ae04070a-63e7-449d-a01e-bad16eb7ca6c"
-    ],
+    "CompletedAt": null,
+    "CompletedLessons": [],
     "Progress": 0,
     "Course": {
       "Id": "dbd17b42-ad41-4f45-b0a4-a4077ba70854",
@@ -230,6 +228,48 @@
       "UpdatedAt": null,
       "IsPublished": true,
       "EnrollmentCount": 0,
+      "Rating": 0
+    }
+  },
+  {
+    "Id": "4189dd9b-3925-4909-a2c1-e295651fdd68",
+    "UserId": "25023525-29be-49d6-bee5-8c809fd0bdfd",
+    "UserName": "Tr\u1ECBnh Minh \u0110\u1EA1t",
+    "CourseId": "7874cf7b-dc31-4215-baf8-08bb4ca9899c",
+    "EnrolledAt": "2025-06-06T18:32:34.1183535+07:00",
+    "CompletedAt": null,
+    "CompletedLessons": [],
+    "Progress": 0,
+    "Course": {
+      "Id": "7874cf7b-dc31-4215-baf8-08bb4ca9899c",
+      "Title": "abc23",
+      "Description": "zxcc",
+      "ShortDescription": "zxxcz",
+      "Lessons": [
+        {
+          "Id": "417accf6-857b-4db8-bdb8-63cfe65c9449",
+          "CourseId": "7874cf7b-dc31-4215-baf8-08bb4ca9899c",
+          "Title": "zccc",
+          "Description": "qeqwe",
+          "VideoPath": "/Data/coursevideo/7874cf7b-dc31-4215-baf8-08bb4ca9899c/417accf6-857b-4db8-bdb8-63cfe65c9449.webm",
+          "Order": 1,
+          "CreatedAt": "2025-06-05T17:25:49.8961597+07:00",
+          "UpdatedAt": null,
+          "IsPublished": true,
+          "Duration": "00:00:00"
+        }
+      ],
+      "Price": 20000,
+      "InstructorId": "admin-123",
+      "InstructorName": "Administrator",
+      "ImageUrl": "/uploads/courses/f6a2dd87-eb73-4dee-821c-15b6e32d19e9.png",
+      "Level": "Advanced",
+      "Category": "Programming",
+      "Duration": 2,
+      "CreatedAt": "2025-06-05T17:25:35.3402936+07:00",
+      "UpdatedAt": null,
+      "IsPublished": true,
+      "EnrollmentCount": 1,
       "Rating": 0
     }
   }

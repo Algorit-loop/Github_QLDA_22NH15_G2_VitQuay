@@ -1,25 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "/home/algorit/Desktop/Project/QLKhoaHoc/AppEL/AppEL.csproj": {}
+    "C:\\Users\\dat11\\Downloads\\Github_QLDA_22NH15_G2_VitQuay-main\\AppEL.csproj": {}
   },
   "projects": {
-    "/home/algorit/Desktop/Project/QLKhoaHoc/AppEL/AppEL.csproj": {
+    "C:\\Users\\dat11\\Downloads\\Github_QLDA_22NH15_G2_VitQuay-main\\AppEL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/algorit/Desktop/Project/QLKhoaHoc/AppEL/AppEL.csproj",
+        "projectUniqueName": "C:\\Users\\dat11\\Downloads\\Github_QLDA_22NH15_G2_VitQuay-main\\AppEL.csproj",
         "projectName": "AppEL",
-        "projectPath": "/home/algorit/Desktop/Project/QLKhoaHoc/AppEL/AppEL.csproj",
-        "packagesPath": "/home/algorit/.nuget/packages/",
-        "outputPath": "/home/algorit/Desktop/Project/QLKhoaHoc/AppEL/obj/",
+        "projectPath": "C:\\Users\\dat11\\Downloads\\Github_QLDA_22NH15_G2_VitQuay-main\\AppEL.csproj",
+        "packagesPath": "C:\\Users\\dat11\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\dat11\\Downloads\\Github_QLDA_22NH15_G2_VitQuay-main\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/home/algorit/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\dat11\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -32,7 +38,13 @@
           "warnAsError": [
             "NU1605"
           ]
-        }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -41,6 +53,14 @@
             "Microsoft.AspNetCore.Authentication.Cookies": {
               "target": "Package",
               "version": "[2.3.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.Google": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.Extensions.Configuration.UserSecrets": {
+              "target": "Package",
+              "version": "[8.0.0, )"
             }
           },
           "imports": [
@@ -62,7 +82,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.116/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

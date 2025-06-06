@@ -30,7 +30,7 @@ namespace AppEL.Services
             System.IO.File.WriteAllText(_enrollmentsPath, jsonString);
         }
 
-        public async Task<Enrollment> EnrollUserInCourse(string userId, string userName, string courseId)
+        public Task<Enrollment> EnrollUserInCourse(string userId, string userName, string courseId)
         {
             var enrollments = GetEnrollments();
             var courses = _jsonFileService.GetCourses();
@@ -57,7 +57,7 @@ namespace AppEL.Services
             course.EnrollmentCount++;
             _jsonFileService.SaveCourses(courses);
 
-            return enrollment;
+            return Task.FromResult(enrollment);
         }
 
         public Enrollment GetEnrollment(string userId, string courseId)
@@ -75,46 +75,75 @@ namespace AppEL.Services
             return enrollments
                 .Where(e => e.UserId == userId)
                 .Select(e => {
-                    e.Course = courses.FirstOrDefault(c => c.Id == e.CourseId);
+                    e.Course = courses.FirstOrDefault(c => c.Id == e.CourseId) ?? new Course() { Id = e.CourseId };
                     return e;
                 })
                 .Where(e => e.Course != null)
                 .ToList();
         }
 
-        public async Task MarkLessonComplete(string userId, string courseId, string lessonId)
+        public Task MarkLessonComplete(string userId, string courseId, string lessonId)
         {
             var enrollments = GetEnrollments();
             var enrollment = enrollments.FirstOrDefault(e => e.UserId == userId && e.CourseId == courseId)
                 ?? throw new Exception("Enrollment not found");
 
+            var course = _jsonFileService.GetCourses().FirstOrDefault(c => c.Id == courseId)
+                ?? throw new Exception("Course not found for progress calculation");
+
             if (!enrollment.CompletedLessons.Contains(lessonId))
             {
                 enrollment.CompletedLessons.Add(lessonId);
                 
-                // Check if all lessons are completed
-                var course = _jsonFileService.GetCourses().FirstOrDefault(c => c.Id == courseId);
-                if (course != null && enrollment.CompletedLessons.Count == course.Lessons.Count)
+                // Recalculate progress
+                if (course.Lessons.Any())
+                {
+                    enrollment.Progress = (double)enrollment.CompletedLessons.Count / course.Lessons.Count * 100;
+                }
+                else
+                {
+                    enrollment.Progress = 0;
+                }
+
+                if (enrollment.CompletedLessons.Count == course.Lessons.Count)
                 {
                     enrollment.CompletedAt = DateTime.Now;
                 }
                 
                 SaveEnrollments(enrollments);
             }
+            
+            return Task.CompletedTask;
         }
 
-        public async Task UnmarkLessonComplete(string userId, string courseId, string lessonId)
+        public Task UnmarkLessonComplete(string userId, string courseId, string lessonId)
         {
             var enrollments = GetEnrollments();
             var enrollment = enrollments.FirstOrDefault(e => e.UserId == userId && e.CourseId == courseId)
                 ?? throw new Exception("Enrollment not found");
 
+            var course = _jsonFileService.GetCourses().FirstOrDefault(c => c.Id == courseId)
+                ?? throw new Exception("Course not found for progress calculation");
+
             if (enrollment.CompletedLessons.Contains(lessonId))
             {
                 enrollment.CompletedLessons.Remove(lessonId);
                 enrollment.CompletedAt = null; // Reset completion status
+
+                // Recalculate progress
+                if (course.Lessons.Any())
+                {
+                    enrollment.Progress = (double)enrollment.CompletedLessons.Count / course.Lessons.Count * 100;
+                }
+                else
+                {
+                    enrollment.Progress = 0;
+                }
+
                 SaveEnrollments(enrollments);
             }
+            
+            return Task.CompletedTask;
         }
     }
 }

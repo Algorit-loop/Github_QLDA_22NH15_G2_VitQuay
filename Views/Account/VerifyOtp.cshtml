@@ -1,0 +1,185 @@
+@model AppEL.ViewModels.VerifyOtpViewModel
+
+@{
+    ViewData["Title"] = "Xác thực OTP";
+}
+
+<div class="auth-page py-5" data-aos="fade-up">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="auth-wrapper">
+                    <div class="row g-0">
+                        <div class="col-lg-6 d-none d-lg-block">
+                            <div class="auth-image-wrapper">
+                                <div class="auth-image">
+                                    <div class="overlay"></div>
+                                    <div class="auth-quote">
+                                        <div class="quote-icon">
+                                            <i class="fas fa-quote-left"></i>
+                                        </div>
+                                        <p class="quote-text">Hãy học tập như thể bạn sẽ sống mãi mãi, hãy sống như thể ngày mai là ngày cuối cùng</p>
+                                        <p class="quote-author">- Mahatma Gandhi</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-6">
+                            <div class="auth-form-container">
+                                <div class="auth-header text-center mb-4">
+                                    <h2 class="auth-title">@ViewData["Title"]</h2>
+                                    <p class="auth-subtitle">Nhập mã OTP đã được gửi đến email của bạn</p>
+                                </div>
+                                
+                                <form method="post" asp-action="VerifyOtp" class="auth-form">
+                                    <input type="hidden" asp-for="Email" />
+
+                                    @if (!ViewData.ModelState.IsValid)
+                                    {
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            <div class="d-flex">
+                                                <div class="me-3">
+                                                    <i class="fas fa-exclamation-circle fa-lg"></i>
+                                                </div>
+                                                <div>
+                                                    <div asp-validation-summary="ModelOnly" class="list-unstyled mb-0"></div>
+                                                </div>
+                                            </div>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                    }
+                                    
+                                    <div class="form-group mb-4">
+                                        <label class="form-label d-block">Mã OTP</label>
+                                        <div class="otp-container d-flex justify-content-between">
+                                            <input type="text" asp-for="OtpCode" class="form-control text-center" maxlength="6" placeholder="Nhập mã 6 chữ số"/>
+                                        </div>
+                                        <span asp-validation-for="OtpCode" class="text-danger small"></span>
+                                        <p class="text-muted small mt-2">
+                                            <i class="fas fa-info-circle me-1"></i> Mã OTP có hiệu lực trong 5 phút
+                                        </p>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary btn-block w-100">
+                                            <i class="fas fa-check-circle me-2"></i>Xác thực
+                                        </button>
+                                    </div>
+                                </form>
+                                
+                                <div class="text-center mt-3">
+                                    <p class="mb-0">
+                                        <a href="#" id="resendOtp" class="auth-link">
+                                            <i class="fas fa-redo me-1"></i> Gửi lại mã
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        // Countdown timer for resend OTP
+        document.addEventListener('DOMContentLoaded', function() {
+            const resendBtn = document.getElementById('resendOtp');
+            let counter = 60;
+            
+            function startCountdown() {
+                resendBtn.classList.add('disabled');
+                
+                const interval = setInterval(function() {
+                    counter--;
+                    if (counter <= 0) {
+                        clearInterval(interval);
+                        resendBtn.innerHTML = '<i class="fas fa-redo me-1"></i> Gửi lại mã';
+                        resendBtn.classList.remove('disabled');
+                        counter = 60;
+                    } else {
+                        resendBtn.innerHTML = `<i class="fas fa-redo me-1"></i> Gửi lại sau (${counter}s)`;
+                    }
+                }, 1000);
+            }
+            
+            startCountdown();
+            
+            resendBtn.addEventListener('click', function(e) {
+                if (!this.classList.contains('disabled')) {
+                    e.preventDefault();
+                    
+                    // Get email from hidden field
+                    const email = document.querySelector('input[name="Email"]').value;
+                    
+                    // Send AJAX request to resend OTP
+                    fetch('/Account/ResendOtp', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                        },
+                        body: JSON.stringify({ email: email })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            showToast('Thành công', 'Mã OTP đã được gửi lại', 'success');
+                            startCountdown();
+                        } else {
+                            showToast('Lỗi', data.message || 'Không thể gửi lại mã OTP', 'error');
+                        }
+                    })
+                    .catch(error => {
+                        showToast('Lỗi', 'Đã xảy ra lỗi, vui lòng thử lại', 'error');
+                        console.error('Error:', error);
+                    });
+                }
+            });
+        });
+        
+        // Toast function
+        function showToast(title, message, type) {
+            if (!window.bootstrap) return;
+            
+            const toastContainer = document.getElementById('toast-container') || (() => {
+                const container = document.createElement('div');
+                container.id = 'toast-container';
+                container.className = 'toast-container position-fixed bottom-0 end-0 p-3';
+                container.style.zIndex = '5';
+                document.body.appendChild(container);
+                return container;
+            })();
+            
+            const toastEl = document.createElement('div');
+            toastEl.className = `toast align-items-center ${type === 'success' ? 'text-bg-success' : 'text-bg-danger'} border-0`;
+            toastEl.setAttribute('role', 'alert');
+            toastEl.setAttribute('aria-live', 'assertive');
+            toastEl.setAttribute('aria-atomic', 'true');
+            
+            toastEl.innerHTML = `
+                <div class="d-flex">
+                    <div class="toast-body">
+                        <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'} me-2"></i>
+                        <strong>${title}:</strong> ${message}
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            `;
+            
+            toastContainer.appendChild(toastEl);
+            const toast = new bootstrap.Toast(toastEl, { autohide: true, delay: 5000 });
+            toast.show();
+            
+            toastEl.addEventListener('hidden.bs.toast', () => {
+                toastEl.remove();
+            });
+        }
+    </script>
+}

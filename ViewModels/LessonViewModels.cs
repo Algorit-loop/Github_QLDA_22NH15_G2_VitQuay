@@ -25,11 +25,4 @@ namespace AppEL.ViewModels
 
         public bool IsPublished { get; set; }
     }
-
-    public class CourseLessonsViewModel
-    {
-        public string CourseId { get; set; } = string.Empty;
-        public string CourseTitle { get; set; } = string.Empty;
-        public List<Models.Lesson> Lessons { get; set; } = new();
-    }
 }

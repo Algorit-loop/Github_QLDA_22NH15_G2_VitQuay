@@ -7,7 +7,7 @@ namespace AppEL.ViewModels
     {
         public Course Course { get; set; } = null!;
         public bool IsEnrolled { get; set; }
-        public float Progress { get; set; }
+        public double Progress { get; set; } // Changed from float to double
         public List<string> CompletedLessons { get; set; } = new();
     }
 
@@ -54,5 +54,12 @@ namespace AppEL.ViewModels
         public string? Level { get; set; }
         public string? SortBy { get; set; }
         public bool IsManagement { get; set; }
+    }
+
+    public class CourseLessonsViewModel
+    {
+        public string CourseId { get; set; } = string.Empty;
+        public string CourseTitle { get; set; } = string.Empty;
+        public List<Lesson> Lessons { get; set; } = new();
     }
 }
