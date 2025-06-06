@@ -1,0 +1,32 @@
+[
+  {
+    "id": "programming",
+    "name": "Lập trình",
+    "description": "Học lập trình từ cơ bản đến nâng cao"
+  },
+  {
+    "id": "language",
+    "name": "Ngoại ngữ",
+    "description": "Làm chủ nhiều ngôn ngữ"
+  },
+  {
+    "id": "business",
+    "name": "Kinh doanh",
+    "description": "Phát triển kỹ năng kinh doanh"
+  },
+  {
+    "id": "design",
+    "name": "Thiết kế",
+    "description": "Sáng tạo không giới hạn"
+  },
+  {
+    "id": "marketing",
+    "name": "Marketing",
+    "description": "Chiến lược marketing hiệu quả"
+  },
+  {
+    "id": "music",
+    "name": "Âm nhạc",
+    "description": "Khám phá thế giới âm nhạc"
+  }
+]

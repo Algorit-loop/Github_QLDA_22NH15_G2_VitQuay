@@ -1,0 +1,202 @@
+@model List<Enrollment>
+@{
+    ViewData["Title"] = "Khóa học của tôi";
+}
+
+<div class="my-courses-page py-6">
+    <div class="container">
+        <!-- Page header -->
+        <div class="page-header mb-5 text-center" data-aos="fade-up">
+            <h1 class="display-4 fw-bold text-gradient mb-3">@ViewData["Title"]</h1>
+            <p class="lead text-muted">Tiếp tục hành trình học tập của bạn với các khóa học đã đăng ký</p>
+        </div>
+
+        @if (Model.Any())
+        {
+            <!-- Course stats summary -->
+            <div class="row mb-5 g-4 justify-content-center" data-aos="fade-up" data-aos-delay="100">
+                <div class="col-sm-6 col-md-4">
+                    <div class="stats-card bg-primary-subtle rounded-4 p-4 text-center h-100">
+                        <div class="stats-icon mb-3">
+                            <i class="fas fa-graduation-cap fa-2x text-primary"></i>
+                        </div>
+                        <h3 class="stats-number mb-1">@Model.Count</h3>
+                        <p class="stats-label mb-0">Khóa học đã đăng ký</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                    <div class="stats-card bg-success-subtle rounded-4 p-4 text-center h-100">
+                        <div class="stats-icon mb-3">
+                            <i class="fas fa-book-reader fa-2x text-success"></i>
+                        </div>
+                        <h3 class="stats-number mb-1">@Model.Sum(e => e.CompletedLessons.Count)</h3>
+                        <p class="stats-label mb-0">Bài học đã hoàn thành</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                    <div class="stats-card bg-info-subtle rounded-4 p-4 text-center h-100">
+                        <div class="stats-icon mb-3">
+                            <i class="fas fa-chart-line fa-2x text-info"></i>
+                        </div>
+                        <h3 class="stats-number mb-1">@(Model.Average(e => e.Progress).ToString("0.0"))%</h3>
+                        <p class="stats-label mb-0">Tiến độ trung bình</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course filters -->
+            <div class="my-courses-filter mb-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="d-flex flex-wrap gap-2 align-items-center justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <h2 class="h4 mb-0 me-3">Danh sách khóa học</h2>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <select class="form-select form-select-sm" id="courseSort">
+                            <option value="progress">Sắp xếp theo tiến độ</option>
+                            <option value="recent">Mới đăng ký nhất</option>
+                            <option value="name">Tên khóa học</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Courses grid -->
+            <div class="row g-4 mb-5" id="myCoursesList">
+                @foreach (var enrollment in Model)
+                {
+                    <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="@(Model.IndexOf(enrollment) * 50)">
+                        <div class="course-card h-100">
+                            <div class="course-card-img">
+                                <img src="@enrollment.Course.ImageUrl" class="img-fluid" alt="@enrollment.Course.Title">
+                                <div class="course-progress-badge @(enrollment.Progress >= 100 ? "completed" : "")">
+                                    <i class="fas @(enrollment.Progress >= 100 ? "fa-check-circle" : "fa-clock") me-1"></i>
+                                    @(enrollment.Progress >= 100 ? "Hoàn thành" : $"{enrollment.Progress.ToString("0.0")}%")
+                                </div>
+                            </div>
+                            <div class="course-card-body">
+                                <div class="course-category mb-2">
+                                    <span class="badge rounded-pill category-badge-@enrollment.Course.Category.ToLower()">
+                                        @enrollment.Course.Category
+                                    </span>
+                                    <span class="badge rounded-pill bg-light text-dark">
+                                        @enrollment.Course.Level
+                                    </span>
+                                </div>
+                                <h3 class="course-title h5">@enrollment.Course.Title</h3>
+                                <p class="course-description">@enrollment.Course.ShortDescription</p>
+                                
+                                <div class="course-progress mt-3">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <small class="text-muted">Tiến độ học tập</small>
+                                        <small class="text-muted fw-bold">@enrollment.Progress.ToString("0.0")%</small>
+                                    </div>
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar @(enrollment.Progress >= 100 ? "bg-success" : "")" 
+                                             role="progressbar" 
+                                             style="width: @enrollment.Progress%"
+                                             aria-valuenow="@enrollment.Progress" 
+                                             aria-valuemin="0" 
+                                             aria-valuemax="100">
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center mt-2">
+                                        <small class="text-muted">
+                                            <i class="fas fa-book me-1"></i> 
+                                            @enrollment.CompletedLessons.Count/@enrollment.Course.Lessons.Count bài học
+                                        </small>
+                                        <small class="text-muted">
+                                            <i class="fas fa-clock me-1"></i>
+                                            @enrollment.Course.Duration giờ
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="course-card-footer">
+                                <a asp-action="Details" asp-route-id="@enrollment.CourseId" class="btn btn-primary w-100">
+                                    <i class="fas fa-play-circle me-2"></i> Tiếp tục học
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="empty-state text-center py-5" data-aos="fade-up">
+                <div class="empty-state-icon mb-4">
+                    <i class="fas fa-graduation-cap fa-5x text-muted"></i>
+                </div>
+                <h2 class="h3 mb-3">Bạn chưa đăng ký khóa học nào!</h2>
+                <p class="text-muted mb-4">Khám phá các khóa học của chúng tôi và bắt đầu hành trình học tập ngay hôm nay.</p>
+                <a asp-action="Index" class="btn btn-primary btn-lg px-5">
+                    <i class="fas fa-search me-2"></i> Khám phá khóa học
+                </a>
+            </div>
+        }
+
+        <!-- Featured courses recommendation -->
+        @if (Model.Any())
+        {
+            <div class="recommended-section mt-5 pt-5 border-top" data-aos="fade-up">
+                <h2 class="h3 mb-4 text-center">Có thể bạn quan tâm</h2>
+                <div class="row g-4 justify-content-center">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="course-card recommended h-100">
+                            <div class="ribbon-wrapper">
+                                <div class="ribbon">Mới</div>
+                            </div>
+                            <div class="course-card-img">
+                                <img src="/uploads/courses/placeholder-1.jpg" class="img-fluid" alt="Khóa học đề xuất">
+                            </div>
+                            <div class="course-card-body">
+                                <div class="course-category mb-2">
+                                    <span class="badge rounded-pill category-badge-programming">
+                                        Lập trình
+                                    </span>
+                                </div>
+                                <h3 class="course-title h5">Lập trình Web với ReactJS</h3>
+                                <p class="course-description">Học cách xây dựng ứng dụng web hiện đại với ReactJS.</p>
+                            </div>
+                            <div class="course-card-footer">
+                                <a href="#" class="btn btn-outline-primary w-100">
+                                    <i class="fas fa-info-circle me-2"></i> Xem chi tiết
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            $('#courseSort').change(function() {
+                let sortType = $(this).val();
+                let coursesList = $('#myCoursesList');
+                let courses = coursesList.children('.col-md-6').get();
+                
+                courses.sort(function(a, b) {
+                    if (sortType === 'progress') {
+                        let progressA = parseFloat($(a).find('.progress-bar').attr('aria-valuenow'));
+                        let progressB = parseFloat($(b).find('.progress-bar').attr('aria-valuenow'));
+                        return progressB - progressA;
+                    } else if (sortType === 'name') {
+                        let titleA = $(a).find('.course-title').text();
+                        let titleB = $(b).find('.course-title').text();
+                        return titleA.localeCompare(titleB);
+                    }
+                    // Default to recent
+                    return 0;
+                });
+                
+                $.each(courses, function(i, course) {
+                    coursesList.append(course);
+                });
+            });
+        });
+    </script>
+}

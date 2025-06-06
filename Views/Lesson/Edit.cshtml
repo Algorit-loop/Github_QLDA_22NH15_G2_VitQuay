@@ -1,0 +1,514 @@
+@model AppEL.ViewModels.LessonViewModel
+
+@{
+    ViewData["Title"] = "Chỉnh sửa bài học";
+}
+
+<div class="lesson-page-wrapper">
+    <!-- Hero Section with Animated Background -->
+    <div class="lesson-hero-section">
+        <div class="lesson-floating-shape shape1"></div>
+        <div class="lesson-floating-shape shape2"></div>
+        <div class="lesson-floating-shape shape3"></div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="page-header text-center" data-aos="fade-up">
+                        <span class="badge bg-primary-subtle text-primary mb-2">
+                            <i class="fas fa-pencil-alt me-1"></i> Đang chỉnh sửa
+                        </span>
+                        <h1 class="display-4 fw-bold text-gradient mb-3">@ViewData["Title"]</h1>
+                        <p class="lead text-muted">Nâng cao chất lượng nội dung với các công cụ biên tập chuyên nghiệp</p>
+                    
+                        <nav aria-label="breadcrumb" class="mt-4 d-flex justify-content-center">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a asp-controller="Course" asp-action="Index">Khóa học</a></li>
+                                <li class="breadcrumb-item"><a asp-controller="Course" asp-action="Details" asp-route-id="@Model.CourseId">Chi tiết khóa học</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Chỉnh sửa bài học</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="lesson-edit-content py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <!-- Form Card with Shadow -->
+                    <div class="card lesson-form-card border-0 shadow-lg rounded-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card-body p-0">
+                            <div class="row g-0">
+                                <!-- Video Preview Section - Left Side -->
+                                <div class="col-lg-5">
+                                    <div class="video-preview-section h-100">
+                                        <div class="video-bg-overlay"></div>
+                                        <div class="video-content p-4 p-lg-5">
+                                            <h3 class="h4 fw-bold text-white mb-4">
+                                                <i class="fas fa-film me-2"></i> Video bài học
+                                            </h3>
+                                            
+                                            <div class="current-video-container mb-4">
+                                                @if (!string.IsNullOrEmpty(Model.VideoPath))
+                                                {
+                                                    <div class="current-video">
+                                                        <div class="video-player-wrapper mb-3">
+                                                            <div class="ratio ratio-16x9">
+                                                                <video controls class="rounded shadow-sm" id="currentVideo">
+                                                                    <source src="@(Model.VideoPath.StartsWith("/") ? Model.VideoPath : "/" + Model.VideoPath)" type="video/mp4">
+                                                                    Trình duyệt của bạn không hỗ trợ thẻ video.
+                                                                </video>
+                                                            </div>
+                                                        </div>
+                                                        <div class="video-info d-flex align-items-center justify-content-between">
+                                                            <div>
+                                                                <span class="badge bg-success-subtle text-success me-2">
+                                                                    <i class="fas fa-check-circle me-1"></i> Đã tải lên
+                                                                </span>
+                                                            </div>
+                                                            <div>
+                                                                <button type="button" class="btn btn-sm btn-outline-light rounded-pill" 
+                                                                     data-bs-toggle="tooltip" data-bs-placement="top" 
+                                                                     title="Nhấn để xem thông tin chi tiết về video">
+                                                                    <i class="fas fa-info-circle me-1"></i> Thông tin video
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="no-video p-4 bg-dark bg-opacity-25 text-center rounded">
+                                                        <i class="fas fa-film fa-3x text-white-50 mb-3"></i>
+                                                        <p class="text-white-50">Chưa có video được tải lên cho bài học này</p>
+                                                    </div>
+                                                }
+                                            </div>
+                                            
+                                            <div class="lesson-metadata">
+                                                <div class="row g-3">
+                                                    <div class="col-6">
+                                                        <div class="metadata-item">
+                                                            <div class="metadata-label text-white-50 small">Thứ tự</div>
+                                                            <div class="metadata-value text-white">
+                                                                <i class="fas fa-sort-numeric-down me-1"></i> 
+                                                                Bài @Model.Order
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="metadata-item">
+                                                            <div class="metadata-label text-white-50 small">Trạng thái</div>
+                                                            <div class="metadata-value text-white">
+                                                                @if (Model.IsPublished)
+                                                                {
+                                                                    <i class="fas fa-check-circle me-1 text-success"></i>
+                                                                    <span>Xuất bản</span>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <i class="fas fa-pencil-alt me-1 text-warning"></i>
+                                                                    <span>Bản nháp</span>
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <!-- Form Section - Right Side -->
+                                <div class="col-lg-7">
+                                    <div class="lesson-form-section p-4 p-lg-5">
+                                        <form method="post" enctype="multipart/form-data" class="lesson-form">
+                                            <input type="hidden" asp-for="Id" />
+                                            <input type="hidden" asp-for="CourseId" />
+                                            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                                            <h3 class="h4 mb-4">Thông tin bài học</h3>
+
+                                            <div class="mb-4">
+                                                <label asp-for="Title" class="form-label fw-semibold">
+                                                    <i class="fas fa-heading me-1 text-primary"></i> 
+                                                    Tiêu đề bài học <span class="text-danger">*</span>
+                                                </label>
+                                                <input asp-for="Title" class="form-control form-control-lg rounded-pill" placeholder="Nhập tiêu đề bài học" />
+                                                <span asp-validation-for="Title" class="text-danger small"></span>
+                                            </div>
+
+                                            <div class="mb-4">
+                                                <label asp-for="Description" class="form-label fw-semibold">
+                                                    <i class="fas fa-align-left me-1 text-primary"></i> 
+                                                    Mô tả <span class="text-danger">*</span>
+                                                </label>
+                                                <textarea asp-for="Description" class="form-control rounded-3" rows="5" placeholder="Mô tả nội dung bài học"></textarea>
+                                                <span asp-validation-for="Description" class="text-danger small"></span>
+                                            </div>
+                                            
+                                            <div class="row mb-4">
+                                                <div class="col-md-6">
+                                                    <label asp-for="Order" class="form-label fw-semibold">
+                                                        <i class="fas fa-sort-numeric-down me-1 text-primary"></i>
+                                                        Thứ tự bài học <span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text rounded-start-pill bg-light"><i class="fas fa-sort-numeric-down"></i></span>
+                                                        <input asp-for="Order" class="form-control rounded-end-pill" type="number" min="1" placeholder="Ví dụ: 1" />
+                                                    </div>
+                                                    <span asp-validation-for="Order" class="text-danger small"></span>
+                                                    <small class="form-text text-muted">Thứ tự hiển thị trong danh sách bài học</small>
+                                                </div>
+                                                
+                                                <div class="col-md-6">
+                                                    <label class="form-label fw-semibold">
+                                                        <i class="fas fa-globe me-1 text-primary"></i>
+                                                        Trạng thái bài học
+                                                    </label>
+                                                    <div class="form-check form-switch form-switch-lg publish-switch">
+                                                        <input asp-for="IsPublished" class="form-check-input" type="checkbox" />
+                                                        <label asp-for="IsPublished" class="form-check-label ms-2">
+                                                            <span id="lessonPublishStatus">Xuất bản</span>
+                                                            <small class="d-block text-muted" id="lessonPublishHint">Bài học hiển thị công khai khi được xuất bản</small>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="video-upload-section p-4 bg-light rounded-4 mb-4">
+                                                <h4 class="h6 fw-bold d-flex align-items-center mb-3">
+                                                    <span class="icon-circle bg-primary text-white me-2">
+                                                        <i class="fas fa-cloud-upload-alt"></i>
+                                                    </span>
+                                                    Thay đổi video
+                                                </h4>
+                                                
+                                                <div class="video-drop-area mb-3" id="videoDropArea">
+                                                    <input asp-for="VideoFile" class="d-none" type="file" accept="video/*" id="videoFileInput" />
+                                                    <label for="videoFileInput" class="video-upload-label">
+                                                        <div class="video-icon-wrapper">
+                                                            <i class="fas fa-cloud-upload-alt fa-2x mb-3"></i>
+                                                        </div>
+                                                        <div class="video-upload-text">
+                                                            <h5 class="h6 mb-2">Kéo thả video mới vào đây hoặc click để chọn</h5>
+                                                            <p class="text-muted small mb-0">Để trống nếu không muốn thay đổi video. Hỗ trợ các định dạng: MP4, WebM</p>
+                                                        </div>
+                                                        
+                                                        <div class="upload-progress d-none">
+                                                            <div class="progress" style="height: 6px;">
+                                                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" 
+                                                                    role="progressbar" style="width: 0%"></div>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                                
+                                                <div id="videoPreviewContainer" class="d-none mb-3">
+                                                    <div class="position-relative">
+                                                        <video id="videoPreview" class="w-100 rounded-3" controls></video>
+                                                        <button type="button" class="btn btn-sm btn-light position-absolute top-0 end-0 m-2 rounded-circle" id="removeVideo">
+                                                            <i class="fas fa-times"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="text-center mt-2">
+                                                        <span class="badge bg-primary-subtle text-primary">
+                                                            <i class="fas fa-info-circle me-1"></i> Video mới sẽ thay thế video hiện tại
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                
+                                                <span asp-validation-for="VideoFile" class="text-danger d-block"></span>
+                                            </div>
+                                            
+                                            <div class="mt-5 d-flex flex-column flex-md-row justify-content-between gap-3">
+                                                <a asp-controller="Course" asp-action="Details" asp-route-id="@Model.CourseId" class="btn btn-outline-secondary rounded-pill">
+                                                    <i class="fas fa-arrow-left me-2"></i> Quay lại
+                                                </a>
+                                                <button type="submit" class="btn btn-primary rounded-pill px-5">
+                                                    <i class="fas fa-save me-2"></i> Cập nhật bài học
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function() {
+            // Initialize AOS for animations
+            AOS.init({
+                duration: 800,
+                once: true,
+                easing: 'ease-in-out'
+            });
+            
+            // Toggle publish status text with animation
+            $('#IsPublished').change(function() {
+                const statusText = $('#lessonPublishStatus');
+                const hintText = $('#lessonPublishHint');
+                
+                statusText.fadeOut(200, function() {
+                    if ($('#IsPublished').is(':checked')) {
+                        statusText.text('Xuất bản').fadeIn(200);
+                        hintText.text('Bài học hiển thị công khai khi được xuất bản');
+                    } else {
+                        statusText.text('Lưu nháp').fadeIn(200);
+                        hintText.text('Bài học ở chế độ nháp và không hiển thị công khai');
+                    }
+                });
+            });
+            
+            // Trigger change event on page load to set correct text
+            $('#IsPublished').trigger('change');
+            
+            // File input handling with enhanced UI feedback
+            const videoInput = document.getElementById('videoFileInput');
+            const videoPreview = document.getElementById('videoPreview');
+            const videoPreviewContainer = document.getElementById('videoPreviewContainer');
+            const videoDropArea = document.getElementById('videoDropArea');
+            const removeVideoBtn = document.getElementById('removeVideo');                    // Handle file selection with validation
+                    videoInput.addEventListener('change', function(e) {
+                        if (this.files && this.files[0]) {
+                            const file = this.files[0];
+                            const fileSize = file.size / 1024 / 1024; // Convert to MB
+                            const fileType = file.type;
+                            
+                            // Check file type
+                            if (fileType !== 'video/mp4' && fileType !== 'video/webm') {
+                                showVideoError('Định dạng không hỗ trợ. Vui lòng sử dụng MP4 hoặc WebM.');
+                                return;
+                            }
+                            
+                            // Check file size (max 500MB)
+                            if (fileSize > 500) {
+                                showVideoError('Kích thước file quá lớn. Tối đa 500MB.');
+                                return;
+                            }
+                            
+                            // Show upload progress bar simulation
+                            const progressBar = videoDropArea.querySelector('.upload-progress');
+                            const progressBarInner = progressBar.querySelector('.progress-bar');
+                            progressBar.classList.remove('d-none');
+                            
+                            let progress = 0;
+                            const progressInterval = setInterval(function() {
+                                progress += 5;
+                                progressBarInner.style.width = progress + '%';
+                                progressBarInner.setAttribute('aria-valuenow', progress);
+                                
+                                if (progress >= 100) {
+                                    clearInterval(progressInterval);
+                                    
+                                    // Valid file, show preview with animation
+                                    setTimeout(function() {
+                                        $(videoDropArea).fadeOut(300, function() {
+                                            const videoUrl = URL.createObjectURL(file);
+                                            videoPreview.src = videoUrl;
+                                            videoPreviewContainer.classList.remove('d-none');
+                                            videoDropArea.classList.add('d-none');
+                                            progressBar.classList.add('d-none');
+                                            $(videoPreviewContainer).hide().fadeIn(300);
+                                            
+                                            // Show success message
+                                            $('.video-upload-section').append(
+                                                `<div class="alert alert-success mt-3 fade show" role="alert">
+                                                    <i class="fas fa-check-circle me-2"></i> Video mới đã được tải lên thành công!
+                                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                </div>`
+                                            );
+                                            
+                                            setTimeout(() => {
+                                                $('.alert').alert('close');
+                                            }, 3000);
+                                        });
+                                    }, 500);
+                                }
+                            }, 100);
+                        }
+                    });
+                    
+                    // Add video information modal
+                    if (document.querySelector('.video-info')) {
+                        const infoBtn = document.querySelector('.video-info button');
+                        if (infoBtn) {
+                            infoBtn.addEventListener('click', function() {
+                                const video = document.getElementById('currentVideo');
+                                const duration = video.duration;
+                                const minutes = Math.floor(duration / 60);
+                                const seconds = Math.floor(duration % 60);
+                                
+                                // Create modal
+                                const modalHTML = `
+                                <div class="modal fade" id="videoInfoModal" tabindex="-1" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content border-0 shadow">
+                                            <div class="modal-header bg-primary text-white">
+                                                <h5 class="modal-title">
+                                                    <i class="fas fa-film me-2"></i>
+                                                    Thông tin video
+                                                </h5>
+                                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body p-4">
+                                                <div class="video-details">
+                                                    <div class="mb-3">
+                                                        <strong>Thời lượng:</strong> 
+                                                        <span class="badge bg-primary-subtle text-primary">${minutes}:${seconds < 10 ? '0' + seconds : seconds}</span>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <strong>Định dạng:</strong> 
+                                                        <span class="badge bg-info-subtle text-info">MP4</span>
+                                                    </div>
+                                                    <div>
+                                                        <strong>Đường dẫn:</strong>
+                                                        <div class="input-group mt-1">
+                                                            <input type="text" class="form-control form-control-sm" value="${video.currentSrc}" readonly>
+                                                            <button class="btn btn-sm btn-outline-secondary" type="button">
+                                                                <i class="fas fa-copy"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`;
+                                
+                                // Append modal to body
+                                document.body.insertAdjacentHTML('beforeend', modalHTML);
+                                
+                                // Show modal
+                                const modal = new bootstrap.Modal(document.getElementById('videoInfoModal'));
+                                modal.show();
+                                
+                                // Remove modal from DOM when hidden
+                                document.getElementById('videoInfoModal').addEventListener('hidden.bs.modal', function() {
+                                    this.remove();
+                                });
+                            });
+                        }
+                    }
+            
+            function showVideoError(message) {
+                videoInput.value = '';
+                $('.video-upload-section').append(
+                    `<div class="alert alert-danger mt-3 fade show" role="alert">
+                        <i class="fas fa-exclamation-circle me-2"></i> ${message}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>`
+                );
+                
+                setTimeout(() => {
+                    $('.alert').alert('close');
+                }, 5000);
+            }
+            
+            // Handle remove video button with animation
+            removeVideoBtn.addEventListener('click', function() {
+                $(videoPreviewContainer).fadeOut(300, function() {
+                    videoInput.value = '';
+                    videoPreview.src = '';
+                    videoPreviewContainer.classList.add('d-none');
+                    videoPreviewContainer.style.display = '';
+                    videoDropArea.classList.remove('d-none');
+                    $(videoDropArea).hide().fadeIn(300);
+                });
+            });
+            
+            // Enhanced drag and drop
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                videoDropArea.addEventListener(eventName, preventDefaults, false);
+            });
+            
+            function preventDefaults(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            
+            ['dragenter', 'dragover'].forEach(eventName => {
+                videoDropArea.addEventListener(eventName, highlight, false);
+            });
+            
+            ['dragleave', 'drop'].forEach(eventName => {
+                videoDropArea.addEventListener(eventName, unhighlight, false);
+            });
+            
+            function highlight() {
+                videoDropArea.classList.add('highlight');
+                $('.video-icon-wrapper').addClass('animated pulse');
+            }
+            
+            function unhighlight() {
+                videoDropArea.classList.remove('highlight');
+                $('.video-icon-wrapper').removeClass('animated pulse');
+            }
+            
+            videoDropArea.addEventListener('drop', handleDrop, false);
+            
+            function handleDrop(e) {
+                const dt = e.dataTransfer;
+                const files = dt.files;
+                
+                if (files.length) {
+                    videoInput.files = files;
+                    const event = new Event('change');
+                    videoInput.dispatchEvent(event);
+                }
+            }
+            
+            // Progress indicators
+            $('.lesson-form').on('submit', function(e) {
+                if (!this.checkValidity()) {
+                    e.preventDefault();
+                    $(this).addClass('was-validated');
+                    
+                    // Scroll to first error with animation
+                    const firstError = $('.is-invalid:first');
+                    if (firstError.length) {
+                        $('html, body').animate({
+                            scrollTop: firstError.offset().top - 150
+                        }, 500);
+                    }
+                } else {
+                    // Show loading state on submit button
+                    const submitBtn = $(this).find('button[type="submit"]');
+                    const originalText = submitBtn.html();
+                    submitBtn.html('<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Đang cập nhật...');
+                    submitBtn.prop('disabled', true);
+                    
+                    // Return to normal after a few seconds (in case of slow response)
+                    setTimeout(() => {
+                        submitBtn.html(originalText);
+                        submitBtn.prop('disabled', false);
+                    }, 8000);
+                }
+            });
+            
+            // Form input focus effects
+            $('.form-control').on('focus', function() {
+                $(this).closest('.form-group').addClass('focused');
+            }).on('blur', function() {
+                $(this).closest('.form-group').removeClass('focused');
+            });
+            
+            // Add tooltip to video information
+            $('[data-bs-toggle="tooltip"]').tooltip();
+        });
+    </script>
+}

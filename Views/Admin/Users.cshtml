@@ -1,0 +1,351 @@
+@model List<AppEL.Models.User>
+
+@{
+    ViewData["Title"] = "Quản lý người dùng";
+}
+
+<div class="admin-section py-5">
+    <div class="container">
+        <!-- Header Section -->
+        <div class="admin-header mb-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2 class="admin-title text-gradient">
+                        <i class="fas fa-users me-2"></i>@ViewData["Title"]
+                    </h2>
+                    <p class="text-muted">Quản lý tất cả người dùng trong hệ thống</p>
+                </div>
+                <div class="col-md-6">
+                    <div class="search-wrapper float-md-end">
+                        <div class="input-group">
+                            <span class="input-group-text bg-transparent border-end-0">
+                                <i class="fas fa-search text-muted"></i>
+                            </span>
+                            <input type="text" id="userSearch" class="form-control border-start-0" placeholder="Tìm kiếm người dùng...">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="stat-card bg-gradient-primary">
+                    <div class="stat-card-body">
+                        <div class="stat-card-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-card-info">
+                            <h5 class="stat-card-title">Tổng số người dùng</h5>
+                            <p class="stat-card-value">@Model.Count</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-card bg-gradient-info">
+                    <div class="stat-card-body">
+                        <div class="stat-card-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="stat-card-info">
+                            <h5 class="stat-card-title">Học viên</h5>
+                            <p class="stat-card-value">@Model.Count(u => u.Role == UserRole.Student)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-card bg-gradient-warning">
+                    <div class="stat-card-body">
+                        <div class="stat-card-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <div class="stat-card-info">
+                            <h5 class="stat-card-title">Giảng viên</h5>
+                            <p class="stat-card-value">@Model.Count(u => u.Role == UserRole.Instructor)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @if (!Model.Any())
+        {
+            <div class="alert alert-info shadow-sm border-0 d-flex align-items-center">
+                <i class="fas fa-info-circle fa-2x me-3"></i>
+                <div>Chưa có người dùng nào trong hệ thống.</div>
+            </div>
+        }
+        else
+        {
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle user-table" id="usersTable">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="ps-4">Người dùng</th>
+                                    <th>Email</th>
+                                    <th>Vai trò</th>
+                                    <th>Ngày tạo</th>
+                                    <th class="text-end pe-4">Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var user in Model)
+                                {
+                                    <tr>
+                                        <td class="ps-4">
+                                            <div class="d-flex align-items-center">
+                                                <div class="user-avatar me-3">
+                                                    <i class="fas fa-user-circle"></i>
+                                                </div>
+                                                <div>
+                                                    <div class="fw-semibold">@user.FullName</div>
+                                                    <small class="text-muted">@user.Username</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>@user.Email</td>
+                                        <td>
+                                            <div class="role-badge @GetRoleBadgeClass(user.Role)">
+                                                <span class="role-icon"><i class="@GetRoleIcon(user.Role)"></i></span>
+                                                <span class="role-name">@user.Role</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <i class="far fa-calendar-alt me-2 text-muted"></i>
+                                                @user.CreatedAt.ToString("dd/MM/yyyy")
+                                            </div>
+                                        </td>
+                                        <td class="text-end pe-4">
+                                            <div class="btn-group">
+                                                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" 
+                                                        type="button" 
+                                                        data-bs-toggle="dropdown" 
+                                                        aria-expanded="false"
+                                                        @(user.Role == UserRole.Admin ? "disabled" : "")>
+                                                    <i class="fas fa-cog me-1"></i> Tùy chọn
+                                                </button>
+                                                <ul class="dropdown-menu dropdown-menu-end">
+                                                    <li>
+                                                        <a href="#" class="dropdown-item change-role-btn" data-user-id="@user.Id" data-bs-toggle="modal" data-bs-target="#changeRoleModal">
+                                                            <i class="fas fa-exchange-alt me-2"></i> Thay đổi vai trò
+                                                        </a>
+                                                    </li>
+                                                    <li><hr class="dropdown-divider"></li>
+                                                    <li>
+                                                        <a href="#" class="dropdown-item text-danger delete-user-btn" 
+                                                           data-user-id="@user.Id" 
+                                                           data-user-name="@user.FullName"
+                                                           data-bs-toggle="modal" 
+                                                           data-bs-target="#deleteUserModal">
+                                                            <i class="fas fa-trash-alt me-2"></i> Xóa người dùng
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Change Role Modal -->
+<div class="modal fade" id="changeRoleModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header bg-light">
+                <h5 class="modal-title">Thay đổi vai trò người dùng</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn đang thay đổi vai trò cho <span id="changeRoleUserName" class="fw-bold"></span></p>
+                <div class="mb-3">
+                    <label class="form-label">Chọn vai trò mới</label>
+                    <select id="newRoleSelect" class="form-select">
+                        @foreach (UserRole role in Enum.GetValues(typeof(UserRole)))
+                        {
+                            <option value="@role">@role</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" id="saveRoleBtn" class="btn btn-primary">
+                    <i class="fas fa-save me-1"></i> Lưu thay đổi
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete User Modal -->
+<div class="modal fade" id="deleteUserModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">Xác nhận xóa người dùng</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex align-items-center">
+                    <div class="modal-icon bg-danger text-white rounded-circle me-3">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div>
+                        <p>Bạn có chắc chắn muốn xóa người dùng <span id="deleteUserName" class="fw-bold"></span>?</p>
+                        <p class="text-danger mb-0"><small>Lưu ý: Hành động này không thể hoàn tác.</small></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" id="confirmDeleteBtn" class="btn btn-danger">
+                    <i class="fas fa-trash me-1"></i> Xác nhận xóa
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@functions {
+    string GetRoleBadgeClass(UserRole role)
+    {
+        return role switch
+        {
+            UserRole.Admin => "role-badge-admin",
+            UserRole.Instructor => "role-badge-instructor",
+            UserRole.Student => "role-badge-student",
+            _ => "role-badge-default"
+        };
+    }
+
+    string GetRoleIcon(UserRole role)
+    {
+        return role switch
+        {
+            UserRole.Admin => "fas fa-user-shield",
+            UserRole.Instructor => "fas fa-chalkboard-teacher",
+            UserRole.Student => "fas fa-user-graduate",
+            _ => "fas fa-user"
+        };
+    }
+}
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Search functionality
+            $("#userSearch").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#usersTable tbody tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+            
+            // Change role modal
+            $(".change-role-btn").on("click", function() {
+                const userId = $(this).data('user-id');
+                const userName = $(this).closest('tr').find('td:first-child .fw-semibold').text();
+                const currentRole = $(this).closest('tr').find('.role-name').text();
+                
+                $('#changeRoleUserName').text(userName);
+                $('#newRoleSelect').val(currentRole);
+                $('#saveRoleBtn').data('user-id', userId);
+            });
+            
+            // Save new role
+            $('#saveRoleBtn').on('click', function() {
+                const userId = $(this).data('user-id');
+                const newRole = $('#newRoleSelect').val();
+                
+                $.post('/Admin/ChangeUserRole', { userId, newRole })
+                    .done(function(response) {
+                        if (response.success) {
+                            showToast('Thành công', 'Đã cập nhật vai trò thành công!', 'success');
+                            setTimeout(() => location.reload(), 1500);
+                        } else {
+                            showToast('Lỗi', response.message, 'error');
+                        }
+                        $('#changeRoleModal').modal('hide');
+                    })
+                    .fail(function() {
+                        showToast('Lỗi', 'Có lỗi xảy ra khi cập nhật vai trò.', 'error');
+                        $('#changeRoleModal').modal('hide');
+                    });
+            });
+            
+            // Delete user modal
+            $(".delete-user-btn").on("click", function() {
+                const userId = $(this).data('user-id');
+                const userName = $(this).data('user-name');
+                
+                $('#deleteUserName').text(userName);
+                $('#confirmDeleteBtn').data('user-id', userId);
+            });
+            
+            // Confirm delete user
+            $('#confirmDeleteBtn').on('click', function() {
+                const userId = $(this).data('user-id');
+                
+                $.post('/Admin/DeleteUser', { userId })
+                    .done(function(response) {
+                        if (response.success) {
+                            showToast('Thành công', 'Người dùng đã được xóa thành công!', 'success');
+                            setTimeout(() => location.reload(), 1500);
+                        } else {
+                            showToast('Lỗi', response.message, 'error');
+                        }
+                        $('#deleteUserModal').modal('hide');
+                    })
+                    .fail(function() {
+                        showToast('Lỗi', 'Có lỗi xảy ra khi xóa người dùng.', 'error');
+                        $('#deleteUserModal').modal('hide');
+                    });
+            });
+            
+            // Toast notification function
+            function showToast(title, message, type) {
+                // Check if we have a toast container
+                if ($('#toast-container').length === 0) {
+                    $('body').append('<div id="toast-container" class="position-fixed bottom-0 end-0 p-3" style="z-index: 5"></div>');
+                }
+                
+                // Toast class based on type
+                const toastClass = type === 'success' ? 'text-bg-success' : 'text-bg-danger';
+                const iconClass = type === 'success' ? 'fas fa-check-circle' : 'fas fa-exclamation-circle';
+                
+                const toast = `
+                    <div class="toast align-items-center ${toastClass} border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="d-flex">
+                            <div class="toast-body">
+                                <i class="${iconClass} me-2"></i>
+                                <strong>${title}:</strong> ${message}
+                            </div>
+                            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                    </div>
+                `;
+                
+                $('#toast-container').append(toast);
+                const toastEl = $('#toast-container .toast:last');
+                const bsToast = new bootstrap.Toast(toastEl, {
+                    autohide: true,
+                    delay: 3000
+                });
+                bsToast.show();
+            }
+        });
+    </script>
+}

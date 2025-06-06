@@ -1,0 +1,328 @@
+@model AppEL.ViewModels.CourseListViewModel
+
+@{
+    ViewData["Title"] = Model.IsManagement ? "Quản lý khóa học" : "Khóa học";
+}
+
+<div class="course-header py-5 mb-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6" data-aos="fade-right">
+                @if (Model.IsManagement)
+                {
+                    <h1 class="display-5 fw-bold mb-3">Quản lý khóa học của tôi</h1>
+                    <p class="lead text-dark-emphasis mb-4">Tạo, cập nhật và quản lý các khóa học của bạn một cách dễ dàng</p>
+                    <a asp-action="Create" class="btn btn-gradient rounded-pill px-4 py-2">
+                        <i class="fas fa-plus me-2"></i>Thêm khóa học mới
+                    </a>
+                }
+                else
+                {
+                    <h1 class="display-5 fw-bold mb-3">Khám phá khóa học</h1>
+                    <p class="lead text-dark-emphasis mb-4">Chọn từ hàng trăm khóa học chất lượng cao từ các giảng viên chuyên nghiệp</p>
+                    @if (User.IsInRole("Admin") || User.IsInRole("Instructor"))
+                    {
+                        <a asp-action="ManageCourses" class="btn btn-outline-primary rounded-pill px-4 py-2">
+                            <i class="fas fa-cog me-2"></i>Quản lý khóa học của tôi
+                        </a>
+                    }
+                }
+            </div>
+            <div class="col-lg-6 text-center d-none d-lg-block" data-aos="fade-left">
+                <img src="/images/course-header.svg" alt="Courses" class="img-fluid header-image" style="max-height: 300px;">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container pb-5">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4 d-lg-none">
+        @if (Model.IsManagement)
+        {
+            <h2 class="h4 mb-0">Khóa học của tôi</h2>
+            <a asp-action="Create" class="btn btn-sm btn-primary">
+                <i class="fas fa-plus"></i> Thêm mới
+            </a>
+        }
+        else
+        {
+            <h2 class="h4 mb-0">Tất cả khóa học</h2>
+            @if (User.IsInRole("Admin") || User.IsInRole("Instructor"))
+            {
+                <a asp-action="ManageCourses" class="btn btn-sm btn-outline-primary">
+                    <i class="fas fa-cog"></i> Quản lý
+                </a>
+            }
+        }
+    </div>
+
+    <!-- Filter and Search -->
+    <div class="course-filter mb-5" data-aos="fade-up">
+        <div class="filter-card">
+            <form method="get" asp-action="Index" class="row g-3">
+                <div class="col-lg-4 col-md-6">
+                    <div class="search-container">
+                        <div class="input-group">
+                            <span class="input-group-text bg-transparent border-end-0"><i class="fas fa-search"></i></span>
+                            <input type="text" class="form-control ps-0 border-start-0" asp-for="SearchTerm" placeholder="Tìm kiếm theo tên hoặc từ khóa...">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="filter-select-container">
+                        <div class="filter-icon"><i class="fas fa-folder"></i></div>
+                        <select class="form-select filter-select" asp-for="Category">
+                            <option value="">Tất cả danh mục</option>
+                            <option value="Programming">Lập trình</option>
+                            <option value="Language">Ngoại ngữ</option>
+                            <option value="Business">Kinh doanh</option>
+                            <option value="Design">Thiết kế</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="filter-select-container">
+                        <div class="filter-icon"><i class="fas fa-signal"></i></div>
+                        <select class="form-select filter-select" asp-for="Level">
+                            <option value="">Tất cả cấp độ</option>
+                            <option value="Beginner">Cơ bản</option>
+                            <option value="Intermediate">Trung cấp</option>
+                            <option value="Advanced">Nâng cao</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <button type="submit" class="btn btn-primary filter-btn w-100">
+                        <i class="fas fa-filter me-2"></i>Áp dụng
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Message -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert custom-alert alert-success alert-dismissible fade show" role="alert">
+            <div class="alert-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="alert-content">
+                <strong>Thành công!</strong> @TempData["SuccessMessage"]
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <!-- Success Message -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle me-2"></i>@TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <!-- Course List -->
+    <div class="row g-4">
+        @if (!Model.Courses.Any())
+        {
+            <div class="col-12" data-aos="fade-up">
+                <div class="empty-state text-center py-5">
+                    <div class="empty-state-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3 class="mt-4">Không tìm thấy khóa học nào</h3>
+                    <p class="text-muted mb-4">Thử tìm kiếm với từ khóa khác hoặc điều chỉnh bộ lọc</p>
+                    <a asp-action="Index" class="btn btn-outline-primary">
+                        <i class="fas fa-sync-alt me-2"></i>Xem tất cả khóa học
+                    </a>
+                </div>
+            </div>
+        }
+        else
+        {
+            @foreach (var course in Model.Courses)
+            {
+                <div class="col-lg-4 col-md-6" data-aos="fade-up">
+                    <div class="course-card h-100">
+                        <div class="course-image-container">
+                            <img src="@(string.IsNullOrEmpty(course.ImageUrl) ? "/images/course-default.jpg" : course.ImageUrl)" 
+                                class="course-img" alt="@course.Title">
+                            <div class="course-overlay">
+                                <div class="course-overlay-content">
+                                    <a asp-action="Details" asp-route-id="@course.Id" class="btn btn-light rounded-circle course-preview-btn">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="course-badges">
+                                <span class="course-category-badge">@course.Category</span>
+                                <span class="course-level-badge">@course.Level</span>
+                            </div>
+                        </div>
+                        <div class="course-body">
+                            <h5 class="course-title">@course.Title</h5>
+                            <div class="course-meta">
+                                <div class="course-instructor">
+                                    <i class="fas fa-user-tie text-primary"></i>
+                                    <span>@(string.IsNullOrEmpty(course.InstructorName) ? "Giảng viên" : course.InstructorName)</span>
+                                </div>
+                                <div class="course-duration">
+                                    <i class="far fa-clock text-primary"></i>
+                                    <span>@course.Duration giờ</span>
+                                </div>
+                            </div>
+                            <p class="course-desc text-muted">@course.ShortDescription</p>
+                            <div class="course-stats">
+                                <div class="course-rating">
+                                    @for (int i = 1; i <= 5; i++)
+                                    {
+                                        <i class="fas fa-star @(i <= 4 ? "text-warning" : "text-muted")"></i>
+                                    }
+                                    <span class="ms-1">4.0</span>
+                                </div>
+                                <div class="course-students">
+                                    <i class="fas fa-user-graduate"></i>
+                                    <span>@(new Random().Next(20, 200)) học viên</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="course-footer">
+                            <div class="course-price">
+                                @if (course.Price > 0)
+                                {
+                                    <span class="price-value">@course.Price.ToString("N0") đ</span>
+                                }
+                                else
+                                {
+                                    <span class="free-course">Miễn phí</span>
+                                }
+                            </div>
+                            <div class="course-actions">
+                                @if (User.IsInRole("Admin") || (User.IsInRole("Instructor") && course.InstructorId == User.FindFirst("UserId")?.Value))
+                                {
+                                    <a asp-action="Edit" asp-route-id="@course.Id" class="btn btn-outline-primary course-action-btn" data-bs-toggle="tooltip" title="Chỉnh sửa">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <button type="button" class="btn btn-outline-danger course-action-btn" 
+                                            onclick="confirmDelete('@course.Id', '@course.Title')" data-bs-toggle="tooltip" title="Xóa">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                }
+                                <a asp-action="Details" asp-route-id="@course.Id" class="btn btn-primary course-detail-btn">
+                                    <i class="fas fa-info-circle me-2"></i>Chi tiết
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+    <!-- Pagination -->
+    <div class="course-pagination mt-5">
+        <nav aria-label="Course pagination">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0">
+                <h5 class="modal-title">Xác nhận xóa khóa học</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center py-4">
+                <div class="modal-icon mb-4">
+                    <i class="fas fa-exclamation-triangle text-warning"></i>
+                </div>
+                <h5 class="mb-3">Bạn chắc chắn muốn xóa?</h5>
+                <p class="text-muted">Khóa học "<span id="courseTitleSpan" class="fw-bold"></span>" sẽ bị xóa và không thể khôi phục lại.</p>
+            </div>
+            <div class="modal-footer border-top-0 justify-content-center">
+                <form id="deleteForm" method="post" asp-action="Delete">
+                    <input type="hidden" id="courseId" name="id" />
+                    <button type="button" class="btn btn-outline-secondary px-4" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-2"></i>Hủy bỏ
+                    </button>
+                    <button type="submit" class="btn btn-danger px-4 ms-2">
+                        <i class="fas fa-trash-alt me-2"></i>Xác nhận xóa
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            });
+            
+            // Delete confirmation
+            function confirmDelete(id, title) {
+                document.getElementById('courseId').value = id;
+                document.getElementById('courseTitleSpan').textContent = title;
+                new bootstrap.Modal(document.getElementById('deleteModal')).show();
+            }
+            
+            // Make confirmDelete available globally
+            window.confirmDelete = confirmDelete;
+            
+            // Filter animation
+            const filterSelects = document.querySelectorAll('.filter-select');
+            filterSelects.forEach(select => {
+                select.addEventListener('focus', function() {
+                    this.closest('.filter-select-container').classList.add('active');
+                });
+                
+                select.addEventListener('blur', function() {
+                    this.closest('.filter-select-container').classList.remove('active');
+                });
+            });
+            
+            // Course card hover effects
+            const courseCards = document.querySelectorAll('.course-card');
+            courseCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    const img = this.querySelector('.course-img');
+                    if (img) {
+                        img.style.transform = 'scale(1.1)';
+                    }
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    const img = this.querySelector('.course-img');
+                    if (img) {
+                        img.style.transform = 'scale(1)';
+                    }
+                });
+            });
+        });
+    </script>
+}

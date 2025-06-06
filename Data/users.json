@@ -1,0 +1,42 @@
+[
+  {
+    "Id": "admin-123",
+    "Username": "admin",
+    "Password": "admin123",
+    "Email": "admin@example.com",
+    "FullName": "Administrator",
+    "Role": 0,
+    "CreatedAt": "2025-06-05T00:00:00",
+    "Balance": 0
+  },
+  {
+    "Id": "405a88cf-2c60-4ba5-8911-305658b06abb",
+    "Username": "ppp",
+    "Password": "123123",
+    "Email": "ppp@gmailcom",
+    "FullName": "ppp",
+    "Role": 2,
+    "CreatedAt": "2025-06-05T13:16:25.8579188+07:00",
+    "Balance": 33329900
+  },
+  {
+    "Id": "25023525-29be-49d6-bee5-8c809fd0bdfd",
+    "Username": "minhdat",
+    "Password": "dat12345",
+    "Email": "dat11022005@gmail.com",
+    "FullName": "Tr\u1ECBnh Minh \u0110\u1EA1t",
+    "Role": 2,
+    "CreatedAt": "2025-06-06T17:02:53.0115164+07:00",
+    "Balance": 39900
+  },
+  {
+    "Id": "6342bded-42d8-4e8d-b5c0-2e925b51c02a",
+    "Username": "admin3",
+    "Password": "admin123",
+    "Email": "dat110220051@gmail.com",
+    "FullName": "Administrator",
+    "Role": 0,
+    "CreatedAt": "2025-06-06T18:48:37.4247454+07:00",
+    "Balance": 0
+  }
+]

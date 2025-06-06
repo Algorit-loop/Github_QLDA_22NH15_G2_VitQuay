@@ -1,0 +1,410 @@
+﻿@using AppEL.Services
+@{
+    ViewData["Title"] = "Trang chủ";
+    var jsonFileService = Context.RequestServices.GetService<JsonFileService>();
+}
+
+<!-- Hero Section with Modern Design -->
+<div class="hero-section position-relative py-5 mb-5">
+    <div class="hero-bg-shape"></div>
+    <div class="container py-4 position-relative">
+        <div class="row align-items-center">
+            <div class="col-lg-6 hero-text-area" data-aos="fade-right" data-aos-duration="1000">
+                <h1 class="display-4 fw-bold mb-4 text-gradient">Học tập là hành trình <span class="highlight-text">không ngừng nghỉ</span></h1>
+                <p class="lead mb-4 text-dark-emphasis">Khám phá hàng nghìn khóa học chất lượng từ các chuyên gia hàng đầu. Nâng cao kỹ năng của bạn ngay hôm nay!</p>
+                @if (!User.Identity?.IsAuthenticated ?? true)
+                {
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-start hero-buttons">
+                        <a asp-controller="Account" asp-action="Register" class="btn btn-gradient btn-lg px-4 me-md-3 rounded-pill">
+                            <i class="fas fa-user-plus me-2"></i>Đăng ký ngay
+                        </a>
+                        <a asp-controller="Course" asp-action="Index" class="btn btn-outline-primary btn-lg px-4 rounded-pill">
+                            <i class="fas fa-book-open me-2"></i>Xem khóa học
+                        </a>
+                    </div>
+                }
+                <div class="hero-stats d-flex mt-5">
+                    <div class="me-4">
+                        <span class="fw-bold fs-3 text-primary">100+</span>
+                        <p class="text-muted">Khóa học</p>
+                    </div>
+                    <div class="me-4">
+                        <span class="fw-bold fs-3 text-primary">50+</span>
+                        <p class="text-muted">Giảng viên</p>
+                    </div>
+                    <div>
+                        <span class="fw-bold fs-3 text-primary">10k+</span>
+                        <p class="text-muted">Học viên</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center" data-aos="fade-left" data-aos-duration="1000">
+                <div class="hero-image-wrapper">
+                    <img src="/images/hero-image.svg" alt="E-Learning" class="img-fluid floating-animation" />
+                    <div class="hero-blob"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Features Section with Modern Cards -->
+<section class="features py-6">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="section-subtitle">Ưu điểm vượt trội</span>
+            <h2 class="section-title">Tại sao chọn chúng tôi?</h2>
+            <div class="section-title-underline mx-auto"></div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="feature-card h-100 text-center p-4">
+                    <div class="feature-icon-wrapper mb-4">
+                        <i class="fas fa-laptop-code fa-2x text-primary"></i>
+                    </div>
+                    <h4 class="feature-title">Học mọi lúc, mọi nơi</h4>
+                    <p class="text-muted">Truy cập khóa học từ máy tính, tablet hoặc điện thoại của bạn. Học tập linh hoạt theo lịch trình cá nhân.</p>
+                    <div class="feature-hover-effect"></div>
+                </div>
+            </div>
+            
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="feature-card h-100 text-center p-4">
+                    <div class="feature-icon-wrapper mb-4">
+                        <i class="fas fa-chalkboard-teacher fa-2x text-primary"></i>
+                    </div>
+                    <h4 class="feature-title">Giảng viên chất lượng</h4>
+                    <p class="text-muted">Học từ các chuyên gia có nhiều năm kinh nghiệm trong ngành. Giảng viên tận tâm, giàu kiến thức thực tế.</p>
+                    <div class="feature-hover-effect"></div>
+                </div>
+            </div>
+            
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="feature-card h-100 text-center p-4">
+                    <div class="feature-icon-wrapper mb-4">
+                        <i class="fas fa-certificate fa-2x text-primary"></i>
+                    </div>
+                    <h4 class="feature-title">Chứng chỉ có giá trị</h4>
+                    <p class="text-muted">Nhận chứng chỉ sau khi hoàn thành khóa học. Được công nhận rộng rãi bởi các doanh nghiệp hàng đầu.</p>
+                    <div class="feature-hover-effect"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Popular Courses Section with Modern Design -->
+<section class="courses py-6 bg-light position-relative">
+    <div class="courses-bg-pattern"></div>
+    <div class="container position-relative">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="section-subtitle">Học tập không giới hạn</span>
+            <h2 class="section-title">Khóa học nổi bật</h2>
+            <div class="section-title-underline mx-auto"></div>
+        </div>
+        
+        <div class="courses-header d-flex justify-content-between align-items-center mb-4">
+            <div class="courses-filters">
+                <button class="btn btn-sm btn-filter active">Tất cả</button>
+                <button class="btn btn-sm btn-filter">Phổ biến</button>
+                <button class="btn btn-sm btn-filter">Mới nhất</button>
+            </div>
+            <a asp-controller="Course" asp-action="Index" class="btn btn-primary rounded-pill">
+                <i class="fas fa-th-list me-2"></i>Xem tất cả
+            </a>
+        </div>
+        
+        <div class="row g-4">
+            @{
+                var webHostEnv = Context.RequestServices.GetService(typeof(IWebHostEnvironment)) as IWebHostEnvironment;
+                var popularCourses = webHostEnv != null 
+                    ? new JsonFileService(webHostEnv).GetCourses()
+                        .Where(c => c.IsPublished)
+                        .OrderByDescending(c => c.EnrollmentCount)
+                        .Take(3)
+                        .ToList()
+                    : new List<AppEL.Models.Course>();
+            }
+            
+            @if (!popularCourses.Any())
+            {
+                <div class="col-12">
+                    <div class="alert alert-info rounded-lg shadow-sm border-0">
+                        <i class="fas fa-info-circle me-2"></i>
+                        Chưa có khóa học nào. Các khóa học sẽ sớm được cập nhật.
+                    </div>
+                </div>
+            }
+            else
+            {
+                @foreach (var course in popularCourses)
+                {
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="course-card h-100">
+                            <div class="course-image-container">
+                                <img src="@(string.IsNullOrEmpty(course.ImageUrl) ? "/images/course-default.jpg" : course.ImageUrl)" 
+                                     class="course-img" alt="@course.Title">
+                                <div class="course-overlay">
+                                    <div class="course-preview">
+                                        <a href="#" class="btn btn-sm btn-light rounded-circle me-2">
+                                            <i class="fas fa-play"></i>
+                                        </a>
+                                        <span class="text-white">Xem trước</span>
+                                    </div>
+                                </div>
+                                <span class="course-badge">@course.Category</span>
+                            </div>
+                            <div class="course-body">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div class="course-rating">
+                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="fas fa-star-half-alt text-warning"></i>
+                                        <span class="ms-1">4.8</span>
+                                    </div>
+                                    <small class="course-duration">
+                                        <i class="far fa-clock me-1"></i>@course.Duration giờ
+                                    </small>
+                                </div>
+                                <h5 class="course-title">@course.Title</h5>
+                                <p class="course-desc text-muted">@course.ShortDescription</p>
+                                
+                                <div class="course-meta">
+                                    <div>
+                                        <i class="fas fa-user-graduate text-primary"></i>
+                                        <span>@(new Random().Next(50, 500)) học viên</span>
+                                    </div>
+                                    <div>
+                                        <i class="fas fa-layer-group text-primary"></i>
+                                        <span>@(new Random().Next(5, 20)) bài học</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="course-footer">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="course-price">
+                                        <span class="price-value">@course.Price.ToString("N0") đ</span>
+                                    </div>
+                                    <a asp-controller="Course" asp-action="Details" asp-route-id="@course.Id" 
+                                       class="btn btn-primary rounded-pill">
+                                        <i class="fas fa-info-circle me-1"></i>Chi tiết
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</section>
+
+<!-- Categories Section with Interactive Cards -->
+<section class="categories py-6">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="section-subtitle">Khám phá lĩnh vực yêu thích</span>
+            <h2 class="section-title">Danh mục phổ biến</h2>
+            <div class="section-title-underline mx-auto"></div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+                <a href="#" class="text-decoration-none">
+                    <div class="category-card text-center h-100">
+                        <div class="category-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h5 class="category-title">Lập trình</h5>
+                        <p class="category-count">
+                            <span class="badge rounded-pill bg-primary-subtle text-primary">20+ khóa học</span>
+                        </p>
+                        <div class="category-topics">
+                            <span class="category-topic-badge">JavaScript</span>
+                            <span class="category-topic-badge">Python</span>
+                            <span class="category-topic-badge">Web</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+                <a href="#" class="text-decoration-none">
+                    <div class="category-card text-center h-100">
+                        <div class="category-icon language-icon">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <h5 class="category-title">Ngoại ngữ</h5>
+                        <p class="category-count">
+                            <span class="badge rounded-pill bg-primary-subtle text-primary">15+ khóa học</span>
+                        </p>
+                        <div class="category-topics">
+                            <span class="category-topic-badge">Tiếng Anh</span>
+                            <span class="category-topic-badge">Tiếng Nhật</span>
+                            <span class="category-topic-badge">IELTS</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+                <a href="#" class="text-decoration-none">
+                    <div class="category-card text-center h-100">
+                        <div class="category-icon business-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h5 class="category-title">Kinh doanh</h5>
+                        <p class="category-count">
+                            <span class="badge rounded-pill bg-primary-subtle text-primary">25+ khóa học</span>
+                        </p>
+                        <div class="category-topics">
+                            <span class="category-topic-badge">Marketing</span>
+                            <span class="category-topic-badge">Khởi nghiệp</span>
+                            <span class="category-topic-badge">Tài chính</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+                <a href="#" class="text-decoration-none">
+                    <div class="category-card text-center h-100">
+                        <div class="category-icon design-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <h5 class="category-title">Thiết kế</h5>
+                        <p class="category-count">
+                            <span class="badge rounded-pill bg-primary-subtle text-primary">18+ khóa học</span>
+                        </p>
+                        <div class="category-topics">
+                            <span class="category-topic-badge">UI/UX</span>
+                            <span class="category-topic-badge">Photoshop</span>
+                            <span class="category-topic-badge">3D</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials py-6 bg-light">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="section-subtitle">Chia sẻ từ học viên</span>
+            <h2 class="section-title">Học viên nói gì về chúng tôi?</h2>
+            <div class="section-title-underline mx-auto"></div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="testimonial-card h-100">
+                    <div class="testimonial-content">
+                        <div class="testimonial-rating mb-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">
+                            "Khóa học thiết kế web đã giúp tôi có được công việc mơ ước. 
+                            Giảng viên rất tận tâm và luôn sẵn sàng hỗ trợ khi tôi gặp khó khăn."
+                        </p>
+                    </div>
+                    <div class="testimonial-user">
+                        <div class="testimonial-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Avatar">
+                        </div>
+                        <div class="testimonial-info">
+                            <h6 class="mb-0">Nguyễn Thị Hương</h6>
+                            <span class="text-muted small">Thiết kế Web</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="testimonial-card h-100">
+                    <div class="testimonial-content">
+                        <div class="testimonial-rating mb-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">
+                            "Tôi đã hoàn thành khóa học JavaScript và nhận được nhiều kiến thức bổ ích. 
+                            Nội dung khóa học rất thực tế và dễ áp dụng vào công việc thực tế."
+                        </p>
+                    </div>
+                    <div class="testimonial-user">
+                        <div class="testimonial-avatar">
+                            <img src="https://randomuser.me/api/portraits/men/46.jpg" alt="Avatar">
+                        </div>
+                        <div class="testimonial-info">
+                            <h6 class="mb-0">Trần Văn Minh</h6>
+                            <span class="text-muted small">Lập trình JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                <div class="testimonial-card h-100">
+                    <div class="testimonial-content">
+                        <div class="testimonial-rating mb-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p class="testimonial-text">
+                            "Khóa học tiếng Anh rất hiệu quả, giúp tôi tự tin giao tiếp hơn. 
+                            Phương pháp học tương tác và thực hành nhiều là điểm tôi thích nhất."
+                        </p>
+                    </div>
+                    <div class="testimonial-user">
+                        <div class="testimonial-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Avatar">
+                        </div>
+                        <div class="testimonial-info">
+                            <h6 class="mb-0">Phạm Thu Hà</h6>
+                            <span class="text-muted small">Tiếng Anh giao tiếp</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Newsletter Section -->
+<section class="newsletter py-5">
+    <div class="container">
+        <div class="newsletter-container" data-aos="zoom-in">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h3 class="mb-3">Đăng ký nhận thông báo về khóa học mới</h3>
+                    <p class="text-muted">Nhận thông tin mới nhất về khóa học, sự kiện và các ưu đãi đặc biệt.</p>
+                </div>
+                <div class="col-lg-6">
+                    <form class="newsletter-form">
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Nhập email của bạn">
+                            <button class="btn btn-primary" type="submit">Đăng ký</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+

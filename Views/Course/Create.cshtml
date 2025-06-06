@@ -1,0 +1,169 @@
+@model AppEL.ViewModels.CourseViewModel
+
+@{
+    ViewData["Title"] = "Thêm khóa học mới";
+}
+
+<div class="course-create-page py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <!-- Page intro -->
+                <div class="page-header mb-5 text-center" data-aos="fade-up">
+                    <h1 class="display-4 fw-bold text-gradient mb-3">@ViewData["Title"]</h1>
+                    <p class="lead text-muted">Tạo khóa học mới và chia sẻ kiến thức của bạn với cộng đồng</p>
+                </div>
+                
+                <div class="card form-card shadow-lg border-0" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card-header bg-transparent border-0 pt-4">
+                        <div class="steps-indicator d-flex justify-content-center">
+                            <div class="step active">
+                                <div class="step-icon">1</div>
+                                <div class="step-text">Thông tin cơ bản</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body p-4 p-lg-5">
+                        <form method="post" enctype="multipart/form-data" class="course-form">
+                            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="mb-4">
+                                        <label asp-for="Title" class="form-label fw-bold">Tiêu đề <span class="text-danger">*</span></label>
+                                        <input asp-for="Title" class="form-control form-control-lg" placeholder="Nhập tiêu đề khóa học" />
+                                        <span asp-validation-for="Title" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label asp-for="ShortDescription" class="form-label fw-bold">Mô tả ngắn <span class="text-danger">*</span></label>
+                                        <textarea asp-for="ShortDescription" class="form-control" rows="2" placeholder="Mô tả ngắn gọn về khóa học"></textarea>
+                                        <span asp-validation-for="ShortDescription" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label asp-for="Description" class="form-label fw-bold">Mô tả chi tiết <span class="text-danger">*</span></label>
+                                        <textarea asp-for="Description" class="form-control rich-text-editor" rows="6" placeholder="Mô tả đầy đủ về nội dung khóa học"></textarea>
+                                        <span asp-validation-for="Description" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-4">
+                                    <div class="mb-4">
+                                        <label asp-for="ImageFile" class="form-label fw-bold">Ảnh khóa học <span class="text-danger">*</span></label>
+                                        <div class="image-upload-container">
+                                            <div class="image-upload-preview">
+                                                <img src="/images/course-placeholder.jpg" id="imagePreview" class="img-fluid rounded" alt="Course thumbnail preview">
+                                            </div>
+                                            <div class="image-upload-controls mt-2">
+                                                <label for="ImageFile" class="btn btn-outline-primary w-100">
+                                                    <i class="fas fa-upload me-2"></i>Chọn ảnh
+                                                </label>
+                                                <input asp-for="ImageFile" class="form-control d-none" type="file" accept="image/*" 
+                                                    onchange="document.getElementById('imagePreview').src = window.URL.createObjectURL(this.files[0])" />
+                                            </div>
+                                            <span asp-validation-for="ImageFile" class="text-danger"></span>
+                                            <div class="form-text">Tỷ lệ ảnh tốt nhất là 16:9. Kích thước đề xuất: 1280x720px.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-4">
+                                <div class="col-md-4">
+                                    <div class="mb-4">
+                                        <label asp-for="Category" class="form-label fw-bold">Danh mục <span class="text-danger">*</span></label>
+                                        <select asp-for="Category" class="form-select">
+                                            <option value="">-- Chọn danh mục --</option>
+                                            <option value="Programming">Lập trình</option>
+                                            <option value="Language">Ngoại ngữ</option>
+                                            <option value="Business">Kinh doanh</option>
+                                            <option value="Design">Thiết kế</option>
+                                        </select>
+                                        <span asp-validation-for="Category" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="mb-4">
+                                        <label asp-for="Price" class="form-label fw-bold">Giá (VNĐ) <span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fas fa-tag"></i></span>
+                                            <input asp-for="Price" class="form-control" type="number" placeholder="Nhập giá khóa học" min="0" />
+                                        </div>
+                                        <span asp-validation-for="Price" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="mb-4">
+                                        <label asp-for="Level" class="form-label fw-bold">Cấp độ <span class="text-danger">*</span></label>
+                                        <select asp-for="Level" class="form-select">
+                                            <option value="Beginner">Cơ bản</option>
+                                            <option value="Intermediate">Trung cấp</option>
+                                            <option value="Advanced">Nâng cao</option>
+                                        </select>
+                                        <span asp-validation-for="Level" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="mb-4">
+                                        <label asp-for="Duration" class="form-label fw-bold">Thời lượng (giờ) <span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fas fa-clock"></i></span>
+                                            <input asp-for="Duration" class="form-control" type="number" placeholder="Ví dụ: 12" min="0" />
+                                        </div>
+                                        <span asp-validation-for="Duration" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-8">
+                                    <div class="mb-4 publication-setting">
+                                        <label class="form-label fw-bold d-block mb-3">Trạng thái khóa học</label>
+                                        <div class="form-check form-switch form-switch-lg">
+                                            <input asp-for="IsPublished" class="form-check-input" type="checkbox" />
+                                            <label asp-for="IsPublished" class="form-check-label ms-2">
+                                                <span id="publishStatus">Xuất bản ngay</span>
+                                                <small class="d-block text-muted" id="publishHint">Khóa học sẽ hiển thị công khai sau khi lưu</small>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-5 d-flex justify-content-between">
+                                <a asp-action="Index" class="btn btn-outline-secondary btn-lg px-4">
+                                    <i class="fas fa-arrow-left me-2"></i> Quay lại
+                                </a>
+                                <button type="submit" class="btn btn-primary btn-lg px-5">
+                                    <i class="fas fa-save me-2"></i> Lưu khóa học
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function() {
+            // Toggle publish status text
+            $('#IsPublished').change(function() {
+                if ($(this).is(':checked')) {
+                    $('#publishStatus').text('Xuất bản ngay');
+                    $('#publishHint').text('Khóa học sẽ hiển thị công khai sau khi lưu');
+                } else {
+                    $('#publishStatus').text('Lưu nháp');
+                    $('#publishHint').text('Khóa học sẽ được lưu ở chế độ nháp và không hiển thị công khai');
+                }
+            });
+        });
+    </script>
+}

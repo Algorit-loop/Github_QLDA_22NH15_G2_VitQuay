@@ -1,0 +1,632 @@
+@model AppEL.ViewModels.CourseDetailsViewModel
+@{
+    ViewData["Title"] = Model.Course.Title;
+}
+
+<!-- Course Hero Section -->
+<div class="course-details-hero py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8" data-aos="fade-right">
+                <nav aria-label="breadcrumb" class="mb-4">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+                        <li class="breadcrumb-item"><a asp-controller="Course" asp-action="Index">Khóa học</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">@Model.Course.Title</li>
+                    </ol>
+                </nav>
+                <span class="course-detail-category">@Model.Course.Category</span>
+                <h1 class="course-detail-title display-5 fw-bold mb-3">@Model.Course.Title</h1>
+                <p class="course-detail-subtitle lead mb-4">@Model.Course.ShortDescription</p>
+                
+                <div class="course-detail-stats d-flex flex-wrap mb-4">
+                    <div class="course-stat">
+                        <div class="stat-icon">
+                            <i class="fas fa-signal"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-label">Cấp độ</span>
+                            <span class="stat-value">@Model.Course.Level</span>
+                        </div>
+                    </div>
+                    <div class="course-stat">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-label">Thời lượng</span>
+                            <span class="stat-value">@Model.Course.Duration giờ</span>
+                        </div>
+                    </div>
+                    <div class="course-stat">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-label">Học viên</span>
+                            <span class="stat-value">@Model.Course.EnrollmentCount</span>
+                        </div>
+                    </div>
+                    <div class="course-stat">
+                        <div class="stat-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-label">Đánh giá</span>
+                            <span class="stat-value">4.8 <small>(256)</small></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="course-detail-instructor d-flex align-items-center mb-4">
+                    <div class="instructor-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="Instructor">
+                    </div>
+                    <div class="instructor-info">
+                        <span class="instructor-label">Giảng viên</span>
+                        <h6 class="instructor-name">@(string.IsNullOrEmpty(Model.Course.InstructorName) ? "Giảng viên E-Learning" : Model.Course.InstructorName)</h6>
+                    </div>
+                    <div class="course-update ms-auto">
+                        <i class="fas fa-history"></i> Cập nhật lần cuối @DateTime.Now.AddDays(-14).ToString("dd/MM/yyyy")
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-left">
+                <div class="course-preview-card">
+                    <div class="preview-image">
+                        <img src="@(string.IsNullOrEmpty(Model.Course.ImageUrl) ? "/images/course-default.jpg" : Model.Course.ImageUrl)" 
+                             class="img-fluid rounded" alt="@Model.Course.Title">
+                        <div class="preview-overlay">
+                            <button class="preview-play-btn" type="button" data-bs-toggle="modal" data-bs-target="#previewModal">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="preview-card-content">
+                        @if (!Model.IsEnrolled)
+                        {
+                            <div class="preview-price-section">
+                                <div class="preview-price">
+                                    @if (Model.Course.Price > 0)
+                                    {
+                                        <span class="current-price">@Model.Course.Price.ToString("N0") đ</span>
+                                        <span class="original-price>@((Model.Course.Price * 1.3m).ToString("N0")) đ</span>
+                                        <span class="discount-badge">-30%</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="free-course">Miễn phí</span>
+                                    }
+                                </div>
+                                <div class="time-limited">
+                                    <i class="fas fa-clock"></i> Ưu đãi kết thúc sau:
+                                    <div class="countdown">
+                                        <div class="countdown-item">
+                                            <span class="count-number">2</span>
+                                            <span class="count-text">Ngày</span>
+                                        </div>
+                                        <div class="countdown-item">
+                                            <span class="count-number">15</span>
+                                            <span class="count-text">Giờ</span>
+                                        </div>
+                                        <div class="countdown-item">
+                                            <span class="count-number">47</span>
+                                            <span class="count-text">Phút</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        
+                        @if (Model.IsEnrolled)
+                        {
+                            <div class="course-progress-wrapper">
+                                <div class="progress-header d-flex justify-content-between mb-1">
+                                    <span>Tiến độ học tập</span>
+                                    <span>@Model.Progress.ToString("0.0")%</span>
+                                </div>
+                                <div class="progress mb-3" style="height: 8px;">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" 
+                                         role="progressbar" 
+                                         style="width: @Model.Progress%"
+                                         aria-valuenow="@Model.Progress" 
+                                         aria-valuemin="0" 
+                                         aria-valuemax="100">
+                                    </div>
+                                </div>
+                                <a href="#lessons" class="btn btn-gradient btn-lg w-100 mb-3 rounded-pill shadow">
+                                    <i class="fas fa-play-circle me-2"></i>Tiếp tục học
+                                </a>
+                                <a href="#" class="btn btn-outline-primary btn-lg w-100 rounded-pill shadow-sm">
+                                    <i class="fas fa-download me-2"></i>Tải xuống tài liệu
+                                </a>
+                            </div>
+                        }
+                        else if (User.IsInRole("Student"))
+                        {
+                            <button onclick="enrollCourse('@Model.Course.Id')" class="btn btn-gradient btn-lg w-100 mb-3 rounded-pill shadow">
+                                <i class="fas fa-graduation-cap me-2"></i>Đăng ký khóa học
+                            </button>
+                            <button class="btn btn-outline-primary btn-lg w-100 rounded-pill shadow-sm">
+                                <i class="fas fa-shopping-cart me-2"></i>Thêm vào giỏ hàng
+                            </button>
+                        }
+                        else if (!User.Identity?.IsAuthenticated ?? true)
+                        {
+                            <a href="/Account/Login" class="btn btn-gradient btn-lg w-100 mb-3 rounded-pill shadow">
+                                <i class="fas fa-sign-in-alt me-2"></i>Đăng nhập để đăng ký
+                            </a>
+                            <a href="/Account/Register" class="btn btn-outline-primary btn-lg w-100 rounded-pill shadow-sm">
+                                <i class="fas fa-user-plus me-2"></i>Chưa có tài khoản? Đăng ký
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lessons -->
+    @if (Model.Course.Lessons.Any())
+    {
+        <div id="lessons" class="row mt-5">
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h3 class="card-title">Nội dung khóa học</h3>
+                        <div class="list-group">
+                            @foreach (var lesson in Model.Course.Lessons.Where(l => l.IsPublished || !User.IsInRole("Student")).OrderBy(l => l.Order))
+                            {
+                                var completed = Model.CompletedLessons.Contains(lesson.Id);
+                                <div class="list-group-item">
+                                    <div class="d-flex w-100 justify-content-between align-items-center">
+                                        <div>
+                                            <h5 class="mb-1">
+                                                @if (completed)
+                                                {
+                                                    <i class="fas fa-check-circle text-success"></i>
+                                                }
+                                                @lesson.Title
+                                            </h5>
+                                            <p class="mb-1">@lesson.Description</p>
+                                        </div>
+                                        <div>
+                                            @if (!string.IsNullOrEmpty(lesson.VideoPath))
+                                            {
+                                                <button class="btn btn-sm btn-primary watch-video rounded-pill shadow-sm" 
+                                                        data-lesson-id="@lesson.Id"
+                                                        data-video-url="@lesson.VideoPath"
+                                                        data-title="@lesson.Title"
+                                                        data-bs-toggle="modal" 
+                                                        data-bs-target="#videoModal">
+                                                    <i class="fas fa-play-circle me-1"></i> Xem bài học
+                                                </button>
+                                            }
+                                            else
+                                            {
+                                                <button class="btn btn-sm btn-secondary rounded-pill shadow-sm" disabled>
+                                                    <i class="fas fa-video-slash me-1"></i> Chưa có video
+                                                </button>
+                                            }
+                                            
+                                            @if (Model.IsEnrolled && User.IsInRole("Student"))
+                                            {
+                                                <button class="btn btn-sm @(completed ? "btn-warning" : "btn-success") toggle-complete rounded-pill ms-2 shadow-sm"
+                                                        data-course-id="@Model.Course.Id"
+                                                        data-lesson-id="@lesson.Id"
+                                                        data-completed="@completed.ToString().ToLower()">
+                                                    <i class="fas @(completed ? "fa-times-circle" : "fa-check-circle") me-1"></i>
+                                                    @(completed ? "Bỏ đánh dấu" : "Đánh dấu hoàn thành")
+                                                </button>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video Modal -->
+        <div class="modal fade" id="videoModal" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="videoModalTitle">Xem bài học</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <video id="lessonVideo" class="w-100 rounded shadow" controls autoplay>
+                            <source src="" type="video/mp4">
+                            Trình duyệt của bạn không hỗ trợ video.
+                        </video>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-between">
+                        <div class="video-status">
+                            <span class="badge bg-success-subtle text-success" id="videoLoadedStatus">
+                                <i class="fas fa-check-circle me-1"></i> Video đã sẵn sàng
+                            </span>
+                        </div>
+                        <button type="button" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@if (User.IsInRole("Admin") || (User.IsInRole("Instructor") && Model.Course.InstructorId == User.FindFirst("UserId")?.Value))
+{
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h3 class="card-title">Quản lý bài học</h3>
+            <a asp-controller="Lesson" asp-action="Create" asp-route-courseId="@Model.Course.Id" class="btn btn-primary mb-3 rounded-pill shadow">
+                <i class="fas fa-plus-circle me-1"></i> Thêm bài học mới
+            </a>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th style="width: 70px">STT</th>
+                            <th>Tiêu đề</th>
+                            <th style="width: 150px">Video</th>
+                            <th style="width: 100px">Trạng thái</th>
+                            <th style="width: 150px">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        @foreach (var lesson in Model.Course.Lessons.OrderBy(l => l.Order))
+                        {
+                            <tr>
+                                <td class="text-center">@lesson.Order</td>
+                                <td>
+                                    <h6 class="mb-1">@lesson.Title</h6>
+                                    <small class="text-muted">@lesson.Description</small>
+                                </td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(lesson.VideoPath))
+                                    {
+                                        <button type="button" class="btn btn-sm btn-outline-primary rounded-pill shadow-sm" 
+                                                onclick="playVideo('@lesson.VideoPath', '@lesson.Title')">
+                                            <i class="fas fa-play-circle me-1"></i> Xem video
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-warning">Chưa có video</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (lesson.IsPublished)
+                                    {
+                                        <span class="badge bg-success">Đã xuất bản</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-secondary">Chưa xuất bản</span>
+                                    }
+                                </td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a asp-controller="Lesson" asp-action="Edit" asp-route-courseId="@Model.Course.Id" 
+                                           asp-route-id="@lesson.Id" class="btn btn-sm btn-outline-primary rounded-start shadow-sm" title="Chỉnh sửa bài học">
+                                            <i class="fas fa-edit me-1"></i> Sửa
+                                        </a>
+                                        <button type="button" class="btn btn-sm btn-outline-danger rounded-end shadow-sm" title="Xóa bài học"
+                                                onclick="confirmDeleteLesson('@Model.Course.Id', '@lesson.Id', '@lesson.Title')">
+                                            <i class="fas fa-trash me-1"></i> Xóa
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Delete Lesson Confirmation Modal -->
+<div class="modal fade" id="deleteLessonModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Xác nhận xóa</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn xóa bài học "<span id="lessonTitleSpan"></span>"?</p>
+            </div>
+            <div class="modal-footer">
+                <form id="deleteLessonForm" method="post" asp-controller="Lesson" asp-action="Delete">
+                    <input type="hidden" id="deleteCourseId" name="courseId" />
+                    <input type="hidden" id="deleteLessonId" name="id" />
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-danger">Xóa</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function playVideo(videoPath, title) {
+            const video = document.getElementById('lessonVideo');
+            const source = video.getElementsByTagName('source')[0];
+            source.src = videoPath;
+            video.load();
+            
+            document.getElementById('videoModalTitle').textContent = title;
+            new bootstrap.Modal(document.getElementById('videoModal')).show();
+        }
+
+        function confirmDeleteLesson(courseId, lessonId, title) {
+            document.getElementById('deleteCourseId').value = courseId;
+            document.getElementById('deleteLessonId').value = lessonId;
+            document.getElementById('lessonTitleSpan').textContent = title;
+            new bootstrap.Modal(document.getElementById('deleteLessonModal')).show();
+        }
+
+        // Stop video when modal is closed
+        document.getElementById('videoModal').addEventListener('hidden.bs.modal', function () {
+            const video = document.getElementById('lessonVideo');
+            video.pause();
+            video.currentTime = 0;
+        });
+
+        $(document).ready(function () {
+            // Check for TempData messages
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <text>
+                    showToast('@TempData["SuccessMessage"]', 'success');
+                </text>
+            }
+            
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <text>
+                    showToast('@TempData["ErrorMessage"]', 'error');
+                </text>
+            }
+            
+            // Watch video button click
+            $('.watch-video').click(function () {
+                var videoUrl = $(this).data('video-url');
+                var title = $(this).data('title');
+                var lessonId = $(this).data('lesson-id');
+                
+                // Make sure video URL is absolute
+                if (videoUrl && !videoUrl.startsWith('http') && !videoUrl.startsWith('/')) {
+                    videoUrl = '/' + videoUrl;
+                }
+                
+                console.log('Loading video from URL:', videoUrl);
+                
+                // Update the video source
+                $('#lessonVideo source').attr('src', videoUrl);
+                $('#videoModalTitle').text(title);
+                
+                // Make sure to reload the video element for the new source
+                var videoElement = $('#lessonVideo')[0];
+                videoElement.load();
+                videoElement.oncanplay = function() {
+                    // Video is ready to play
+                    console.log('Video loaded successfully');
+                };
+                videoElement.onerror = function() {
+                    // Error loading video
+                    console.error('Error loading video:', videoElement.error);
+                    showToast('Không thể tải video. Vui lòng thử lại sau.', 'error');
+                };
+                
+                // Show the modal
+                $('#videoModal').modal('show');
+            });
+
+            // Toggle lesson completion
+            $('.toggle-complete').click(function () {
+                var btn = $(this);
+                var courseId = btn.data('course-id');
+                var lessonId = btn.data('lesson-id');
+                var completed = btn.data('completed');
+                var action = completed ? 'UnmarkLessonComplete' : 'MarkLessonComplete';
+                
+                // Show loading state
+                var originalHtml = btn.html();
+                var originalClass = btn.attr('class');
+                btn.html('<i class="fas fa-spinner fa-spin"></i> Đang xử lý...').prop('disabled', true);
+                
+                $.ajax({
+                    url: `/Course/${action}`,
+                    type: 'POST',
+                    data: { courseId: courseId, lessonId: lessonId },
+                    success: function(response) {
+                        if (response.success) {
+                            // Toggle the button appearance without reloading
+                            if (completed) {
+                                // Change to mark as complete button
+                                btn.removeClass('btn-warning').addClass('btn-success');
+                                btn.html('<i class="fas fa-check-circle"></i> Đánh dấu hoàn thành');
+                                btn.data('completed', false);
+                                
+                                // Remove check icon from lesson title
+                                var lessonItem = btn.closest('.list-group-item');
+                                lessonItem.find('h5 i.fa-check-circle').remove();
+                            } else {
+                                // Change to unmark button
+                                btn.removeClass('btn-success').addClass('btn-warning');
+                                btn.html('<i class="fas fa-times-circle"></i> Bỏ đánh dấu');
+                                btn.data('completed', true);
+                                
+                                // Add check icon to lesson title
+                                var lessonItem = btn.closest('.list-group-item');
+                                if (lessonItem.find('h5 i.fa-check-circle').length === 0) {
+                                    lessonItem.find('h5').prepend('<i class="fas fa-check-circle text-success"></i> ');
+                                }
+                            }
+                            
+                            // Update progress bar with the new progress from the server
+                            if (typeof response.progress !== 'undefined') {
+                                updateProgressBar(response.progress, response.completedLessonsCount, response.totalLessonsCount);
+                            } else {
+                                // Fallback to client-side calculation if progress not in response (should not happen)
+                                updateProgressBar(); 
+                            }
+                            showToast(response.message || 'Cập nhật thành công!', 'success');
+                        } else {
+                            // Restore original button state
+                            btn.html(originalHtml);
+                            btn.attr('class', originalClass);
+                            showToast(response.message || 'Đã xảy ra lỗi', 'error');
+                        }
+                    },
+                    error: function(xhr) {
+                        // Restore original button state
+                        btn.html(originalHtml);
+                        btn.attr('class', originalClass);
+                        showToast('Đã xảy ra lỗi khi cập nhật trạng thái bài học', 'error');
+                        console.error('Error:', xhr);
+                    },
+                    complete: function() {
+                        btn.prop('disabled', false);
+                    }
+                });
+            });
+            
+            // Function to update progress bar
+            function updateProgressBar(progress, completedLessonsCount, totalLessonsCount) {
+                var progressBar = $('.progress-bar');
+                var progressText = $('.progress-header span:last-child');
+                var progressPercent;
+
+                if (typeof progress !== 'undefined') {
+                    progressPercent = progress;
+                } else {
+                    // Fallback to client-side calculation if progress not provided
+                    var totalLessons = @(Model.Course.Lessons?.Count(l => l.IsPublished) ?? 0);
+                    var completedLessons = $('.toggle-complete[data-completed="true"]').length;
+                    progressPercent = totalLessons > 0 ? (completedLessons / totalLessons * 100) : 0;
+                }
+
+                progressBar.css('width', progressPercent + '%').attr('aria-valuenow', progressPercent);
+                progressText.text(progressPercent.toFixed(1) + '%');
+
+                // Optionally, update the text like "Hoàn thành 2/5 bài học"
+                if (typeof completedLessonsCount !== 'undefined' && typeof totalLessonsCount !== 'undefined') {
+                    // You might want to add an element to display this text
+                    // e.g., $('.progress-details').text(`Hoàn thành ${completedLessonsCount}/${totalLessonsCount} bài học`);
+                }
+            }
+
+            // Clean up video when modal is closed
+            $('#videoModal').on('hidden.bs.modal', function () {
+                var video = $('#lessonVideo')[0];
+                video.pause();
+                video.currentTime = 0;
+            });
+        });
+
+        function enrollCourse(courseId) {
+            $.post('/Course/Enroll', { courseId: courseId })
+                .done(function(response) {
+                    if (response.success) {
+                        // Thay thế alert bằng toast
+                        showToast(response.message, 'success');
+                        setTimeout(function() {
+                            window.location.href = '/Course/MyCourses';
+                        }, 1500);
+                    } else {
+                        showToast(response.message, 'error');
+                    }
+                })
+                .fail(function() {
+                    showToast('Có lỗi xảy ra khi đăng ký khóa học.', 'error');
+                });
+        }
+        
+        // Lesson delete confirmation
+        function confirmDeleteLesson(courseId, lessonId, lessonTitle) {
+            if (confirm(`Bạn có chắc chắn muốn xóa bài học "${lessonTitle}"?`)) {
+                deleteLesson(courseId, lessonId);
+            }
+        }
+        
+        // Delete lesson AJAX
+        function deleteLesson(courseId, lessonId) {
+            $.ajax({
+                url: '@Url.Action("Delete", "Lesson")',
+                type: 'POST',
+                data: {
+                    courseId: courseId,
+                    id: lessonId
+                },
+                success: function (result) {
+                    if (result.success) {
+                        // Show success message with toast
+                        showToast(result.message || "Đã xóa bài học thành công.", 'success');
+                        
+                        // Reload current page after a brief delay
+                        setTimeout(function() {
+                            window.location.reload();
+                        }, 1500);
+                    } else {
+                        // Show error message
+                        showToast(result.message || "Không thể xóa bài học.", 'error');
+                    }
+                },
+                error: function () {
+                    showToast("Đã xảy ra lỗi khi xóa bài học.", 'error');
+                }
+            });
+        }
+        
+        // Toast notification function
+        function showToast(message, type = 'success') {
+            // Create toast element dynamically
+            const toastHtml = `
+                <div class="toast align-items-center ${type === 'success' ? 'bg-success' : 'bg-danger'} text-white border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'} me-2"></i>
+                            ${message}
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                </div>
+            `;
+            
+            // Create container if it doesn't exist
+            let toastContainer = document.querySelector('.toast-container');
+            if (!toastContainer) {
+                toastContainer = document.createElement('div');
+                toastContainer.className = 'toast-container position-fixed bottom-0 end-0 p-3';
+                toastContainer.style.zIndex = '1080';
+                document.body.appendChild(toastContainer);
+            }
+            
+            // Add toast to container
+            toastContainer.innerHTML += toastHtml;
+            
+            // Get the last added toast
+            const toast = toastContainer.lastElementChild;
+            
+            // Initialize and show toast
+            const bsToast = new bootstrap.Toast(toast, {
+                autohide: true,
+                delay: 4000
+            });
+            bsToast.show();
+            
+            // Remove toast from DOM when hidden
+            toast.addEventListener('hidden.bs.toast', function() {
+                this.remove();
+            });
+        }
+    </script>
+}
