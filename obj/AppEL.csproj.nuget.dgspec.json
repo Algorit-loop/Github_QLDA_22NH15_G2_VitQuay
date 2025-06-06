@@ -1,0 +1,70 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/algorit/Desktop/Project/QLKhoaHoc/AppEL/AppEL.csproj": {}
+  },
+  "projects": {
+    "/home/algorit/Desktop/Project/QLKhoaHoc/AppEL/AppEL.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/algorit/Desktop/Project/QLKhoaHoc/AppEL/AppEL.csproj",
+        "projectName": "AppEL",
+        "projectPath": "/home/algorit/Desktop/Project/QLKhoaHoc/AppEL/AppEL.csproj",
+        "packagesPath": "/home/algorit/.nuget/packages/",
+        "outputPath": "/home/algorit/Desktop/Project/QLKhoaHoc/AppEL/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/algorit/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Authentication.Cookies": {
+              "target": "Package",
+              "version": "[2.3.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.116/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

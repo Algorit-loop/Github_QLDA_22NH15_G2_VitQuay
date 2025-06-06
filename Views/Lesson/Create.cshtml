@@ -1,0 +1,67 @@
+@model AppEL.ViewModels.LessonViewModel
+
+@{
+    ViewData["Title"] = "Thêm bài học mới";
+}
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title h3 mb-4">@ViewData["Title"]</h1>
+
+                    <form method="post" enctype="multipart/form-data">
+                        <input type="hidden" asp-for="CourseId" />
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="Title" class="form-label">Tiêu đề bài học</label>
+                            <input asp-for="Title" class="form-control" />
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Description" class="form-label">Mô tả</label>
+                            <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="VideoFile" class="form-label">Video bài học</label>
+                            <input asp-for="VideoFile" class="form-control" type="file" accept="video/*" />
+                            <span asp-validation-for="VideoFile" class="text-danger"></span>
+                            <small class="form-text text-muted">Hỗ trợ các định dạng: MP4, WebM</small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Order" class="form-label">Thứ tự bài học</label>
+                            <input asp-for="Order" class="form-control" type="number" />
+                            <span asp-validation-for="Order" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input asp-for="IsPublished" class="form-check-input" type="checkbox" />
+                                <label asp-for="IsPublished" class="form-check-label">Xuất bản ngay</label>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a asp-controller="Course" asp-action="Details" asp-route-id="@Model.CourseId" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Quay lại
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Lưu bài học
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

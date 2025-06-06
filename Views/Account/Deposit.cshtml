@@ -1,0 +1,43 @@
+@model AppEL.Models.User
+@{
+    ViewData["Title"] = "Nạp tiền vào tài khoản";
+}
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="card-title mb-4">Ví tiền của bạn</h2>
+                    @if (TempData["SuccessMessage"] != null)
+                    {
+                        <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+                    }
+                    @if (TempData["ErrorMessage"] != null)
+                    {
+                        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+                    }
+                    <div class="mb-4">
+                        <h4>Số dư hiện tại: <span class="text-primary">@Model.Balance.ToString("N0") VNĐ</span></h4>
+                    </div>
+                    <div class="mb-4">
+                        <h5>Nạp tiền nhanh</h5>
+                        <div class="row g-2">
+                            @foreach (var amount in new[] { 50000, 100000, 200000, 500000, 1000000, 2000000, 5000000, 10000000 })
+                            {
+                                <div class="col-6 col-md-3">
+                                    <form asp-action="Deposit" method="post" class="d-grid">
+                                        <input type="hidden" name="amount" value="@amount" />
+                                        <button type="submit" class="btn btn-outline-primary mb-2">@amount.ToString("N0") VNĐ</button>
+                                    </form>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="alert alert-info">
+                        Số dư sẽ được cập nhật ngay lập tức sau khi nạp tiền.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

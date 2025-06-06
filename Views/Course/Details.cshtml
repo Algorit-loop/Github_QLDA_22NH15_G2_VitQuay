@@ -1,0 +1,296 @@
+@model AppEL.ViewModels.CourseDetailsViewModel
+@{
+    ViewData["Title"] = Model.Course.Title;
+}
+
+<div class="container py-5">
+    <div class="row">
+        <!-- Course Info -->
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <img src="@Model.Course.ImageUrl" class="card-img-top" alt="@Model.Course.Title">
+                <div class="card-body">
+                    <h1 class="card-title">@Model.Course.Title</h1>
+                    <p class="text-muted">
+                        <i class="fas fa-graduation-cap"></i> Cấp độ: @Model.Course.Level |
+                        <i class="fas fa-clock"></i> Thời lượng: @Model.Course.Duration |
+                        <i class="fas fa-users"></i> @Model.Course.EnrollmentCount học viên
+                    </p>
+                    <h5>Mô tả ngắn</h5>
+                    <p>@Model.Course.ShortDescription</p>
+                    <h5>Chi tiết khóa học</h5>
+                    <p>@Model.Course.Description</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Enrollment & Progress -->
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Thông tin khóa học</h5>
+                    <p class="h2 text-primary mb-4">@Model.Course.Price.ToString("N0") đ</p>
+                    
+                    @if (Model.IsEnrolled)
+                    {
+                        <div class="progress mb-3">
+                            <div class="progress-bar" role="progressbar" style="width: @Model.Progress%"
+                                aria-valuenow="@Model.Progress" aria-valuemin="0" aria-valuemax="100">
+                                @Model.Progress.ToString("0.0")%
+                            </div>
+                        </div>
+                        <a href="#lessons" class="btn btn-primary w-100">Tiếp tục học</a>
+                    }
+                    else if (User.IsInRole("Student"))
+                    {
+                        <button onclick="enrollCourse('@Model.Course.Id')" class="btn btn-primary w-100">Đăng ký khóa học</button>
+                    }
+                    else if (!User.Identity.IsAuthenticated)
+                    {
+                        <a href="/Account/Login" class="btn btn-primary w-100">Đăng nhập để đăng ký</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lessons -->
+    @if (Model.Course.Lessons.Any())
+    {
+        <div id="lessons" class="row mt-5">
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h3 class="card-title">Nội dung khóa học</h3>
+                        <div class="list-group">
+                            @foreach (var lesson in Model.Course.Lessons.Where(l => l.IsPublished || !User.IsInRole("Student")).OrderBy(l => l.Order))
+                            {
+                                var completed = Model.CompletedLessons.Contains(lesson.Id);
+                                <div class="list-group-item">
+                                    <div class="d-flex w-100 justify-content-between align-items-center">
+                                        <div>
+                                            <h5 class="mb-1">
+                                                @if (completed)
+                                                {
+                                                    <i class="fas fa-check-circle text-success"></i>
+                                                }
+                                                @lesson.Title
+                                            </h5>
+                                            <p class="mb-1">@lesson.Description</p>
+                                        </div>
+                                        <div>
+                                            <button class="btn btn-sm btn-primary watch-video" 
+                                                    data-lesson-id="@lesson.Id"
+                                                    data-video-url="@lesson.VideoPath"
+                                                    data-title="@lesson.Title">
+                                                <i class="fas fa-play"></i> Xem bài học
+                                            </button>
+                                            <button class="btn btn-sm @(completed ? "btn-warning" : "btn-success") toggle-complete"
+                                                    data-course-id="@Model.Course.Id"
+                                                    data-lesson-id="@lesson.Id"
+                                                    data-completed="@completed.ToString().ToLower()">
+                                                @(completed ? "Bỏ đánh dấu" : "Đánh dấu hoàn thành")
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video Modal -->
+        <div class="modal fade" id="videoModal" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="videoModalTitle">Xem bài học</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <video id="lessonVideo" class="w-100" controls>
+                            <source src="" type="video/mp4">
+                            Trình duyệt của bạn không hỗ trợ video.
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@if (User.IsInRole("Admin") || (User.IsInRole("Instructor") && Model.Course.InstructorId == User.FindFirst("UserId")?.Value))
+{
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h3 class="card-title">Quản lý bài học</h3>
+            <a asp-controller="Lesson" asp-action="Create" asp-route-courseId="@Model.Course.Id" class="btn btn-primary mb-3">
+                <i class="fas fa-plus"></i> Thêm bài học mới
+            </a>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th style="width: 70px">STT</th>
+                            <th>Tiêu đề</th>
+                            <th style="width: 150px">Video</th>
+                            <th style="width: 100px">Trạng thái</th>
+                            <th style="width: 150px">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        @foreach (var lesson in Model.Course.Lessons.OrderBy(l => l.Order))
+                        {
+                            <tr>
+                                <td class="text-center">@lesson.Order</td>
+                                <td>
+                                    <h6 class="mb-1">@lesson.Title</h6>
+                                    <small class="text-muted">@lesson.Description</small>
+                                </td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(lesson.VideoPath))
+                                    {
+                                        <button type="button" class="btn btn-sm btn-outline-primary" 
+                                                onclick="playVideo('@lesson.VideoPath', '@lesson.Title')">
+                                            <i class="fas fa-play"></i> Xem video
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-warning">Chưa có video</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (lesson.IsPublished)
+                                    {
+                                        <span class="badge bg-success">Đã xuất bản</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-secondary">Chưa xuất bản</span>
+                                    }
+                                </td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a asp-controller="Lesson" asp-action="Edit" asp-route-courseId="@Model.Course.Id" 
+                                           asp-route-id="@lesson.Id" class="btn btn-sm btn-outline-primary">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <button type="button" class="btn btn-sm btn-outline-danger"
+                                                onclick="confirmDeleteLesson('@Model.Course.Id', '@lesson.Id', '@lesson.Title')">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Delete Lesson Confirmation Modal -->
+<div class="modal fade" id="deleteLessonModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Xác nhận xóa</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn xóa bài học "<span id="lessonTitleSpan"></span>"?</p>
+            </div>
+            <div class="modal-footer">
+                <form id="deleteLessonForm" method="post" asp-controller="Lesson" asp-action="Delete">
+                    <input type="hidden" id="deleteCourseId" name="courseId" />
+                    <input type="hidden" id="deleteLessonId" name="id" />
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-danger">Xóa</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function playVideo(videoPath, title) {
+            const video = document.getElementById('lessonVideo');
+            const source = video.getElementsByTagName('source')[0];
+            source.src = videoPath;
+            video.load();
+            
+            document.getElementById('videoModalTitle').textContent = title;
+            new bootstrap.Modal(document.getElementById('videoModal')).show();
+        }
+
+        function confirmDeleteLesson(courseId, lessonId, title) {
+            document.getElementById('deleteCourseId').value = courseId;
+            document.getElementById('deleteLessonId').value = lessonId;
+            document.getElementById('lessonTitleSpan').textContent = title;
+            new bootstrap.Modal(document.getElementById('deleteLessonModal')).show();
+        }
+
+        // Stop video when modal is closed
+        document.getElementById('videoModal').addEventListener('hidden.bs.modal', function () {
+            const video = document.getElementById('lessonVideo');
+            video.pause();
+            video.currentTime = 0;
+        });
+
+        $(document).ready(function () {
+            // Watch video button click
+            $('.watch-video').click(function () {
+                var videoUrl = $(this).data('video-url');
+                var title = $(this).data('title');
+                $('#lessonVideo source').attr('src', videoUrl);
+                $('#lessonVideo')[0].load();
+                $('#videoModalTitle').text(title);
+                $('#videoModal').modal('show');
+            });
+
+            // Toggle lesson completion
+            $('.toggle-complete').click(function () {
+                var btn = $(this);
+                var courseId = btn.data('course-id');
+                var lessonId = btn.data('lesson-id');
+                var completed = btn.data('completed');
+                var action = completed ? 'UnmarkLessonComplete' : 'MarkLessonComplete';
+
+                $.post(`/Course/${action}`, { courseId: courseId, lessonId: lessonId })
+                    .done(function () {
+                        location.reload();
+                    })
+                    .fail(function (response) {
+                        alert('Error: ' + response.responseJSON.message);
+                    });
+            });
+
+            // Clean up video when modal is closed
+            $('#videoModal').on('hidden.bs.modal', function () {
+                var video = $('#lessonVideo')[0];
+                video.pause();
+                video.currentTime = 0;
+            });
+        });
+
+        function enrollCourse(courseId) {
+            $.post('/Course/Enroll', { courseId: courseId })
+                .done(function(response) {
+                    if (response.success) {
+                        alert(response.message);
+                        window.location.href = '/Course/MyCourses';
+                    } else {
+                        alert(response.message);
+                    }
+                })
+                .fail(function() {
+                    alert('Có lỗi xảy ra khi đăng ký khóa học.');
+                });
+        }
+    </script>
+}

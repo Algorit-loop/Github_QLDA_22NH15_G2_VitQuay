@@ -1,0 +1,158 @@
+@model AppEL.ViewModels.CourseListViewModel
+
+@{
+    ViewData["Title"] = "Quản lý khóa học";
+}
+
+<div class="container py-4">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        @if (Model.IsManagement)
+        {
+            <h1 class="h3">Quản lý khóa học của tôi</h1>
+            <a asp-action="Create" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Thêm khóa học mới
+            </a>
+        }
+        else
+        {
+            <h1 class="h3">Danh sách khóa học</h1>
+            @if (User.IsInRole("Admin") || User.IsInRole("Instructor"))
+            {
+                <a asp-action="ManageCourses" class="btn btn-outline-primary">
+                    <i class="fas fa-cog"></i> Quản lý khóa học của tôi
+                </a>
+            }
+        }
+    </div>
+
+    <!-- Filter and Search -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="get" asp-action="Index" class="row g-3">
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-search"></i></span>
+                        <input type="text" class="form-control" asp-for="SearchTerm" placeholder="Tìm kiếm...">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <select class="form-select" asp-for="Category">
+                        <option value="">-- Chọn danh mục --</option>
+                        <option value="Programming">Lập trình</option>
+                        <option value="Language">Ngoại ngữ</option>
+                        <option value="Business">Kinh doanh</option>
+                        <option value="Design">Thiết kế</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select class="form-select" asp-for="Level">
+                        <option value="">-- Chọn cấp độ --</option>
+                        <option value="Beginner">Cơ bản</option>
+                        <option value="Intermediate">Trung cấp</option>
+                        <option value="Advanced">Nâng cao</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">Lọc</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Message -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <!-- Course List -->
+    <div class="row g-4">
+        @if (!Model.Courses.Any())
+        {
+            <div class="col-12">
+                <div class="alert alert-info">
+                    Không tìm thấy khóa học nào.
+                </div>
+            </div>
+        }
+        else
+        {
+            @foreach (var course in Model.Courses)
+            {
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100">
+                        <img src="@(string.IsNullOrEmpty(course.ImageUrl) ? "/images/course-default.jpg" : course.ImageUrl)" 
+                             class="card-img-top" alt="@course.Title" style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge bg-primary">@course.Category</span>
+                                <span class="badge bg-secondary">@course.Level</span>
+                            </div>
+                            <h5 class="card-title">@course.Title</h5>
+                            <p class="card-text text-muted">@course.ShortDescription</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="text-primary fw-bold">@course.Price.ToString("N0") đ</span>
+                                <small class="text-muted">@course.Duration giờ</small>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-white">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    @if (User.IsInRole("Admin") || (User.IsInRole("Instructor") && course.InstructorId == User.FindFirst("UserId")?.Value))
+                                    {
+                                        <a asp-action="Edit" asp-route-id="@course.Id" class="btn btn-outline-primary btn-sm me-2">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <button type="button" class="btn btn-outline-danger btn-sm" 
+                                                onclick="confirmDelete('@course.Id', '@course.Title')">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    }
+                                </div>
+                                <a asp-action="Details" asp-route-id="@course.Id" class="btn btn-primary btn-sm">
+                                    Chi tiết
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Xác nhận xóa</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn xóa khóa học "<span id="courseTitleSpan"></span>"?</p>
+            </div>
+            <div class="modal-footer">
+                <form id="deleteForm" method="post" asp-action="Delete">
+                    <input type="hidden" id="courseId" name="id" />
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-danger">Xóa</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function confirmDelete(id, title) {
+            document.getElementById('courseId').value = id;
+            document.getElementById('courseTitleSpan').textContent = title;
+            new bootstrap.Modal(document.getElementById('deleteModal')).show();
+        }
+    </script>
+}

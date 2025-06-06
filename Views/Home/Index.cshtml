@@ -1,0 +1,169 @@
+﻿@using AppEL.Services
+@{
+    ViewData["Title"] = "Trang chủ";
+    var jsonFileService = Context.RequestServices.GetService<JsonFileService>();
+}
+
+<!-- Hero Section -->
+<div class="hero-section py-5 bg-primary text-white mb-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold mb-4">Học tập là hành trình không ngừng nghỉ</h1>
+                <p class="lead mb-4">Khám phá hàng nghìn khóa học chất lượng từ các chuyên gia hàng đầu. Nâng cao kỹ năng của bạn ngay hôm nay!</p>
+                @if (!User.Identity?.IsAuthenticated ?? true)
+                {
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                        <a asp-controller="Account" asp-action="Register" class="btn btn-light btn-lg px-4 me-md-2">Đăng ký ngay</a>
+                        <a asp-controller="Course" asp-action="Index" class="btn btn-outline-light btn-lg px-4">Xem khóa học</a>
+                    </div>
+                }
+            </div>
+            <div class="col-lg-6">
+                <img src="/images/hero-image.svg" alt="E-Learning" class="img-fluid" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Features Section -->
+<section class="features py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Tại sao chọn chúng tôi?</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="text-center">
+                    <i class="fas fa-laptop-code fa-3x text-primary mb-3"></i>
+                    <h4>Học mọi lúc, mọi nơi</h4>
+                    <p class="text-muted">Truy cập khóa học từ máy tính, tablet hoặc điện thoại của bạn</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="text-center">
+                    <i class="fas fa-chalkboard-teacher fa-3x text-primary mb-3"></i>
+                    <h4>Giảng viên chất lượng</h4>
+                    <p class="text-muted">Học từ các chuyên gia có nhiều năm kinh nghiệm trong ngành</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="text-center">
+                    <i class="fas fa-certificate fa-3x text-primary mb-3"></i>
+                    <h4>Chứng chỉ có giá trị</h4>
+                    <p class="text-muted">Nhận chứng chỉ sau khi hoàn thành khóa học</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Popular Courses Section -->
+<section class="courses py-5 bg-light">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Khóa học nổi bật</h2>
+            <a asp-controller="Course" asp-action="Index" class="btn btn-primary">Xem tất cả</a>
+        </div>
+        <div class="row g-4">
+            @{
+                var popularCourses = new JsonFileService(
+                    (IWebHostEnvironment)Context.RequestServices.GetService(typeof(IWebHostEnvironment))
+                ).GetCourses()
+                .Where(c => c.IsPublished)
+                .OrderByDescending(c => c.EnrollmentCount)
+                .Take(3)
+                .ToList();
+            }
+            
+            @if (!popularCourses.Any())
+            {
+                <div class="col-12">
+                    <div class="alert alert-info">
+                        Chưa có khóa học nào. Các khóa học sẽ sớm được cập nhật.
+                    </div>
+                </div>
+            }
+            else
+            {
+                @foreach (var course in popularCourses)
+                {
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <img src="@(string.IsNullOrEmpty(course.ImageUrl) ? "/images/course-default.jpg" : course.ImageUrl)" 
+                                 class="card-img-top" alt="@course.Title">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span class="badge bg-primary">@course.Category</span>
+                                    <small class="text-muted">@course.Duration giờ</small>
+                                </div>
+                                <h5 class="card-title">@course.Title</h5>
+                                <p class="card-text text-muted">@course.ShortDescription</p>
+                            </div>
+                            <div class="card-footer bg-white">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="text-primary fw-bold">@course.Price.ToString("N0") đ</span>
+                                    <a asp-controller="Course" asp-action="Details" asp-route-id="@course.Id" 
+                                       class="btn btn-outline-primary btn-sm">Chi tiết</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</section>
+
+<!-- Categories Section -->
+<section class="categories py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Danh mục phổ biến</h2>
+        <div class="row g-4">
+            <div class="col-md-3">
+                <a href="#" class="text-decoration-none">
+                    <div class="card text-center h-100">
+                        <div class="card-body">
+                            <i class="fas fa-code fa-3x text-primary mb-3"></i>
+                            <h5 class="card-title">Lập trình</h5>
+                            <p class="card-text text-muted">20+ khóa học</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="#" class="text-decoration-none">
+                    <div class="card text-center h-100">
+                        <div class="card-body">
+                            <i class="fas fa-language fa-3x text-primary mb-3"></i>
+                            <h5 class="card-title">Ngoại ngữ</h5>
+                            <p class="card-text text-muted">15+ khóa học</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="#" class="text-decoration-none">
+                    <div class="card text-center h-100">
+                        <div class="card-body">
+                            <i class="fas fa-chart-line fa-3x text-primary mb-3"></i>
+                            <h5 class="card-title">Kinh doanh</h5>
+                            <p class="card-text text-muted">25+ khóa học</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="#" class="text-decoration-none">
+                    <div class="card text-center h-100">
+                        <div class="card-body">
+                            <i class="fas fa-paint-brush fa-3x text-primary mb-3"></i>
+                            <h5 class="card-title">Thiết kế</h5>
+                            <p class="card-text text-muted">18+ khóa học</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+

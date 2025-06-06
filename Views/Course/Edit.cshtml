@@ -1,0 +1,110 @@
+@model AppEL.ViewModels.CourseViewModel
+
+@{
+    ViewData["Title"] = "Chỉnh sửa khóa học";
+}
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title h3 mb-4">@ViewData["Title"]</h1>
+
+                    <form method="post" enctype="multipart/form-data">
+                        <input type="hidden" asp-for="Id" />
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="Title" class="form-label">Tiêu đề</label>
+                            <input asp-for="Title" class="form-control" />
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="ShortDescription" class="form-label">Mô tả ngắn</label>
+                            <textarea asp-for="ShortDescription" class="form-control" rows="2"></textarea>
+                            <span asp-validation-for="ShortDescription" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Description" class="form-label">Mô tả chi tiết</label>
+                            <textarea asp-for="Description" class="form-control" rows="5"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Price" class="form-label">Giá (VNĐ)</label>
+                                <input asp-for="Price" class="form-control" type="number" />
+                                <span asp-validation-for="Price" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Duration" class="form-label">Thời lượng (giờ)</label>
+                                <input asp-for="Duration" class="form-control" type="number" />
+                                <span asp-validation-for="Duration" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Category" class="form-label">Danh mục</label>
+                                <select asp-for="Category" class="form-select">
+                                    <option value="">-- Chọn danh mục --</option>
+                                    <option value="Programming">Lập trình</option>
+                                    <option value="Language">Ngoại ngữ</option>
+                                    <option value="Business">Kinh doanh</option>
+                                    <option value="Design">Thiết kế</option>
+                                </select>
+                                <span asp-validation-for="Category" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Level" class="form-label">Cấp độ</label>
+                                <select asp-for="Level" class="form-select">
+                                    <option value="Beginner">Cơ bản</option>
+                                    <option value="Intermediate">Trung cấp</option>
+                                    <option value="Advanced">Nâng cao</option>
+                                </select>
+                                <span asp-validation-for="Level" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="ImageFile" class="form-label">Ảnh khóa học</label>
+                            @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                            {
+                                <div class="mb-2">
+                                    <img src="@Model.ImageUrl" alt="Current Image" class="img-thumbnail" style="max-height: 200px" />
+                                </div>
+                            }
+                            <input asp-for="ImageFile" class="form-control" type="file" accept="image/*" />
+                            <span asp-validation-for="ImageFile" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input asp-for="IsPublished" class="form-check-input" type="checkbox" />
+                                <label asp-for="IsPublished" class="form-check-label">Xuất bản</label>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a asp-action="Index" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Quay lại
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Cập nhật
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
