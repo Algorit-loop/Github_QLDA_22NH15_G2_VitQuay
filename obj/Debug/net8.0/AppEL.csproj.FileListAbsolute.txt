@@ -43,3 +43,4 @@ C:\Users\dat11\Downloads\Github_QLDA_22NH15_G2_VitQuay-main\obj\Debug\net8.0\ref
 C:\Users\dat11\Downloads\Github_QLDA_22NH15_G2_VitQuay-main\obj\Debug\net8.0\AppEL.pdb
 C:\Users\dat11\Downloads\Github_QLDA_22NH15_G2_VitQuay-main\obj\Debug\net8.0\AppEL.genruntimeconfig.cache
 C:\Users\dat11\Downloads\Github_QLDA_22NH15_G2_VitQuay-main\obj\Debug\net8.0\ref\AppEL.dll
+C:\Users\dat11\Downloads\Github_QLDA_22NH15_G2_VitQuay-main\obj\Debug\net8.0\AppEL.sourcelink.json
