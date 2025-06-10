@@ -1,0 +1,158 @@
+[
+  {
+    "id": "programming",
+    "name": "Lập trình",
+    "description": "Học lập trình từ cơ bản đến nâng cao",
+    "isFeatured": true
+  },
+  {
+    "id": "language",
+    "name": "Ngoại ngữ",
+    "description": "Làm chủ nhiều ngôn ngữ",
+    "isFeatured": true
+  },
+  {
+    "id": "business",
+    "name": "Kinh doanh",
+    "description": "Phát triển kỹ năng kinh doanh",
+    "isFeatured": true
+  },
+  {
+    "id": "design",
+    "name": "Thiết kế",
+    "description": "Sáng tạo không giới hạn",
+    "isFeatured": true
+  },
+  {
+    "id": "marketing",
+    "name": "Marketing",
+    "description": "Chiến lược marketing hiệu quả",
+    "isFeatured": true
+  },
+  {
+    "id": "music",
+    "name": "Âm nhạc",
+    "description": "Khám phá thế giới âm nhạc",
+    "isFeatured": false
+  },
+  {
+    "id": "photography",
+    "name": "Nhiếp ảnh",
+    "description": "Bí kíp chụp ảnh chuyên nghiệp",
+    "isFeatured": true
+  },
+  {
+    "id": "health",
+    "name": "Sức khỏe",
+    "description": "Giữ gìn cơ thể và tinh thần",
+    "isFeatured": true
+  },
+  {
+    "id": "cooking",
+    "name": "Nấu ăn",
+    "description": "Món ngon mỗi ngày",
+    "isFeatured": false
+  },
+  {
+    "id": "finance",
+    "name": "Tài chính",
+    "description": "Quản lý tài chính cá nhân",
+    "isFeatured": true
+  },
+  {
+    "id": "web-development",
+    "name": "Phát triển Web",
+    "description": "Học thiết kế và phát triển trang web từ cơ bản đến nâng cao",
+    "isFeatured": true
+  },
+  {
+    "id": "mobile-development",
+    "name": "Lập trình Di động",
+    "description": "Phát triển ứng dụng trên các nền tảng di động iOS và Android",
+    "isFeatured": true
+  },
+  {
+    "id": "data-science",
+    "name": "Khoa học Dữ liệu",
+    "description": "Phân tích và xử lý dữ liệu lớn, machine learning và AI",
+    "isFeatured": true
+  },
+  {
+    "id": "game-development",
+    "name": "Phát triển Game",
+    "description": "Thiết kế và phát triển trò chơi điện tử đa nền tảng",
+    "isFeatured": false
+  },
+  {
+    "id": "digital-marketing",
+    "name": "Digital Marketing",
+    "description": "Chiến lược tiếp thị kỹ thuật số toàn diện",
+    "isFeatured": true
+  },
+  {
+    "id": "soft-skills",
+    "name": "Kỹ năng mềm",
+    "description": "Phát triển kỹ năng giao tiếp, lãnh đạo và làm việc nhóm",
+    "isFeatured": false
+  },
+  {
+    "id": "mathematics",
+    "name": "Toán học",
+    "description": "Khám phá thế giới toán học từ đại số đến giải tích",
+    "isFeatured": false
+  },
+  {
+    "id": "english",
+    "name": "Tiếng Anh",
+    "description": "Nâng cao kỹ năng tiếng Anh từ cơ bản đến nâng cao",
+    "isFeatured": true
+  },
+  {
+    "id": "japanese",
+    "name": "Tiếng Nhật",
+    "description": "Học tiếng Nhật từ hiragana, katakana đến kanji",
+    "isFeatured": false
+  },
+  {
+    "id": "korean",
+    "name": "Tiếng Hàn",
+    "description": "Khám phá ngôn ngữ và văn hóa Hàn Quốc",
+    "isFeatured": false
+  },
+  {
+    "id": "physics",
+    "name": "Vật lý",
+    "description": "Học các nguyên lý cơ bản và nâng cao trong vật lý học",
+    "isFeatured": false
+  },
+  {
+    "id": "accounting",
+    "name": "Kế toán",
+    "description": "Các nguyên tắc kế toán và quản lý tài chính doanh nghiệp",
+    "isFeatured": false
+  },
+  {
+    "id": "fitness",
+    "name": "Thể hình",
+    "description": "Các bài tập rèn luyện sức khỏe và cơ bắp",
+    "isFeatured": true
+  },
+  {
+    "id": "interior-design",
+    "name": "Thiết kế Nội thất",
+    "description": "Nghệ thuật thiết kế và trang trí không gian sống",
+    "isFeatured": false
+  },
+  {
+    "id": "guitar",
+    "name": "Guitar",
+    "description": "Hướng dẫn chơi guitar từ cơ bản đến nâng cao",
+    "isFeatured": false
+  },
+  {
+    "id": "piano",
+    "name": "Piano",
+    "description": "Khám phá nghệ thuật chơi piano và bản nhạc kinh điển",
+    "isFeatured": false
+  }
+]

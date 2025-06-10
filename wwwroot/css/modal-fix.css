@@ -1,0 +1,73 @@
+/**
+ * Modal Interaction Fixes
+ * Giải quyết vấn đề tương tác với modal popup khi có chatbot
+ */
+
+/* Đảm bảo modal được hiển thị trên mọi phần tử khác */
+.modal {
+    z-index: 2000 !important;
+}
+
+.modal-backdrop {
+    z-index: 1999 !important;
+}
+
+.modal-dialog {
+    z-index: 2001 !important;
+}
+
+.modal-content {
+    z-index: 2002 !important;
+}
+
+/* Đảm bảo các phần tử trong modal có thể tương tác */
+.modal .modal-body,
+.modal .modal-header,
+.modal .modal-footer {
+    position: relative;
+    z-index: 2003 !important;
+}
+
+/* Đảm bảo các nút và đầu vào trong modal luôn nhận được sự kiện chuột */
+.modal .btn,
+.modal button,
+.modal input,
+.modal select,
+.modal a,
+.modal .form-control,
+.modal .form-select,
+.modal .dropdown-toggle {
+    position: relative;
+    z-index: 2010 !important;
+    pointer-events: auto !important;
+}
+
+/* Đảm bảo dropdown menu trong modal hiển thị đúng */
+.modal .dropdown-menu {
+    z-index: 2020 !important;
+    pointer-events: auto !important;
+}
+
+.modal .dropdown-item {
+    z-index: 2021 !important;
+    pointer-events: auto !important;
+}
+
+/* Khi chatbot đang mở, ưu tiên modal */
+.chatbot-container.active ~ .modal,
+.chatbot-container.active ~ .modal-backdrop {
+    z-index: 2050 !important;
+}
+
+/* Khi modal đang mở, giảm z-index của chatbot */
+body.modal-open .chatbot-container {
+    z-index: 1000 !important;
+}
+
+/* Sửa lỗi hiển thị modal trên các thiết bị di động */
+@media (max-width: 768px) {
+    .modal-dialog {
+        margin: 0.5rem auto;
+        max-width: 95%;
+    }
+}

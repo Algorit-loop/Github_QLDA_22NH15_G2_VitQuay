@@ -1,0 +1,302 @@
+[
+  {
+    "Id": "admin-123",
+    "Username": "admin",
+    "Password": "admin123",
+    "Email": "admin@vitquay.edu.vn",
+    "FullName": "Administrator",
+    "Role": 0,
+    "CreatedAt": "2025-06-05T00:00:00",
+    "Balance": 0
+  },
+  {
+    "Id": "instructor-001",
+    "Username": "nguyenvana",
+    "Password": "secure123",
+    "Email": "nguyenvana@vitquay.edu.vn",
+    "FullName": "Nguy\u1EC5n V\u0103n A",
+    "Role": 1,
+    "CreatedAt": "2025-01-15T00:00:00+07:00",
+    "Balance": 5000000
+  },
+  {
+    "Id": "instructor-002",
+    "Username": "tranthib",
+    "Password": "secure456",
+    "Email": "tranthib@vitquay.edu.vn",
+    "FullName": "Tr\u1EA7n Th\u1ECB B",
+    "Role": 1,
+    "CreatedAt": "2025-02-01T00:00:00+07:00",
+    "Balance": 4500000
+  },
+  {
+    "Id": "instructor-003",
+    "Username": "lequocc",
+    "Password": "secure789",
+    "Email": "lequocc@vitquay.edu.vn",
+    "FullName": "L\u00EA Qu\u1ED1c C",
+    "Role": 1,
+    "CreatedAt": "2025-02-10T00:00:00+07:00",
+    "Balance": 6200000
+  },
+  {
+    "Id": "instructor-004",
+    "Username": "phamthid",
+    "Password": "secure012",
+    "Email": "phamthid@vitquay.edu.vn",
+    "FullName": "Ph\u1EA1m Th\u1ECB D",
+    "Role": 1,
+    "CreatedAt": "2025-03-05T00:00:00+07:00",
+    "Balance": 3700000
+  },
+  {
+    "Id": "instructor-005",
+    "Username": "hothuye",
+    "Password": "secure345",
+    "Email": "hothuye@vitquay.edu.vn",
+    "FullName": "H\u1ED3 Th\u1EE5y E",
+    "Role": 1,
+    "CreatedAt": "2025-03-15T00:00:00+07:00",
+    "Balance": 5800000
+  },
+  {
+    "Id": "405a88cf-2c60-4ba5-8911-305658b06abb",
+    "Username": "ppp",
+    "Password": "123123",
+    "Email": "ppp@gmail.com",
+    "FullName": "Ph\u1EA1m Ph\u01B0\u01A1ng Ph\u00E1p",
+    "Role": 2,
+    "CreatedAt": "2025-06-05T13:16:25.8579188+07:00",
+    "Balance": 33329900
+  },
+  {
+    "Id": "25023525-29be-49d6-bee5-8c809fd0bdfd",
+    "Username": "minhdat",
+    "Password": "dat12345",
+    "Email": "dat11022005@gmail.com",
+    "FullName": "Tr\u1ECBnh Minh \u0110\u1EA1t",
+    "Role": 2,
+    "CreatedAt": "2025-06-06T17:02:53.0115164+07:00",
+    "Balance": 5039900
+  },
+  {
+    "Id": "6342bded-42d8-4e8d-b5c0-2e925b51c02a",
+    "Username": "admin3",
+    "Password": "admin123",
+    "Email": "dat110220051@gmail.com",
+    "FullName": "Administrator",
+    "Role": 0,
+    "CreatedAt": "2025-06-06T18:48:37.4247454+07:00",
+    "Balance": 0
+  },
+  {
+    "Id": "8fd8db50-4c77-413e-8399-a66847468a6b",
+    "Username": "giangvien01",
+    "Password": "secure123",
+    "Email": "giangvien01@vitquay.edu.vn",
+    "FullName": "Nguy\u1EC5n Th\u1ECB H\u01B0\u01A1ng",
+    "Role": 1,
+    "CreatedAt": "2025-06-01T10:15:30+07:00",
+    "Balance": 500000
+  },
+  {
+    "Id": "7c95e215-a099-4423-ba78-d63e11c1b1a6",
+    "Username": "giangvien02",
+    "Password": "teach456",
+    "Email": "giangvien02@vitquay.edu.vn",
+    "FullName": "Tr\u1EA7n V\u0103n Nam",
+    "Role": 1,
+    "CreatedAt": "2025-06-02T08:30:15+07:00",
+    "Balance": 750000
+  },
+  {
+    "Id": "9e87d1c3-45b6-4a2f-9c8d-7a5b6c1d2e3f",
+    "Username": "giangvien03",
+    "Password": "prof789",
+    "Email": "giangvien03@vitquay.edu.vn",
+    "FullName": "Ph\u1EA1m Minh Tu\u1EA5n",
+    "Role": 1,
+    "CreatedAt": "2025-06-03T14:20:10+07:00",
+    "Balance": 620000
+  },
+  {
+    "Id": "instructor-006",
+    "Username": "nguyenhuong",
+    "Password": "secure456",
+    "Email": "nguyenhuong@vitquay.edu.vn",
+    "FullName": "Nguy\u1EC5n Thu H\u01B0\u01A1ng",
+    "Role": 1,
+    "CreatedAt": "2025-03-20T00:00:00+07:00",
+    "Balance": 4100000
+  },
+  {
+    "Id": "instructor-007",
+    "Username": "trantrung",
+    "Password": "secure789",
+    "Email": "trantrung@vitquay.edu.vn",
+    "FullName": "Tr\u1EA7n Qu\u1ED1c Trung",
+    "Role": 1,
+    "CreatedAt": "2025-04-01T00:00:00+07:00",
+    "Balance": 5300000
+  },
+  {
+    "Id": "instructor-008",
+    "Username": "lehoa",
+    "Password": "secure012",
+    "Email": "lehoa@vitquay.edu.vn",
+    "FullName": "L\u00EA Th\u1ECB Hoa",
+    "Role": 1,
+    "CreatedAt": "2025-04-15T00:00:00+07:00",
+    "Balance": 2800000
+  },
+  {
+    "Id": "instructor-009",
+    "Username": "phambac",
+    "Password": "secure345",
+    "Email": "phambac@vitquay.edu.vn",
+    "FullName": "Ph\u1EA1m V\u0103n B\u1EAFc",
+    "Role": 1,
+    "CreatedAt": "2025-05-01T00:00:00+07:00",
+    "Balance": 3100000
+  },
+  {
+    "Id": "instructor-010",
+    "Username": "hoanglan",
+    "Password": "secure678",
+    "Email": "hoanglan@vitquay.edu.vn",
+    "FullName": "Ho\u00E0ng Th\u1ECB Lan",
+    "Role": 1,
+    "CreatedAt": "2025-05-10T00:00:00+07:00",
+    "Balance": 4800000
+  },
+  {
+    "Id": "5b8c9d2e-1a3f-4e6d-8g7h-5i6j7k8l9m0n",
+    "Username": "hocvien01",
+    "Password": "student123",
+    "Email": "hocvien01@gmail.com",
+    "FullName": "L\u00EA Th\u1ECB Mai",
+    "Role": 2,
+    "CreatedAt": "2025-06-04T09:45:30+07:00",
+    "Balance": 150000
+  },
+  {
+    "Id": "2d3e4f5g-6h7i-8j9k-0l1m-2n3o4p5q6r7s",
+    "Username": "hocvien02",
+    "Password": "learn456",
+    "Email": "hocvien02@gmail.com",
+    "FullName": "V\u0169 \u0110\u00ECnh Ho\u00E0ng",
+    "Role": 2,
+    "CreatedAt": "2025-06-05T16:30:45+07:00",
+    "Balance": 200000
+  },
+  {
+    "Id": "8t9u0v1w-2x3y-4z5a-6b7c-8d9e0f1g2h3i",
+    "Username": "hocvien03",
+    "Password": "study789",
+    "Email": "hocvien03@gmail.com",
+    "FullName": "\u0110\u1ED7 Thanh H\u00E0",
+    "Role": 2,
+    "CreatedAt": "2025-06-06T11:20:15+07:00",
+    "Balance": 120000
+  },
+  {
+    "Id": "student-001",
+    "Username": "nguyenvan",
+    "Password": "student123",
+    "Email": "nguyenvan@gmail.com",
+    "FullName": "Nguy\u1EC5n V\u0103n",
+    "Role": 2,
+    "CreatedAt": "2025-01-05T00:00:00+07:00",
+    "Balance": 500000
+  },
+  {
+    "Id": "student-002",
+    "Username": "phamlinh",
+    "Password": "student456",
+    "Email": "phamlinh@gmail.com",
+    "FullName": "Ph\u1EA1m Th\u00F9y Linh",
+    "Role": 2,
+    "CreatedAt": "2025-01-10T00:00:00+07:00",
+    "Balance": 650000
+  },
+  {
+    "Id": "student-003",
+    "Username": "tranbinh",
+    "Password": "student789",
+    "Email": "tranbinh@gmail.com",
+    "FullName": "Tr\u1EA7n Quang B\u00ECnh",
+    "Role": 2,
+    "CreatedAt": "2025-01-20T00:00:00+07:00",
+    "Balance": 320000
+  },
+  {
+    "Id": "student-004",
+    "Username": "lemyhanh",
+    "Password": "student012",
+    "Email": "lemyhanh@gmail.com",
+    "FullName": "L\u00EA M\u1EF9 H\u1EA1nh",
+    "Role": 2,
+    "CreatedAt": "2025-02-05T00:00:00+07:00",
+    "Balance": 480000
+  },
+  {
+    "Id": "student-005",
+    "Username": "hoangduc",
+    "Password": "student345",
+    "Email": "hoangduc@gmail.com",
+    "FullName": "Ho\u00E0ng Minh \u0110\u1EE9c",
+    "Role": 2,
+    "CreatedAt": "2025-02-15T00:00:00+07:00",
+    "Balance": 700000
+  },
+  {
+    "Id": "student-006",
+    "Username": "vulan",
+    "Password": "student678",
+    "Email": "vulan@gmail.com",
+    "FullName": "V\u0169 Th\u1ECB Lan",
+    "Role": 2,
+    "CreatedAt": "2025-03-01T00:00:00+07:00",
+    "Balance": 250000
+  },
+  {
+    "Id": "student-007",
+    "Username": "duongminh",
+    "Password": "student901",
+    "Email": "duongminh@gmail.com",
+    "FullName": "D\u01B0\u01A1ng V\u0103n Minh",
+    "Role": 2,
+    "CreatedAt": "2025-03-10T00:00:00+07:00",
+    "Balance": 580000
+  },
+  {
+    "Id": "student-008",
+    "Username": "ngothuy",
+    "Password": "student234",
+    "Email": "ngothuy@gmail.com",
+    "FullName": "Ng\u00F4 Thanh Th\u1EE7y",
+    "Role": 2,
+    "CreatedAt": "2025-04-05T00:00:00+07:00",
+    "Balance": 430000
+  },
+  {
+    "Id": "student-009",
+    "Username": "dinhcong",
+    "Password": "student567",
+    "Email": "dinhcong@gmail.com",
+    "FullName": "\u0110inh B\u00E1 C\u00F4ng",
+    "Role": 2,
+    "CreatedAt": "2025-04-20T00:00:00+07:00",
+    "Balance": 280000
+  },
+  {
+    "Id": "student-010",
+    "Username": "mailan",
+    "Password": "student890",
+    "Email": "mailan@gmail.com",
+    "FullName": "Mai Th\u1ECB Lan",
+    "Role": 2,
+    "CreatedAt": "2025-05-05T00:00:00+07:00",
+    "Balance": 620000
+  }
+]

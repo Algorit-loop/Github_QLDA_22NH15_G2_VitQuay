@@ -1,0 +1,136 @@
+/* Fixes for z-index issues between elements */
+
+/* Structure changes for page layout */
+html {
+    height: 100%;
+    position: relative;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* Sửa lỗi chatbot che phủ các nút bấm */
+.pointer-events-none {
+    pointer-events: none !important; /* Vô hiệu hóa sự kiện chuột để click xuyên qua */
+}
+
+/* Đảm bảo nút launcher vẫn có thể nhấp được */
+.chatbot-launcher {
+    pointer-events: auto !important;
+}
+
+/* Khi chatbot đang mở, cho phép tương tác */
+.chatbot-popup.active {
+    pointer-events: auto !important;
+}
+
+/* Đảm bảo các modal có thể nhận sự kiện chuột */
+.modal, .modal-dialog, .modal-content, .modal-body, .modal-header, .modal-footer {
+    pointer-events: auto !important;
+}
+
+/* Đảm bảo các phần tử tương tác trong modal nhận được sự kiện chuột */
+.modal.show button,
+.modal.show .btn,
+.modal.show input,
+.modal.show select,
+.modal.show a,
+.modal.show .form-control,
+.modal.show .form-select,
+.modal.show .form-check,
+.modal.show .form-check-input,
+.modal.show .dropdown-toggle,
+.modal.show .dropdown-menu,
+.modal.show .dropdown-item {
+    pointer-events: auto !important;
+    position: relative;
+    z-index: 2100 !important;
+}
+
+/* Quan trọng: Đảm bảo phần nội dung chính không bị footer đè lên */
+main {
+    flex: 1 0 auto;
+    position: relative;
+    z-index: 30;
+    background-color: #f8f9fa;
+}
+
+/* Đảm bảo main container có đủ không gian */
+.container {
+    position: relative;
+    z-index: 50;
+}
+
+/* Ensure auth forms are visible */
+.auth-page {
+    position: relative;
+    z-index: 1055 !important;
+    background-color: #f8f9fa;
+    padding-bottom: 50px; /* Thêm padding phía dưới để tránh bị footer che mất */
+}
+
+.auth-wrapper {
+    position: relative;
+    z-index: 1055 !important;
+    background-color: white; /* Đảm bảo nền trắng không trong suốt */
+}
+
+/* Footer adjustments */
+.footer {
+    position: relative !important;
+    width: 100%;
+    z-index: 1 !important; /* Cực thấp để đảm bảo nằm dưới mọi phần tử khác */
+    margin-top: auto;
+}
+
+/* Chat and modal adjustments */
+.modal-backdrop {
+    z-index: 1050 !important;
+    position: fixed !important;
+}
+
+.modal-open .modal {
+    display: block;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal, .modal-dialog {
+    z-index: 2000 !important; /* Rất cao để đảm bảo hiển thị trên mọi thứ */
+}
+
+/* Đảm bảo các phần tử trong modal có thể tương tác */
+.modal.show .modal-content, 
+.modal.show .modal-body, 
+.modal.show .modal-footer, 
+.modal.show .modal-header {
+    position: relative;
+    z-index: 2050 !important;
+}
+
+/* Ưu tiên cao cho form controls trong modal */
+.modal.show input,
+.modal.show button,
+.modal.show select,
+.modal.show textarea,
+.modal.show a,
+.modal.show .form-control {
+    position: relative;
+    z-index: 2100 !important;
+}
+
+/* Fix modal container */
+.modal-content {
+    background-color: white !important;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5) !important;
+}
+
+.chatbot-container {
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    z-index: 1500 !important; /* Cao hơn footer nhưng thấp hơn modal */
+}

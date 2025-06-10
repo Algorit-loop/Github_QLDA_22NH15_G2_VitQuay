@@ -1,0 +1,910 @@
+[
+  {
+    "Id": "6f203fa4-27d0-4539-9aa8-6352b3ab90aa",
+    "UserId": "8fd8db50-4c77-413e-8399-a66847468a6b",
+    "UserName": "Nguy\u1EC5n Th\u1ECB H\u01B0\u01A1ng",
+    "CourseId": "2290ec75-85ed-4772-91bd-1e135710bd96",
+    "EnrolledAt": "2025-06-05T14:17:58.7575199+07:00",
+    "CompletedAt": "2025-06-09T10:25:30+07:00",
+    "CompletedLessons": [
+      "f2f16c1a-7f28-4aab-9e21-79fbe73482d7"
+    ],
+    "Progress": 100,
+    "Course": {
+      "Id": "2290ec75-85ed-4772-91bd-1e135710bd96",
+      "Title": "L\u1EADp tr\u00ECnh Web c\u01A1 b\u1EA3n v\u1EDBi HTML, CSS v\u00E0 JavaScript",
+      "Description": "Kh\u00F3a h\u1ECDc n\u00E0y gi\u00FAp b\u1EA1n n\u1EAFm v\u1EEFng nh\u1EEFng ki\u1EBFn th\u1EE9c n\u1EC1n t\u1EA3ng v\u1EC1 l\u1EADp tr\u00ECnh web, t\u1EEB c\u1EA5u tr\u00FAc HTML, \u0111\u1ECBnh d\u1EA1ng v\u1EDBi CSS \u0111\u1EBFn t\u01B0\u01A1ng t\u00E1c \u0111\u1ED9ng v\u1EDBi JavaScript. B\u1EA1n s\u1EBD \u0111\u01B0\u1EE3c th\u1EF1c h\u00E0nh qua c\u00E1c b\u00E0i t\u1EADp th\u1EF1c t\u1EBF v\u00E0 x\u00E2y d\u1EF1ng m\u1ED9t website c\u00E1 nh\u00E2n ho\u00E0n ch\u1EC9nh.",
+      "ShortDescription": "L\u00E0m ch\u1EE7 n\u1EC1n t\u1EA3ng l\u1EADp tr\u00ECnh web v\u1EDBi HTML, CSS v\u00E0 JS",
+      "Lessons": [
+        {
+          "Id": "f2f16c1a-7f28-4aab-9e21-79fbe73482d7",
+          "CourseId": "2290ec75-85ed-4772-91bd-1e135710bd96",
+          "Title": "Gi\u1EDBi thi\u1EC7u HTML v\u00E0 c\u1EA5u tr\u00FAc c\u01A1 b\u1EA3n",
+          "Description": "B\u00E0i h\u1ECDc \u0111\u1EA7u ti\u00EAn gi\u1EDBi thi\u1EC7u v\u1EC1 c\u00E1ch t\u1EA1o trang web HTML c\u01A1 b\u1EA3n",
+          "VideoPath": "/Data/coursevideo/2290ec75-85ed-4772-91bd-1e135710bd96/f2f16c1a-7f28-4aab-9e21-79fbe73482d7.mp4",
+          "Order": 1,
+          "CreatedAt": "2025-06-05T15:14:25.0411653+07:00",
+          "UpdatedAt": "2025-06-06T18:57:40.5711056+07:00",
+          "IsPublished": true,
+          "Duration": "00:30:00"
+        }
+      ],
+      "Price": 250000,
+      "InstructorId": "instructor-001",
+      "InstructorName": "Nguy\u1EC5n V\u0103n A",
+      "ImageUrl": "/uploads/courses/bebcefef-f6c9-4bd6-846a-66708d7ab55f.png",
+      "Level": "Intermediate",
+      "Category": "Programming",
+      "Duration": 100,
+      "CreatedAt": "2025-06-05T13:48:42.9094498+07:00",
+      "UpdatedAt": "2025-06-05T13:55:00+07:00",
+      "IsPublished": true,
+      "EnrollmentCount": 3,
+      "Rating": 4.2
+    }
+  },
+  {
+    "Id": "3be95d68-74b0-42bb-8abf-206e60e0e7ae",
+    "UserId": "405a88cf-2c60-4ba5-8911-305658b06abb",
+    "UserName": "ppp",
+    "CourseId": "2290ec75-85ed-4772-91bd-1e135710bd96",
+    "EnrolledAt": "2025-06-05T16:38:04.9647017+07:00",
+    "CompletedAt": "2025-06-06T22:40:23.0914553+07:00",
+    "CompletedLessons": [
+      "f2f16c1a-7f28-4aab-9e21-79fbe73482d7",
+      "76909a4f-d642-443c-98e7-e5249472eac1"
+    ],
+    "Progress": 100,
+    "Course": {
+      "Id": "2290ec75-85ed-4772-91bd-1e135710bd96",
+      "Title": "zczc",
+      "Description": "xczx",
+      "ShortDescription": "xcc",
+      "Lessons": [
+        {
+          "Id": "f2f16c1a-7f28-4aab-9e21-79fbe73482d7",
+          "CourseId": "2290ec75-85ed-4772-91bd-1e135710bd96",
+          "Title": "zc",
+          "Description": "\u0111a",
+          "VideoPath": "/Data/coursevideo/2290ec75-85ed-4772-91bd-1e135710bd96/f2f16c1a-7f28-4aab-9e21-79fbe73482d7.webm",
+          "Order": 1,
+          "CreatedAt": "2025-06-05T15:14:25.0411653+07:00",
+          "UpdatedAt": null,
+          "IsPublished": true,
+          "Duration": "00:00:00"
+        },
+        {
+          "Id": "76909a4f-d642-443c-98e7-e5249472eac1",
+          "CourseId": "2290ec75-85ed-4772-91bd-1e135710bd96",
+          "Title": "\u00E1dsad",
+          "Description": "\u0111\u00E1",
+          "VideoPath": "/Data/coursevideo/2290ec75-85ed-4772-91bd-1e135710bd96/76909a4f-d642-443c-98e7-e5249472eac1.webm",
+          "Order": 2,
+          "CreatedAt": "2025-06-05T15:35:03.6914202+07:00",
+          "UpdatedAt": "2025-06-05T15:35:21.2917873+07:00",
+          "IsPublished": true,
+          "Duration": "00:00:00"
+        }
+      ],
+      "Price": 100,
+      "InstructorId": "admin-123",
+      "InstructorName": "Administrator",
+      "ImageUrl": "/uploads/courses/bebcefef-f6c9-4bd6-846a-66708d7ab55f.png",
+      "Level": "Intermediate",
+      "Category": "Programming",
+      "Duration": 100,
+      "CreatedAt": "2025-06-05T13:48:42.9094498+07:00",
+      "UpdatedAt": "2025-06-05T13:55:00+07:00",
+      "IsPublished": true,
+      "EnrollmentCount": 1,
+      "Rating": 0
+    }
+  },
+  {
+    "Id": "fd39948b-4e78-4965-8602-e5e3d5bef609",
+    "UserId": "405a88cf-2c60-4ba5-8911-305658b06abb",
+    "UserName": "ppp",
+    "CourseId": "a27b00ce-7364-431c-92ae-83b1fe9a7a94",
+    "EnrolledAt": "2025-06-05T17:00:03.1541975+07:00",
+    "CompletedAt": null,
+    "CompletedLessons": [],
+    "Progress": 0,
+    "Course": {
+      "Id": "a27b00ce-7364-431c-92ae-83b1fe9a7a94",
+      "Title": "qqqqqqqqqqq",
+      "Description": "qqqqqqqq",
+      "ShortDescription": "qqqqqqqqq",
+      "Lessons": [],
+      "Price": 1000000,
+      "InstructorId": "admin-123",
+      "InstructorName": "Administrator",
+      "ImageUrl": "/uploads/courses/09ce126e-5ed8-46ad-96b5-9eaf5a82b921.png",
+      "Level": "Advanced",
+      "Category": "Programming",
+      "Duration": 1,
+      "CreatedAt": "2025-06-05T16:51:13.7180088+07:00",
+      "UpdatedAt": "2025-06-05T16:52:11.0332815+07:00",
+      "IsPublished": true,
+      "EnrollmentCount": 0,
+      "Rating": 0
+    }
+  },
+  {
+    "Id": "84410c79-f157-4e60-8bc8-3f213195802a",
+    "UserId": "405a88cf-2c60-4ba5-8911-305658b06abb",
+    "UserName": "ppp",
+    "CourseId": "4ab07b96-6c56-463d-b75b-d0164daf5ae7",
+    "EnrolledAt": "2025-06-05T17:21:19.8766035+07:00",
+    "CompletedAt": "2025-06-06T22:40:47.1985883+07:00",
+    "CompletedLessons": [
+      "1958895c-7a38-44f6-a057-72cac77ab6fa"
+    ],
+    "Progress": 100,
+    "Course": {
+      "Id": "4ab07b96-6c56-463d-b75b-d0164daf5ae7",
+      "Title": "aaaaa",
+      "Description": "aaaaa",
+      "ShortDescription": "\u00E2",
+      "Lessons": [
+        {
+          "Id": "1958895c-7a38-44f6-a057-72cac77ab6fa",
+          "CourseId": "4ab07b96-6c56-463d-b75b-d0164daf5ae7",
+          "Title": "C\u00E1ch bay l\u00EAn tr\u1EDDi",
+          "Description": "1 2 3 zo",
+          "VideoPath": "/Data/coursevideo/4ab07b96-6c56-463d-b75b-d0164daf5ae7/1958895c-7a38-44f6-a057-72cac77ab6fa.webm",
+          "Order": 1,
+          "CreatedAt": "2025-06-05T17:01:57.3691976+07:00",
+          "UpdatedAt": "2025-06-05T17:11:52.2438803+07:00",
+          "IsPublished": true,
+          "Duration": "00:00:00"
+        }
+      ],
+      "Price": 500000,
+      "InstructorId": "admin-123",
+      "InstructorName": "Administrator",
+      "ImageUrl": "/uploads/courses/a7d43651-10c2-499e-8917-04d75ff8a237.png",
+      "Level": "Intermediate",
+      "Category": "Language",
+      "Duration": 5,
+      "CreatedAt": "2025-06-05T17:00:49.0730512+07:00",
+      "UpdatedAt": null,
+      "IsPublished": true,
+      "EnrollmentCount": 0,
+      "Rating": 0
+    }
+  },
+  {
+    "Id": "565d2b4e-f8aa-491a-98b7-61f2fbdf10f2",
+    "UserId": "405a88cf-2c60-4ba5-8911-305658b06abb",
+    "UserName": "ppp",
+    "CourseId": "dbd17b42-ad41-4f45-b0a4-a4077ba70854",
+    "EnrolledAt": "2025-06-05T17:23:57.9824332+07:00",
+    "CompletedAt": null,
+    "CompletedLessons": [],
+    "Progress": 0,
+    "Course": {
+      "Id": "dbd17b42-ad41-4f45-b0a4-a4077ba70854",
+      "Title": "lz",
+      "Description": "\u00E2csd",
+      "ShortDescription": "zxc",
+      "Lessons": [],
+      "Price": 1000000,
+      "InstructorId": "admin-123",
+      "InstructorName": "Administrator",
+      "ImageUrl": "/uploads/courses/1df2d1b6-e3a3-447f-816b-ee3f73318e8b.png",
+      "Level": "Advanced",
+      "Category": "Programming",
+      "Duration": 10,
+      "CreatedAt": "2025-06-05T17:23:33.2889887+07:00",
+      "UpdatedAt": "2025-06-05T17:23:43.1029218+07:00",
+      "IsPublished": true,
+      "EnrollmentCount": 0,
+      "Rating": 0
+    }
+  },
+  {
+    "Id": "bf754d20-fab7-4e2f-8edb-d8b6f30704ff",
+    "UserId": "405a88cf-2c60-4ba5-8911-305658b06abb",
+    "UserName": "ppp",
+    "CourseId": "7874cf7b-dc31-4215-baf8-08bb4ca9899c",
+    "EnrolledAt": "2025-06-05T17:25:56.2514595+07:00",
+    "CompletedAt": "2025-06-05T17:26:02.2940162+07:00",
+    "CompletedLessons": [
+      "417accf6-857b-4db8-bdb8-63cfe65c9449"
+    ],
+    "Progress": 100,
+    "Course": {
+      "Id": "7874cf7b-dc31-4215-baf8-08bb4ca9899c",
+      "Title": "abc23",
+      "Description": "zxcc",
+      "ShortDescription": "zxxcz",
+      "Lessons": [
+        {
+          "Id": "417accf6-857b-4db8-bdb8-63cfe65c9449",
+          "CourseId": "7874cf7b-dc31-4215-baf8-08bb4ca9899c",
+          "Title": "zccc",
+          "Description": "qeqwe",
+          "VideoPath": "/Data/coursevideo/7874cf7b-dc31-4215-baf8-08bb4ca9899c/417accf6-857b-4db8-bdb8-63cfe65c9449.webm",
+          "Order": 1,
+          "CreatedAt": "2025-06-05T17:25:49.8961597+07:00",
+          "UpdatedAt": null,
+          "IsPublished": true,
+          "Duration": "00:00:00"
+        }
+      ],
+      "Price": 20000,
+      "InstructorId": "admin-123",
+      "InstructorName": "Administrator",
+      "ImageUrl": "/uploads/courses/f6a2dd87-eb73-4dee-821c-15b6e32d19e9.png",
+      "Level": "Advanced",
+      "Category": "Programming",
+      "Duration": 2,
+      "CreatedAt": "2025-06-05T17:25:35.3402936+07:00",
+      "UpdatedAt": null,
+      "IsPublished": true,
+      "EnrollmentCount": 0,
+      "Rating": 0
+    }
+  },
+  {
+    "Id": "4189dd9b-3925-4909-a2c1-e295651fdd68",
+    "UserId": "25023525-29be-49d6-bee5-8c809fd0bdfd",
+    "UserName": "Tr\u1ECBnh Minh \u0110\u1EA1t",
+    "CourseId": "7874cf7b-dc31-4215-baf8-08bb4ca9899c",
+    "EnrolledAt": "2025-06-06T18:32:34.1183535+07:00",
+    "CompletedAt": null,
+    "CompletedLessons": [],
+    "Progress": 0,
+    "Course": {
+      "Id": "7874cf7b-dc31-4215-baf8-08bb4ca9899c",
+      "Title": "abc23",
+      "Description": "zxcc",
+      "ShortDescription": "zxxcz",
+      "Lessons": [
+        {
+          "Id": "417accf6-857b-4db8-bdb8-63cfe65c9449",
+          "CourseId": "7874cf7b-dc31-4215-baf8-08bb4ca9899c",
+          "Title": "zccc",
+          "Description": "qeqwe",
+          "VideoPath": "/Data/coursevideo/7874cf7b-dc31-4215-baf8-08bb4ca9899c/417accf6-857b-4db8-bdb8-63cfe65c9449.webm",
+          "Order": 1,
+          "CreatedAt": "2025-06-05T17:25:49.8961597+07:00",
+          "UpdatedAt": null,
+          "IsPublished": true,
+          "Duration": "00:00:00"
+        }
+      ],
+      "Price": 20000,
+      "InstructorId": "admin-123",
+      "InstructorName": "Administrator",
+      "ImageUrl": "/uploads/courses/f6a2dd87-eb73-4dee-821c-15b6e32d19e9.png",
+      "Level": "Advanced",
+      "Category": "Programming",
+      "Duration": 2,
+      "CreatedAt": "2025-06-05T17:25:35.3402936+07:00",
+      "UpdatedAt": null,
+      "IsPublished": true,
+      "EnrollmentCount": 1,
+      "Rating": 0
+    }
+  },
+  {
+    "Id": "b276d7ba-325f-499e-a50b-c26d37c8abb8",
+    "UserId": "25023525-29be-49d6-bee5-8c809fd0bdfd",
+    "UserName": "Tr\u1ECBnh Minh \u0110\u1EA1t",
+    "CourseId": "2290ec75-85ed-4772-91bd-1e135710bd96",
+    "EnrolledAt": "2025-06-06T22:30:29.0491541+07:00",
+    "CompletedAt": null,
+    "CompletedLessons": [],
+    "Progress": 0,
+    "Course": {
+      "Id": "2290ec75-85ed-4772-91bd-1e135710bd96",
+      "Title": "L\u1EADp tr\u00ECnh Web c\u01A1 b\u1EA3n v\u1EDBi HTML, CSS v\u00E0 JavaScript",
+      "Description": "Kh\u00F3a h\u1ECDc n\u00E0y gi\u00FAp b\u1EA1n n\u1EAFm v\u1EEFng nh\u1EEFng ki\u1EBFn th\u1EE9c n\u1EC1n t\u1EA3ng v\u1EC1 l\u1EADp tr\u00ECnh web, t\u1EEB c\u1EA5u tr\u00FAc HTML, \u0111\u1ECBnh d\u1EA1ng v\u1EDBi CSS \u0111\u1EBFn t\u01B0\u01A1ng t\u00E1c \u0111\u1ED9ng v\u1EDBi JavaScript. B\u1EA1n s\u1EBD \u0111\u01B0\u1EE3c th\u1EF1c h\u00E0nh qua c\u00E1c b\u00E0i t\u1EADp th\u1EF1c t\u1EBF v\u00E0 x\u00E2y d\u1EF1ng m\u1ED9t website c\u00E1 nh\u00E2n ho\u00E0n ch\u1EC9nh.",
+      "ShortDescription": "L\u00E0m ch\u1EE7 n\u1EC1n t\u1EA3ng l\u1EADp tr\u00ECnh web v\u1EDBi HTML, CSS v\u00E0 JS",
+      "Lessons": [
+        {
+          "Id": "f2f16c1a-7f28-4aab-9e21-79fbe73482d7",
+          "CourseId": "2290ec75-85ed-4772-91bd-1e135710bd96",
+          "Title": "Gi\u1EDBi thi\u1EC7u HTML v\u00E0 c\u1EA5u tr\u00FAc c\u01A1 b\u1EA3n",
+          "Description": "B\u00E0i h\u1ECDc \u0111\u1EA7u ti\u00EAn gi\u1EDBi thi\u1EC7u v\u1EC1 c\u00E1ch t\u1EA1o trang web HTML c\u01A1 b\u1EA3n",
+          "VideoPath": "/Data/coursevideo/2290ec75-85ed-4772-91bd-1e135710bd96/f2f16c1a-7f28-4aab-9e21-79fbe73482d7.mp4",
+          "Order": 1,
+          "CreatedAt": "2025-06-05T15:14:25.0411653+07:00",
+          "UpdatedAt": "2025-06-06T18:57:40.5711056+07:00",
+          "IsPublished": true,
+          "Duration": "00:30:00"
+        }
+      ],
+      "Price": 250000,
+      "InstructorId": "instructor-001",
+      "InstructorName": "Nguy\u1EC5n V\u0103n A",
+      "ImageUrl": "/uploads/courses/bebcefef-f6c9-4bd6-846a-66708d7ab55f.png",
+      "Level": "Intermediate",
+      "Category": "programming",
+      "Duration": 100,
+      "CreatedAt": "2025-06-05T13:48:42.9094498+07:00",
+      "UpdatedAt": "2025-06-05T13:55:00+07:00",
+      "IsPublished": true,
+      "EnrollmentCount": 3,
+      "Rating": 4.2
+    }
+  },
+  {
+    "Id": "enrollment-001",
+    "UserId": "student-001",
+    "UserName": "Nguy\u1EC5n V\u0103n",
+    "CourseId": "7a34de69-b03e-4d2c-9d9c-b1618db417c2",
+    "EnrolledAt": "2025-05-10T09:15:00+07:00",
+    "CompletedAt": "2025-06-01T14:25:00+07:00",
+    "CompletedLessons": [
+      "python-ds-lesson1",
+      "python-ds-lesson2"
+    ],
+    "Progress": 100,
+    "Course": {
+      "Id": "7a34de69-b03e-4d2c-9d9c-b1618db417c2",
+      "Title": "L\u1EADp tr\u00ECnh Python cho Khoa h\u1ECDc D\u1EEF li\u1EC7u",
+      "Description": "Kh\u00E1m ph\u00E1 s\u1EE9c m\u1EA1nh c\u1EE7a Python trong ph\u00E2n t\u00EDch d\u1EEF li\u1EC7u. Kh\u00F3a h\u1ECDc n\u00E0y d\u1EA1y b\u1EA1n t\u1EEB c\u00E1c th\u01B0 vi\u1EC7n ph\u00E2n t\u00EDch d\u1EEF li\u1EC7u c\u01A1 b\u1EA3n nh\u01B0 Pandas, NumPy \u0111\u1EBFn c\u00E1c k\u1EF9 thu\u1EADt tr\u1EF1c quan h\u00F3a v\u1EDBi Matplotlib, Seaborn v\u00E0 ph\u00E1t tri\u1EC3n m\u00F4 h\u00ECnh Machine Learning v\u1EDBi Scikit-learn. B\u1EA1n s\u1EBD \u00E1p d\u1EE5ng ki\u1EBFn th\u1EE9c v\u00E0o c\u00E1c d\u1EF1 \u00E1n th\u1EF1c t\u1EBF.",
+      "ShortDescription": "L\u00E0m ch\u1EE7 Python \u0111\u1EC3 ph\u00E2n t\u00EDch v\u00E0 x\u1EED l\u00FD d\u1EEF li\u1EC7u hi\u1EC7u qu\u1EA3",
+      "Lessons": [
+        {
+          "Id": "python-ds-lesson1",
+          "CourseId": "7a34de69-b03e-4d2c-9d9c-b1618db417c2",
+          "Title": "Gi\u1EDBi thi\u1EC7u v\u1EC1 Python v\u00E0 m\u00F4i tr\u01B0\u1EDDng ph\u00E1t tri\u1EC3n",
+          "Description": "C\u00E0i \u0111\u1EB7t Python, Anaconda, Jupyter Notebook v\u00E0 c\u00E1c c\u00F4ng c\u1EE5 c\u1EA7n thi\u1EBFt",
+          "VideoPath": "/Data/coursevideo/7a34de69-b03e-4d2c-9d9c-b1618db417c2/python-ds-lesson1.mp4",
+          "Order": 1,
+          "CreatedAt": "2025-06-05T17:09:28.9730398+07:00",
+          "UpdatedAt": null,
+          "IsPublished": true,
+          "Duration": "00:45:00"
+        },
+        {
+          "Id": "python-ds-lesson2",
+          "CourseId": "7a34de69-b03e-4d2c-9d9c-b1618db417c2",
+          "Title": "C\u01A1 b\u1EA3n v\u1EC1 NumPy v\u00E0 Pandas",
+          "Description": "H\u1ECDc c\u00E1ch l\u00E0m vi\u1EC7c v\u1EDBi m\u1EA3ng NumPy v\u00E0 DataFrame trong Pandas",
+          "VideoPath": "/Data/coursevideo/7a34de69-b03e-4d2c-9d9c-b1618db417c2/python-ds-lesson2.mp4",
+          "Order": 2,
+          "CreatedAt": "2025-06-05T17:10:28.9730398+07:00",
+          "UpdatedAt": null,
+          "IsPublished": true,
+          "Duration": "00:50:00"
+        }
+      ],
+      "Price": 600000,
+      "InstructorId": "instructor-003",
+      "InstructorName": "L\u00EA Qu\u1ED1c C",
+      "ImageUrl": "/uploads/courses/384a5de6-8030-4cd5-9fce-f4e992214582.png",
+      "Level": "Advanced",
+      "Category": "data-science",
+      "Duration": 32,
+      "CreatedAt": "2025-06-05T17:08:28.9730398+07:00",
+      "UpdatedAt": "2025-06-10T09:15:00+07:00",
+      "IsPublished": true,
+      "EnrollmentCount": 15,
+      "Rating": 4.8
+    }
+  },
+  {
+    "Id": "enrollment-002",
+    "UserId": "student-002",
+    "UserName": "Ph\u1EA1m Th\u00F9y Linh",
+    "CourseId": "7a34de69-b03e-4d2c-9d9c-b1618db417c2",
+    "EnrolledAt": "2025-05-12T14:20:00+07:00",
+    "CompletedAt": null,
+    "CompletedLessons": [
+      "python-ds-lesson1"
+    ],
+    "Progress": 50,
+    "Course": {
+      "Id": "7a34de69-b03e-4d2c-9d9c-b1618db417c2",
+      "Title": "L\u1EADp tr\u00ECnh Python cho Khoa h\u1ECDc D\u1EEF li\u1EC7u",
+      "Description": "Kh\u00E1m ph\u00E1 s\u1EE9c m\u1EA1nh c\u1EE7a Python trong ph\u00E2n t\u00EDch d\u1EEF li\u1EC7u. Kh\u00F3a h\u1ECDc n\u00E0y d\u1EA1y b\u1EA1n t\u1EEB c\u00E1c th\u01B0 vi\u1EC7n ph\u00E2n t\u00EDch d\u1EEF li\u1EC7u c\u01A1 b\u1EA3n nh\u01B0 Pandas, NumPy \u0111\u1EBFn c\u00E1c k\u1EF9 thu\u1EADt tr\u1EF1c quan h\u00F3a v\u1EDBi Matplotlib, Seaborn v\u00E0 ph\u00E1t tri\u1EC3n m\u00F4 h\u00ECnh Machine Learning v\u1EDBi Scikit-learn. B\u1EA1n s\u1EBD \u00E1p d\u1EE5ng ki\u1EBFn th\u1EE9c v\u00E0o c\u00E1c d\u1EF1 \u00E1n th\u1EF1c t\u1EBF.",
+      "ShortDescription": "L\u00E0m ch\u1EE7 Python \u0111\u1EC3 ph\u00E2n t\u00EDch v\u00E0 x\u1EED l\u00FD d\u1EEF li\u1EC7u hi\u1EC7u qu\u1EA3",
+      "Lessons": [
+        {
+          "Id": "python-ds-lesson1",
+          "CourseId": "7a34de69-b03e-4d2c-9d9c-b1618db417c2",
+          "Title": "Gi\u1EDBi thi\u1EC7u v\u1EC1 Python v\u00E0 m\u00F4i tr\u01B0\u1EDDng ph\u00E1t tri\u1EC3n",
+          "Description": "C\u00E0i \u0111\u1EB7t Python, Anaconda, Jupyter Notebook v\u00E0 c\u00E1c c\u00F4ng c\u1EE5 c\u1EA7n thi\u1EBFt",
+          "VideoPath": "/Data/coursevideo/7a34de69-b03e-4d2c-9d9c-b1618db417c2/python-ds-lesson1.mp4",
+          "Order": 1,
+          "CreatedAt": "2025-06-05T17:09:28.9730398+07:00",
+          "UpdatedAt": null,
+          "IsPublished": true,
+          "Duration": "00:45:00"
+        },
+        {
+          "Id": "python-ds-lesson2",
+          "CourseId": "7a34de69-b03e-4d2c-9d9c-b1618db417c2",
+          "Title": "C\u01A1 b\u1EA3n v\u1EC1 NumPy v\u00E0 Pandas",
+          "Description": "H\u1ECDc c\u00E1ch l\u00E0m vi\u1EC7c v\u1EDBi m\u1EA3ng NumPy v\u00E0 DataFrame trong Pandas",
+          "VideoPath": "/Data/coursevideo/7a34de69-b03e-4d2c-9d9c-b1618db417c2/python-ds-lesson2.mp4",
+          "Order": 2,
+          "CreatedAt": "2025-06-05T17:10:28.9730398+07:00",
+          "UpdatedAt": null,
+          "IsPublished": true,
+          "Duration": "00:50:00"
+        }
+      ],
+      "Price": 600000,
+      "InstructorId": "instructor-003",
+      "InstructorName": "L\u00EA Qu\u1ED1c C",
+      "ImageUrl": "/uploads/courses/384a5de6-8030-4cd5-9fce-f4e992214582.png",
+      "Level": "Advanced",
+      "Category": "data-science",
+      "Duration": 32,
+      "CreatedAt": "2025-06-05T17:08:28.9730398+07:00",
+      "UpdatedAt": "2025-06-10T09:15:00+07:00",
+      "IsPublished": true,
+      "EnrollmentCount": 15,
+      "Rating": 4.8
+    }
+  },
+  {
+    "Id": "enrollment-003",
+    "UserId": "student-003",
+    "UserName": "Tr\u1EA7n Quang B\u00ECnh",
+    "CourseId": "course-001",
+    "EnrolledAt": "2025-05-15T10:35:00+07:00",
+    "CompletedAt": "2025-06-05T16:45:00+07:00",
+    "CompletedLessons": [
+      "marketing-lesson-1",
+      "marketing-lesson-2",
+      "marketing-lesson-3"
+    ],
+    "Progress": 100,
+    "Course": {
+      "Id": "course-001",
+      "Title": "Marketing K\u1EF9 thu\u1EADt s\u1ED1 t\u1EEB A-Z",
+      "Description": "Kh\u00F3a h\u1ECDc to\u00E0n di\u1EC7n v\u1EC1 Marketing K\u1EF9 thu\u1EADt s\u1ED1 bao g\u1ED3m SEO, Google Ads, Facebook Ads, Email Marketing v\u00E0 Content Marketing. B\u1EA1n s\u1EBD h\u1ECDc c\u00E1ch x\u00E2y d\u1EF1ng chi\u1EBFn l\u01B0\u1EE3c marketing hi\u1EC7u qu\u1EA3, ph\u00E2n t\u00EDch d\u1EEF li\u1EC7u v\u00E0 t\u1ED1i \u01B0u h\u00F3a chi\u1EBFn d\u1ECBch \u0111\u1EC3 \u0111\u1EA1t \u0111\u01B0\u1EE3c ROI cao nh\u1EA5t.",
+      "ShortDescription": "L\u00E0m ch\u1EE7 c\u00E1c k\u1EF9 thu\u1EADt marketing online hi\u1EC7u qu\u1EA3",
+      "Lessons": [
+        {
+          "Id": "marketing-lesson-1",
+          "CourseId": "course-001",
+          "Title": "T\u1ED5ng quan v\u1EC1 Marketing K\u1EF9 thu\u1EADt s\u1ED1",
+          "Description": "Gi\u1EDBi thi\u1EC7u c\u00E1c kh\u00E1i ni\u1EC7m v\u00E0 k\u00EAnh marketing online",
+          "VideoPath": "/Data/coursevideo/course-001/marketing-lesson-1.mp4",
+          "Order": 1,
+          "CreatedAt": "2025-04-15T09:00:00+07:00",
+          "UpdatedAt": null,
+          "IsPublished": true,
+          "Duration": "00:50:00"
+        },
+        {
+          "Id": "marketing-lesson-2",
+          "CourseId": "course-001",
+          "Title": "SEO c\u01A1 b\u1EA3n v\u00E0 n\u00E2ng cao",
+          "Description": "C\u00E1c k\u1EF9 thu\u1EADt t\u1ED1i \u01B0u h\u00F3a c\u00F4ng c\u1EE5 t\u00ECm ki\u1EBFm hi\u1EC7u qu\u1EA3",
+          "VideoPath": "/Data/coursevideo/course-001/marketing-lesson-2.mp4",
+          "Order": 2,
+          "CreatedAt": "2025-04-15T10:00:00+07:00",
+          "UpdatedAt": null,
+          "IsPublished": true,
+          "Duration": "01:10:00"
+        },
+        {
+          "Id": "marketing-lesson-3",
+          "CourseId": "course-001",
+          "Title": "Qu\u1EA3ng c\u00E1o Google Ads",
+          "Description": "T\u1EA1o v\u00E0 t\u1ED1i \u01B0u chi\u1EBFn d\u1ECBch Google Ads hi\u1EC7u qu\u1EA3",
+          "VideoPath": "/Data/coursevideo/course-001/marketing-lesson-3.mp4",
+          "Order": 3,
+          "CreatedAt": "2025-04-16T09:00:00+07:00",
+          "UpdatedAt": null,
+          "IsPublished": true,
+          "Duration": "00:55:00"
+        }
+      ],
+      "Price": 750000,
+      "InstructorId": "instructor-005",
+      "InstructorName": "H\u1ED3 Th\u1EE5y E",
+      "ImageUrl": "/uploads/courses/marketing-digital.png",
+      "Level": "Beginner",
+      "Category": "digital-marketing",
+      "Duration": 25,
+      "CreatedAt": "2025-04-10T08:30:00+07:00",
+      "UpdatedAt": "2025-06-01T10:15:00+07:00",
+      "IsPublished": true,
+      "EnrollmentCount": 42,
+      "Rating": 4.7
+    }
+  },
+  {
+    "Id": "enrollment-004",
+    "UserId": "student-004",
+    "UserName": "L\u00EA M\u1EF9 H\u1EA1nh",
+    "CourseId": "course-002",
+    "EnrolledAt": "2025-05-18T08:25:00+07:00",
+    "CompletedAt": null,
+    "CompletedLessons": [
+      "react-native-lesson-1"
+    ],
+    "Progress": 50,
+    "Course": {
+      "Id": "course-002",
+      "Title": "Ph\u00E1t tri\u1EC3n \u1EE9ng d\u1EE5ng di \u0111\u1ED9ng v\u1EDBi React Native",
+      "Description": "Kh\u00F3a h\u1ECDc gi\u00FAp b\u1EA1n l\u00E0m ch\u1EE7 React Native \u0111\u1EC3 ph\u00E1t tri\u1EC3n \u1EE9ng d\u1EE5ng di \u0111\u1ED9ng \u0111a n\u1EC1n t\u1EA3ng (iOS v\u00E0 Android) v\u1EDBi m\u1ED9t codebase duy nh\u1EA5t. B\u1EA1n s\u1EBD h\u1ECDc c\u00E1ch x\u00E2y d\u1EF1ng UI, qu\u1EA3n l\u00FD state, g\u1ECDi API, l\u01B0u tr\u1EEF d\u1EEF li\u1EC7u v\u00E0 xu\u1EA5t b\u1EA3n \u1EE9ng d\u1EE5ng l\u00EAn App Store v\u00E0 Google Play.",
+      "ShortDescription": "T\u1EA1o \u1EE9ng d\u1EE5ng di \u0111\u1ED9ng \u0111a n\u1EC1n t\u1EA3ng v\u1EDBi React Native",
+      "Lessons": [
+        {
+          "Id": "react-native-lesson-1",
+          "CourseId": "course-002",
+          "Title": "Gi\u1EDBi thi\u1EC7u v\u1EC1 React Native",
+          "Description": "T\u1ED5ng quan v\u1EC1 React Native v\u00E0 c\u00E0i \u0111\u1EB7t m\u00F4i tr\u01B0\u1EDDng ph\u00E1t tri\u1EC3n",
+          "VideoPath": "/Data/coursevideo/course-002/react-native-lesson-1.mp4",
+          "Order": 1,
+          "CreatedAt": "2025-03-01T14:00:00+07:00",
+          "UpdatedAt": null,
+          "IsPublished": true,
+          "Duration": "00:45:00"
+        },
+        {
+          "Id": "react-native-lesson-2",
+          "CourseId": "course-002",
+          "Title": "X\u00E2y d\u1EF1ng UI v\u1EDBi React Native Components",
+          "Description": "H\u1ECDc v\u1EC1 c\u00E1c th\u00E0nh ph\u1EA7n UI c\u01A1 b\u1EA3n c\u1EE7a React Native",
+          "VideoPath": "/Data/coursevideo/course-002/react-native-lesson-2.mp4",
+          "Order": 2,
+          "CreatedAt": "2025-03-01T15:00:00+07:00",
+          "UpdatedAt": null,
+          "IsPublished": true,
+          "Duration": "01:00:00"
+        }
+      ],
+      "Price": 899000,
+      "InstructorId": "instructor-006",
+      "InstructorName": "Nguy\u1EC5n Thu H\u01B0\u01A1ng",
+      "ImageUrl": "/uploads/courses/react-native.png",
+      "Level": "Intermediate",
+      "Category": "mobile-development",
+      "Duration": 30,
+      "CreatedAt": "2025-02-25T09:45:00+07:00",
+      "UpdatedAt": "2025-05-15T16:30:00+07:00",
+      "IsPublished": true,
+      "EnrollmentCount": 28,
+      "Rating": 4.6
+    }
+  },
+  {
+    "Id": "enrollment-005",
+    "UserId": "student-005",
+    "UserName": "Ho\u00E0ng Minh \u0110\u1EE9c",
+    "CourseId": "course-003",
+    "EnrolledAt": "2025-05-20T16:30:00+07:00",
+    "CompletedAt": "2025-06-05T19:15:00+07:00",
+    "CompletedLessons": [
+      "guitar-lesson-1",
+      "guitar-lesson-2"
+    ],
+    "Progress": 100,
+    "Course": {
+      "Id": "course-003",
+      "Title": "Guitar c\u01A1 b\u1EA3n cho ng\u01B0\u1EDDi m\u1EDBi b\u1EAFt \u0111\u1EA7u",
+      "Description": "Kh\u00F3a h\u1ECDc d\u00E0nh cho nh\u1EEFng ng\u01B0\u1EDDi mu\u1ED1n h\u1ECDc ch\u01A1i guitar t\u1EEB con s\u1ED1 0. B\u1EA1n s\u1EBD \u0111\u01B0\u1EE3c h\u01B0\u1EDBng d\u1EABn c\u00E1ch c\u1EA7m \u0111\u00E0n, \u0111\u1ECDc tab, c\u00E1c k\u1EF9 thu\u1EADt c\u01A1 b\u1EA3n nh\u01B0 \u0111\u00E1nh, g\u1EA3y, v\u00E0 c\u00E1c h\u1EE3p \u00E2m c\u01A1 b\u1EA3n. Cu\u1ED1i kh\u00F3a, b\u1EA1n s\u1EBD c\u00F3 th\u1EC3 ch\u01A1i \u0111\u01B0\u1EE3c m\u1ED9t s\u1ED1 b\u00E0i h\u00E1t \u0111\u01A1n gi\u1EA3n.",
+      "ShortDescription": "L\u00E0m quen v\u1EDBi guitar v\u00E0 ch\u01A1i \u0111\u01B0\u1EE3c c\u00E1c b\u00E0i h\u00E1t \u0111\u1EA7u ti\u00EAn",
+      "Lessons": [
+        {
+          "Id": "guitar-lesson-1",
+          "CourseId": "course-003",
+          "Title": "L\u00E0m quen v\u1EDBi c\u00E2y \u0111\u00E0n guitar",
+          "Description": "C\u00E1ch c\u1EA7m \u0111\u00E0n, t\u01B0 th\u1EBF ng\u1ED3i v\u00E0 gi\u1EDBi thi\u1EC7u c\u00E1c b\u1ED9 ph\u1EADn c\u1EE7a guitar",
+          "VideoPath": "/Data/coursevideo/course-003/guitar-lesson-1.mp4",
+          "Order": 1,
+          "CreatedAt": "2025-05-10T10:00:00+07:00",
+          "UpdatedAt": null,
+          "IsPublished": true,
+          "Duration": "00:30:00"
+        },
+        {
+          "Id": "guitar-lesson-2",
+          "CourseId": "course-003",
+          "Title": "H\u1EE3p \u00E2m c\u01A1 b\u1EA3n (C, G, D, Em, Am)",
+          "Description": "H\u01B0\u1EDBng d\u1EABn c\u00E1c h\u1EE3p \u00E2m \u0111\u1EA7u ti\u00EAn v\u00E0 c\u00E1ch chuy\u1EC3n h\u1EE3p \u00E2m",
+          "VideoPath": "/Data/coursevideo/course-003/guitar-lesson-2.mp4",
+          "Order": 2,
+          "CreatedAt": "2025-05-10T10:35:00+07:00",
+          "UpdatedAt": null,
+          "IsPublished": true,
+          "Duration": "00:40:00"
+        }
+      ],
+      "Price": 320000,
+      "InstructorId": "instructor-007",
+      "InstructorName": "Tr\u1EA7n Qu\u1ED1c Trung",
+      "ImageUrl": "/uploads/courses/basic-guitar.png",
+      "Level": "Beginner",
+      "Category": "guitar",
+      "Duration": 12,
+      "CreatedAt": "2025-05-05T08:15:00+07:00",
+      "UpdatedAt": "2025-06-02T14:30:00+07:00",
+      "IsPublished": true,
+      "EnrollmentCount": 34,
+      "Rating": 4.9
+    }
+  },
+  {
+    "Id": "enrollment-006",
+    "UserId": "student-006",
+    "UserName": "V\u0169 Th\u1ECB Lan",
+    "CourseId": "course-004",
+    "EnrolledAt": "2025-05-25T09:20:00+07:00",
+    "CompletedAt": null,
+    "CompletedLessons": [
+      "yoga-lesson-1"
+    ],
+    "Progress": 50,
+    "Course": {
+      "Id": "course-004",
+      "Title": "Yoga cho s\u1EE9c kh\u1ECFe v\u00E0 tinh th\u1EA7n",
+      "Description": "Kh\u00F3a h\u1ECDc Yoga to\u00E0n di\u1EC7n d\u00E0nh cho m\u1ECDi c\u1EA5p \u0111\u1ED9, gi\u00FAp b\u1EA1n ph\u00E1t tri\u1EC3n s\u1EF1 d\u1EBBo dai, s\u1EE9c m\u1EA1nh v\u00E0 s\u1EF1 t\u1EADp trung. B\u1EA1n s\u1EBD h\u1ECDc c\u00E1c t\u01B0 th\u1EBF yoga ph\u1ED5 bi\u1EBFn, k\u1EF9 thu\u1EADt th\u1EDF v\u00E0 thi\u1EC1n \u0111\u1ECBnh \u0111\u1EC3 c\u1EA3i thi\u1EC7n s\u1EE9c kh\u1ECFe th\u1EC3 ch\u1EA5t v\u00E0 tinh th\u1EA7n.",
+      "ShortDescription": "T\u0103ng c\u01B0\u1EDDng s\u1EE9c kh\u1ECFe v\u00E0 c\u00E2n b\u1EB1ng tinh th\u1EA7n v\u1EDBi Yoga",
+      "Lessons": [
+        {
+          "Id": "yoga-lesson-1",
+          "CourseId": "course-004",
+          "Title": "Gi\u1EDBi thi\u1EC7u v\u1EC1 Yoga v\u00E0 c\u00E1c l\u1EE3i \u00EDch",
+          "Description": "T\u00ECm hi\u1EC3u v\u1EC1 ngu\u1ED3n g\u1ED1c, tri\u1EBFt l\u00FD v\u00E0 l\u1EE3i \u00EDch c\u1EE7a Yoga",
+          "VideoPath": "/Data/coursevideo/course-004/yoga-lesson-1.mp4",
+          "Order": 1,
+          "CreatedAt": "2025-05-20T09:00:00+07:00",
+          "UpdatedAt": null,
+          "IsPublished": true,
+          "Duration": "00:25:00"
+        },
+        {
+          "Id": "yoga-lesson-2",
+          "CourseId": "course-004",
+          "Title": "C\u00E1c t\u01B0 th\u1EBF Yoga c\u01A1 b\u1EA3n",
+          "Description": "H\u01B0\u1EDBng d\u1EABn c\u00E1c t\u01B0 th\u1EBF Yoga \u0111\u1EA7u ti\u00EAn cho ng\u01B0\u1EDDi m\u1EDBi b\u1EAFt \u0111\u1EA7u",
+          "VideoPath": "/Data/coursevideo/course-004/yoga-lesson-2.mp4",
+          "Order": 2,
+          "CreatedAt": "2025-05-20T09:30:00+07:00",
+          "UpdatedAt": null,
+          "IsPublished": true,
+          "Duration": "00:35:00"
+        }
+      ],
+      "Price": 280000,
+      "InstructorId": "instructor-008",
+      "InstructorName": "L\u00EA Th\u1ECB Hoa",
+      "ImageUrl": "/uploads/courses/yoga-health.png",
+      "Level": "Beginner",
+      "Category": "health",
+      "Duration": 10,
+      "CreatedAt": "2025-05-18T16:45:00+07:00",
+      "UpdatedAt": "2025-06-03T11:20:00+07:00",
+      "IsPublished": true,
+      "EnrollmentCount": 56,
+      "Rating": 4.8
+    }
+  },
+  {
+    "Id": "enrollment-007",
+    "UserId": "student-007",
+    "UserName": "D\u01B0\u01A1ng V\u0103n Minh",
+    "CourseId": "course-005",
+    "EnrolledAt": "2025-05-30T14:15:00+07:00",
+    "CompletedAt": "2025-06-09T20:30:00+07:00",
+    "CompletedLessons": [
+      "unity-lesson-1",
+      "unity-lesson-2",
+      "unity-lesson-3"
+    ],
+    "Progress": 100,
+    "Course": {
+      "Id": "course-005",
+      "Title": "L\u1EADp tr\u00ECnh game 2D v\u1EDBi Unity",
+      "Description": "H\u1ECDc c\u00E1ch ph\u00E1t tri\u1EC3n game 2D ho\u00E0n ch\u1EC9nh v\u1EDBi Unity, m\u1ED9t trong nh\u1EEFng game engine ph\u1ED5 bi\u1EBFn nh\u1EA5t hi\u1EC7n nay. Kh\u00F3a h\u1ECDc bao g\u1ED3m ki\u1EBFn th\u1EE9c v\u1EC1 thi\u1EBFt k\u1EBF level, l\u1EADp tr\u00ECnh game v\u1EDBi C#, t\u1EA1o animation, \u00E2m thanh v\u00E0 xu\u1EA5t b\u1EA3n game l\u00EAn nhi\u1EC1u n\u1EC1n t\u1EA3ng.",
+      "ShortDescription": "T\u1EA1o game 2D ho\u00E0n ch\u1EC9nh v\u1EDBi Unity t\u1EEB A \u0111\u1EBFn Z",
+      "Lessons": [
+        {
+          "Id": "unity-lesson-1",
+          "CourseId": "course-005",
+          "Title": "Gi\u1EDBi thi\u1EC7u v\u1EC1 Unity Engine",
+          "Description": "T\u1ED5ng quan v\u1EC1 Unity v\u00E0 c\u00E0i \u0111\u1EB7t m\u00F4i tr\u01B0\u1EDDng ph\u00E1t tri\u1EC3n",
+          "VideoPath": "/Data/coursevideo/course-005/unity-lesson-1.mp4",
+          "Order": 1,
+          "CreatedAt": "2025-04-01T13:00:00+07:00",
+          "UpdatedAt": null,
+          "IsPublished": true,
+          "Duration": "00:50:00"
+        },
+        {
+          "Id": "unity-lesson-2",
+          "CourseId": "course-005",
+          "Title": "C\u01A1 b\u1EA3n v\u1EC1 C# trong Unity",
+          "Description": "H\u1ECDc l\u1EADp tr\u00ECnh C# c\u01A1 b\u1EA3n cho ph\u00E1t tri\u1EC3n game",
+          "VideoPath": "/Data/coursevideo/course-005/unity-lesson-2.mp4",
+          "Order": 2,
+          "CreatedAt": "2025-04-01T14:00:00+07:00",
+          "UpdatedAt": null,
+          "IsPublished": true,
+          "Duration": "01:05:00"
+        },
+        {
+          "Id": "unity-lesson-3",
+          "CourseId": "course-005",
+          "Title": "T\u1EA1o nh\u00E2n v\u1EADt v\u00E0 \u0111i\u1EC1u khi\u1EC3n",
+          "Description": "H\u1ECDc c\u00E1ch t\u1EA1o v\u00E0 \u0111i\u1EC1u khi\u1EC3n nh\u00E2n v\u1EADt trong game 2D",
+          "VideoPath": "/Data/coursevideo/course-005/unity-lesson-3.mp4",
+          "Order": 3,
+          "CreatedAt": "2025-04-02T13:00:00+07:00",
+          "UpdatedAt": null,
+          "IsPublished": true,
+          "Duration": "00:55:00"
+        }
+      ],
+      "Price": 680000,
+      "InstructorId": "instructor-009",
+      "InstructorName": "Ph\u1EA1m V\u0103n B\u1EAFc",
+      "ImageUrl": "/uploads/courses/unity-2d.png",
+      "Level": "Intermediate",
+      "Category": "game-development",
+      "Duration": 28,
+      "CreatedAt": "2025-03-28T10:30:00+07:00",
+      "UpdatedAt": "2025-05-20T15:45:00+07:00",
+      "IsPublished": true,
+      "EnrollmentCount": 23,
+      "Rating": 4.7
+    }
+  },
+  {
+    "Id": "enrollment-008",
+    "UserId": "student-008",
+    "UserName": "Ng\u00F4 Thanh Th\u1EE7y",
+    "CourseId": "course-003",
+    "EnrolledAt": "2025-05-22T11:10:00+07:00",
+    "CompletedAt": null,
+    "CompletedLessons": [
+      "guitar-lesson-1"
+    ],
+    "Progress": 50,
+    "Course": {
+      "Id": "course-003",
+      "Title": "Guitar c\u01A1 b\u1EA3n cho ng\u01B0\u1EDDi m\u1EDBi b\u1EAFt \u0111\u1EA7u",
+      "Description": "Kh\u00F3a h\u1ECDc d\u00E0nh cho nh\u1EEFng ng\u01B0\u1EDDi mu\u1ED1n h\u1ECDc ch\u01A1i guitar t\u1EEB con s\u1ED1 0. B\u1EA1n s\u1EBD \u0111\u01B0\u1EE3c h\u01B0\u1EDBng d\u1EABn c\u00E1ch c\u1EA7m \u0111\u00E0n, \u0111\u1ECDc tab, c\u00E1c k\u1EF9 thu\u1EADt c\u01A1 b\u1EA3n nh\u01B0 \u0111\u00E1nh, g\u1EA3y, v\u00E0 c\u00E1c h\u1EE3p \u00E2m c\u01A1 b\u1EA3n. Cu\u1ED1i kh\u00F3a, b\u1EA1n s\u1EBD c\u00F3 th\u1EC3 ch\u01A1i \u0111\u01B0\u1EE3c m\u1ED9t s\u1ED1 b\u00E0i h\u00E1t \u0111\u01A1n gi\u1EA3n.",
+      "ShortDescription": "L\u00E0m quen v\u1EDBi guitar v\u00E0 ch\u01A1i \u0111\u01B0\u1EE3c c\u00E1c b\u00E0i h\u00E1t \u0111\u1EA7u ti\u00EAn",
+      "Lessons": [
+        {
+          "Id": "guitar-lesson-1",
+          "CourseId": "course-003",
+          "Title": "L\u00E0m quen v\u1EDBi c\u00E2y \u0111\u00E0n guitar",
+          "Description": "C\u00E1ch c\u1EA7m \u0111\u00E0n, t\u01B0 th\u1EBF ng\u1ED3i v\u00E0 gi\u1EDBi thi\u1EC7u c\u00E1c b\u1ED9 ph\u1EADn c\u1EE7a guitar",
+          "VideoPath": "/Data/coursevideo/course-003/guitar-lesson-1.mp4",
+          "Order": 1,
+          "CreatedAt": "2025-05-10T10:00:00+07:00",
+          "UpdatedAt": null,
+          "IsPublished": true,
+          "Duration": "00:30:00"
+        },
+        {
+          "Id": "guitar-lesson-2",
+          "CourseId": "course-003",
+          "Title": "H\u1EE3p \u00E2m c\u01A1 b\u1EA3n (C, G, D, Em, Am)",
+          "Description": "H\u01B0\u1EDBng d\u1EABn c\u00E1c h\u1EE3p \u00E2m \u0111\u1EA7u ti\u00EAn v\u00E0 c\u00E1ch chuy\u1EC3n h\u1EE3p \u00E2m",
+          "VideoPath": "/Data/coursevideo/course-003/guitar-lesson-2.mp4",
+          "Order": 2,
+          "CreatedAt": "2025-05-10T10:35:00+07:00",
+          "UpdatedAt": null,
+          "IsPublished": true,
+          "Duration": "00:40:00"
+        }
+      ],
+      "Price": 320000,
+      "InstructorId": "instructor-007",
+      "InstructorName": "Tr\u1EA7n Qu\u1ED1c Trung",
+      "ImageUrl": "/uploads/courses/basic-guitar.png",
+      "Level": "Beginner",
+      "Category": "guitar",
+      "Duration": 12,
+      "CreatedAt": "2025-05-05T08:15:00+07:00",
+      "UpdatedAt": "2025-06-02T14:30:00+07:00",
+      "IsPublished": true,
+      "EnrollmentCount": 34,
+      "Rating": 4.9
+    }
+  },
+  {
+    "Id": "enrollment-009",
+    "UserId": "student-009",
+    "UserName": "\u0110inh B\u00E1 C\u00F4ng",
+    "CourseId": "4ab07b96-6c56-463d-b75b-d0164daf5ae7",
+    "EnrolledAt": "2025-06-01T09:45:00+07:00",
+    "CompletedAt": null,
+    "CompletedLessons": [],
+    "Progress": 0,
+    "Course": {
+      "Id": "4ab07b96-6c56-463d-b75b-d0164daf5ae7",
+      "Title": "Ti\u1EBFng Anh giao ti\u1EBFp th\u01B0\u01A1ng m\u1EA1i",
+      "Description": "Kh\u00F3a h\u1ECDc Ti\u1EBFng Anh giao ti\u1EBFp th\u01B0\u01A1ng m\u1EA1i gi\u00FAp b\u1EA1n n\u00E2ng cao kh\u1EA3 n\u0103ng giao ti\u1EBFp trong m\u00F4i tr\u01B0\u1EDDng kinh doanh qu\u1ED1c t\u1EBF. B\u1EA1n s\u1EBD h\u1ECDc c\u00E1c t\u1EEB v\u1EF1ng chuy\u00EAn ng\u00E0nh, k\u1EF9 n\u0103ng \u0111\u00E0m ph\u00E1n, vi\u1EBFt email chuy\u00EAn nghi\u1EC7p v\u00E0 tr\u00ECnh b\u00E0y \u00FD t\u01B0\u1EDFng m\u1ED9t c\u00E1ch t\u1EF1 tin.",
+      "ShortDescription": "L\u00E0m ch\u1EE7 ti\u1EBFng Anh trong m\u00F4i tr\u01B0\u1EDDng kinh doanh",
+      "Lessons": [
+        {
+          "Id": "1958895c-7a38-44f6-a057-72cac77ab6fa",
+          "CourseId": "4ab07b96-6c56-463d-b75b-d0164daf5ae7",
+          "Title": "Gi\u1EDBi thi\u1EC7u v\u00E0 t\u1ED5ng quan v\u1EC1 Ti\u1EBFng Anh th\u01B0\u01A1ng m\u1EA1i",
+          "Description": "B\u00E0i h\u1ECDc gi\u1EDBi thi\u1EC7u c\u00E1c k\u1EF9 n\u0103ng ti\u1EBFng Anh c\u1EA7n c\u00F3 trong m\u00F4i tr\u01B0\u1EDDng doanh nghi\u1EC7p",
+          "VideoPath": "/Data/coursevideo/4ab07b96-6c56-463d-b75b-d0164daf5ae7/1958895c-7a38-44f6-a057-72cac77ab6fa.webm",
+          "Order": 1,
+          "CreatedAt": "2025-06-05T17:01:57.3691976+07:00",
+          "UpdatedAt": "2025-06-05T17:11:52.2438803+07:00",
+          "IsPublished": true,
+          "Duration": "00:35:00"
+        }
+      ],
+      "Price": 500000,
+      "InstructorId": "instructor-002",
+      "InstructorName": "Tr\u1EA7n Th\u1ECB B",
+      "ImageUrl": "/uploads/courses/a7d43651-10c2-499e-8917-04d75ff8a237.png",
+      "Level": "Intermediate",
+      "Category": "english",
+      "Duration": 20,
+      "CreatedAt": "2025-06-05T17:00:49.0730512+07:00",
+      "UpdatedAt": "2025-06-11T08:30:00+07:00",
+      "IsPublished": true,
+      "EnrollmentCount": 1,
+      "Rating": 4.2
+    }
+  },
+  {
+    "Id": "enrollment-010",
+    "UserId": "student-010",
+    "UserName": "Mai Th\u1ECB Lan",
+    "CourseId": "7874cf7b-dc31-4215-baf8-08bb4ca9899c",
+    "EnrolledAt": "2025-06-03T15:25:00+07:00",
+    "CompletedAt": "2025-06-08T18:10:00+07:00",
+    "CompletedLessons": [
+      "fdc971ad-1c4f-4892-ba75-b79c599f8aae",
+      "2e661ad7-1f44-468e-b822-de90784b8fbb"
+    ],
+    "Progress": 100,
+    "Course": {
+      "Id": "7874cf7b-dc31-4215-baf8-08bb4ca9899c",
+      "Title": "Thi\u1EBFt k\u1EBF giao di\u1EC7n ng\u01B0\u1EDDi d\u00F9ng v\u1EDBi Figma",
+      "Description": "Kh\u00F3a h\u1ECDc n\u00E0y s\u1EBD h\u01B0\u1EDBng d\u1EABn b\u1EA1n c\u00E1ch s\u1EED d\u1EE5ng Figma, c\u00F4ng c\u1EE5 thi\u1EBFt k\u1EBF giao di\u1EC7n ng\u01B0\u1EDDi d\u00F9ng h\u00E0ng \u0111\u1EA7u hi\u1EC7n nay. B\u1EA1n s\u1EBD h\u1ECDc c\u00E1ch t\u1EA1o wireframe, prototype, thi\u1EBFt k\u1EBF h\u1EC7 th\u1ED1ng v\u00E0 c\u1ED9ng t\u00E1c v\u1EDBi c\u00E1c th\u00E0nh vi\u00EAn trong nh\u00F3m. Kh\u00F3a h\u1ECDc n\u00E0y ph\u00F9 h\u1EE3p cho ng\u01B0\u1EDDi m\u1EDBi b\u1EAFt \u0111\u1EA7u \u0111\u1EBFn nh\u1EEFng nh\u00E0 thi\u1EBFt k\u1EBF c\u00F3 kinh nghi\u1EC7m mu\u1ED1n c\u1EA3i thi\u1EC7n k\u1EF9 n\u0103ng.",
+      "ShortDescription": "N\u1EAFm v\u1EEFng k\u1EF9 thu\u1EADt thi\u1EBFt k\u1EBF UI/UX hi\u1EC7n \u0111\u1EA1i v\u1EDBi Figma",
+      "Lessons": [
+        {
+          "Id": "fdc971ad-1c4f-4892-ba75-b79c599f8aae",
+          "CourseId": "7874cf7b-dc31-4215-baf8-08bb4ca9899c",
+          "Title": "Gi\u1EDBi thi\u1EC7u Figma v\u00E0 giao di\u1EC7n l\u00E0m vi\u1EC7c",
+          "Description": "T\u1ED5ng quan v\u1EC1 Figma v\u00E0 c\u00E1c c\u00F4ng c\u1EE5 c\u01A1 b\u1EA3n",
+          "VideoPath": "/Data/coursevideo/7874cf7b-dc31-4215-baf8-08bb4ca9899c/fdc971ad-1c4f-4892-ba75-b79c599f8aae.mp4",
+          "Order": 1,
+          "CreatedAt": "2025-06-06T21:03:34.1366514+07:00",
+          "UpdatedAt": "2025-06-06T22:29:07.1224019+07:00",
+          "IsPublished": true,
+          "Duration": "00:40:00"
+        },
+        {
+          "Id": "2e661ad7-1f44-468e-b822-de90784b8fbb",
+          "CourseId": "7874cf7b-dc31-4215-baf8-08bb4ca9899c",
+          "Title": "C\u00E1ch t\u1EA1o Wireframes v\u00E0 Layouts",
+          "Description": "H\u1ECDc c\u00E1ch t\u1EA1o wireframes, layouts v\u00E0 grid systems",
+          "VideoPath": "/Data/coursevideo/7874cf7b-dc31-4215-baf8-08bb4ca9899c/2e661ad7-1f44-468e-b822-de90784b8fbb.mp4",
+          "Order": 2,
+          "CreatedAt": "2025-06-06T22:11:07.0279642+07:00",
+          "UpdatedAt": null,
+          "IsPublished": true,
+          "Duration": "00:35:00"
+        }
+      ],
+      "Price": 349000,
+      "InstructorId": "instructor-004",
+      "InstructorName": "Ph\u1EA1m Th\u1ECB D",
+      "ImageUrl": "/uploads/courses/f6a2dd87-eb73-4dee-821c-15b6e32d19e9.png",
+      "Level": "Intermediate",
+      "Category": "design",
+      "Duration": 15,
+      "CreatedAt": "2025-06-05T17:25:35.3402936+07:00",
+      "UpdatedAt": "2025-06-09T14:45:00+07:00",
+      "IsPublished": true,
+      "EnrollmentCount": 8,
+      "Rating": 4.5
+    }
+  }
+]

@@ -1,0 +1,273 @@
+@model List<AppEL.Models.Category>
+@using AppEL.Services
+
+@{
+    ViewData["Title"] = "Quản lý danh mục";
+}
+
+<div class="admin-categories py-5">
+    <div class="container">
+        <!-- Page header -->
+        <div class="page-header mb-5" data-aos="fade-up">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <nav aria-label="breadcrumb" class="mb-3">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a asp-action="Index">Dashboard</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Danh mục</li>
+                        </ol>
+                    </nav>
+                    <h1 class="display-5 fw-bold text-gradient mb-3">Quản lý danh mục</h1>
+                    <p class="lead text-muted">Tạo và quản lý các danh mục khóa học trên hệ thống</p>
+                </div>
+                <div class="col-lg-4 text-lg-end" data-aos="fade-left" data-aos-delay="100">
+                    <a asp-action="CreateCategory" class="btn btn-primary btn-lg">
+                        <i class="fas fa-plus me-2"></i> Thêm danh mục mới
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alerts -->
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show d-flex align-items-center" role="alert" data-aos="fade-up">
+                <i class="fas fa-check-circle me-2"></i>
+                <div>
+                    @TempData["SuccessMessage"]
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert" data-aos="fade-up">
+                <i class="fas fa-exclamation-circle me-2"></i>
+                <div>
+                    @TempData["ErrorMessage"]
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+
+        <!-- Categories table -->
+        <div class="row">
+            <div class="col-lg-8" data-aos="fade-up" data-aos-delay="100">
+                <div class="card shadow-sm border-0 rounded-4 mb-4">
+                    <div class="card-header bg-transparent border-0 pt-4">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="card-title m-0">
+                                <i class="fas fa-list text-primary me-2"></i>
+                                Danh sách các danh mục
+                            </h5>
+                            <div class="search-container">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="categorySearch" placeholder="Tìm kiếm...">
+                                    <span class="input-group-text bg-transparent">
+                                        <i class="fas fa-search"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-categories" id="categoriesTable">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th class="ps-4">Mã</th>
+                                        <th>Tên danh mục</th>
+                                        <th>Mô tả</th>
+                                        <th class="text-center">Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null && Model.Any())
+                                    {
+                                        @foreach (var category in Model)
+                                        {
+                                            <tr>
+                                                <td class="ps-4 fw-bold text-primary">@category.Id</td>
+                                                <td>
+                                                    <div class="category-name fw-semibold">
+                                                        <i class="fas fa-tag me-2 text-muted"></i>
+                                                        @category.Name
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="category-description text-muted">
+                                                        @(string.IsNullOrEmpty(category.Description) ? "Không có mô tả" : category.Description)
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="btn-group" role="group">
+                                                        <a asp-action="EditCategory" asp-route-id="@category.Id" 
+                                                        class="btn btn-sm btn-light me-2" data-bs-toggle="tooltip" title="Chỉnh sửa">
+                                                            <i class="fas fa-edit text-primary"></i>
+                                                        </a>
+                                                        <button type="button" class="btn btn-sm btn-light" 
+                                                                onclick="confirmDelete('@category.Id', '@category.Name')"
+                                                                data-bs-toggle="tooltip" title="Xóa">
+                                                            <i class="fas fa-trash text-danger"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="4" class="text-center py-4">
+                                                <div class="empty-state">
+                                                    <i class="fas fa-folder-open fa-3x text-muted mb-3"></i>
+                                                    <p>Không có danh mục nào</p>
+                                                    <a asp-action="CreateCategory" class="btn btn-sm btn-primary">
+                                                        <i class="fas fa-plus me-2"></i> Thêm danh mục
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="150">
+                <div class="card shadow-sm border-0 rounded-4">
+                    <div class="card-header bg-transparent border-0 pt-4">
+                        <h5 class="card-title m-0">
+                            <i class="fas fa-info-circle text-primary me-2"></i>
+                            Thống kê danh mục
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="stat-item d-flex align-items-center mb-4">
+                            <div class="stat-icon me-3 bg-primary-subtle text-primary rounded-3 p-3">
+                                <i class="fas fa-tags fa-2x"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 class="h5 mb-0">@Model.Count</h3>
+                                <p class="text-muted mb-0">Tổng số danh mục</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-item d-flex align-items-center mb-4">
+                            <div class="stat-icon me-3 bg-success-subtle text-success rounded-3 p-3">
+                                <i class="fas fa-book fa-2x"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 class="h5 mb-0">@ViewBag.TotalCourses</h3>
+                                <p class="text-muted mb-0">Tổng số khóa học</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-item d-flex align-items-center">
+                            <div class="stat-icon me-3 bg-info-subtle text-info rounded-3 p-3">
+                                <i class="fas fa-star fa-2x"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 class="h5 mb-0">@(ViewBag.MostPopularCategory ?? "Không có dữ liệu")</h3>
+                                <p class="text-muted mb-0">Danh mục phổ biến nhất</p>
+                            </div>
+                        </div>
+                        
+                        <div class="category-tips bg-light p-4 rounded-3 mt-4">
+                            <h6 class="mb-3"><i class="fas fa-lightbulb text-warning me-2"></i> Mẹo quản lý</h6>
+                            <p class="text-muted mb-0">Danh mục nên ngắn gọn, dễ hiểu và phân loại rõ ràng để người dùng dễ dàng tìm kiếm khóa học.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal xác nhận xóa -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header border-0">
+                <h5 class="modal-title" id="deleteModalLabel">Xác nhận xóa</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body py-4">
+                <div class="text-center mb-4">
+                    <i class="fas fa-exclamation-triangle fa-3x text-warning mb-3"></i>
+                    <h5>Bạn có chắc chắn muốn xóa?</h5>
+                    <p class="text-muted mb-0">Danh mục <strong id="categoryName"></strong> sẽ bị xóa vĩnh viễn.</p>
+                </div>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-2"></i> Hủy
+                </button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteBtn">
+                    <i class="fas fa-trash me-2"></i> Xóa danh mục
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        let categoryToDelete = null;
+
+        function confirmDelete(id, name) {
+            categoryToDelete = id;
+            document.getElementById('categoryName').textContent = name;
+            new bootstrap.Modal(document.getElementById('deleteModal')).show();
+        }
+
+        document.getElementById('confirmDeleteBtn').addEventListener('click', function() {
+            if (categoryToDelete) {
+                fetch(`/Admin/DeleteCategory/${categoryToDelete}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        window.location.reload();
+                    } else {
+                        alert(data.message || 'Có lỗi xảy ra khi xóa danh mục');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Có lỗi xảy ra khi xóa danh mục');
+                });
+            }
+        });
+        
+        // Enable tooltips
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });
+        
+        // Category search functionality
+        document.getElementById('categorySearch').addEventListener('keyup', function() {
+            const searchValue = this.value.toLowerCase();
+            const tableRows = document.querySelectorAll('#categoriesTable tbody tr');
+            
+            tableRows.forEach(row => {
+                const categoryName = row.querySelector('.category-name').textContent.toLowerCase();
+                const categoryDescription = row.querySelector('.category-description').textContent.toLowerCase();
+                
+                if (categoryName.includes(searchValue) || categoryDescription.includes(searchValue)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    </script>
+}

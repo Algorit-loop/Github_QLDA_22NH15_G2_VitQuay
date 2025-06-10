@@ -1,0 +1,387 @@
+@model AppEL.ViewModels.LessonViewModel
+
+@{
+    ViewData["Title"] = "Thêm bài học mới";
+}
+
+<div class="lesson-page-wrapper">
+    <!-- Hero Section with Animated Background -->
+    <div class="lesson-hero-section">
+        <div class="lesson-floating-shape shape1"></div>
+        <div class="lesson-floating-shape shape2"></div>
+        <div class="lesson-floating-shape shape3"></div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="page-header text-center" data-aos="fade-up">
+                        <span class="badge bg-success-subtle text-success mb-2">
+                            <i class="fas fa-plus-circle me-1"></i> Tạo mới
+                        </span>
+                        <h1 class="display-4 fw-bold text-gradient mb-3">@ViewData["Title"]</h1>
+                        <p class="lead text-muted">Xây dựng nội dung giảng dạy chất lượng để truyền đạt kiến thức hiệu quả</p>
+                    
+                        <nav aria-label="breadcrumb" class="mt-4 d-flex justify-content-center">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a asp-controller="Course" asp-action="Index">Khóa học</a></li>
+                                <li class="breadcrumb-item"><a asp-controller="Course" asp-action="Details" asp-route-id="@Model.CourseId">Chi tiết khóa học</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Thêm bài học</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="lesson-create-content py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <!-- Form Card with Shadow -->
+                    <div class="card lesson-form-card border-0 shadow-lg rounded-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card-body p-0">
+                            <div class="row g-0">
+                                <!-- Video Preview Section - Left Side -->
+                                <div class="col-lg-5">
+                                    <div class="video-preview-section h-100">
+                                        <div class="video-bg-overlay"></div>
+                                        <div class="video-content p-4 p-lg-5">
+                                            <h3 class="h4 fw-bold text-white mb-4">
+                                                <i class="fas fa-film me-2"></i> Video bài học
+                                            </h3>
+                                            
+                                            <div id="videoPreviewArea" class="video-preview-area mb-4">
+                                                <div class="no-video-yet p-4 text-center rounded">
+                                                    <div class="video-icon-large">
+                                                        <i class="fas fa-film fa-4x mb-3 text-white-50"></i>
+                                                    </div>
+                                                    <h5 class="text-white mb-2">Chưa có video</h5>
+                                                    <p class="text-white-50 mb-0">Video sẽ hiển thị tại đây khi bạn tải lên</p>
+                                                </div>
+                                                
+                                                <div id="videoPreviewContainer" class="d-none">
+                                                    <div class="position-relative">
+                                                        <video id="videoPreview" class="w-100 rounded" controls></video>
+                                                        <button type="button" class="btn btn-sm btn-light position-absolute top-0 end-0 m-2 rounded-circle" id="removeVideo">
+                                                            <i class="fas fa-times"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="upload-instructions text-white-50">
+                                                <h5 class="h6 text-white mb-3">Hướng dẫn tải video:</h5>
+                                                <ul class="upload-tips">
+                                                    <li>Hỗ trợ định dạng: MP4, WebM</li>
+                                                    <li>Kích thước tối đa: 500MB</li>
+                                                    <li>Độ phân giải khuyến nghị: 720p hoặc 1080p</li>
+                                                    <li>Tỷ lệ khung hình: 16:9</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <!-- Form Section - Right Side -->
+                                <div class="col-lg-7">
+                                    <div class="lesson-form-section p-4 p-lg-5">
+                                        <form method="post" enctype="multipart/form-data" class="lesson-form">
+                                            <input type="hidden" asp-for="CourseId" />
+                                            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                                            <h3 class="h4 mb-4">Thông tin bài học</h3>
+
+                                            <div class="mb-4">
+                                                <label asp-for="Title" class="form-label fw-semibold">
+                                                    <i class="fas fa-heading me-1 text-primary"></i> 
+                                                    Tiêu đề bài học <span class="text-danger">*</span>
+                                                </label>
+                                                <input asp-for="Title" class="form-control form-control-lg rounded-pill" placeholder="Nhập tiêu đề bài học" />
+                                                <span asp-validation-for="Title" class="text-danger small"></span>
+                                            </div>
+
+                                            <div class="mb-4">
+                                                <label asp-for="Description" class="form-label fw-semibold">
+                                                    <i class="fas fa-align-left me-1 text-primary"></i> 
+                                                    Mô tả <span class="text-danger">*</span>
+                                                </label>
+                                                <textarea asp-for="Description" class="form-control rounded-3" rows="5" placeholder="Mô tả nội dung bài học"></textarea>
+                                                <span asp-validation-for="Description" class="text-danger small"></span>
+                                            </div>
+                                            
+                                            <div class="row mb-4">
+                                                <div class="col-md-6">
+                                                    <label asp-for="Order" class="form-label fw-semibold">
+                                                        <i class="fas fa-sort-numeric-down me-1 text-primary"></i>
+                                                        Thứ tự bài học <span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text rounded-start-pill bg-light"><i class="fas fa-sort-numeric-down"></i></span>
+                                                        <input asp-for="Order" class="form-control rounded-end-pill" type="number" min="1" placeholder="Ví dụ: 1" />
+                                                    </div>
+                                                    <span asp-validation-for="Order" class="text-danger small"></span>
+                                                    <small class="form-text text-muted">Thứ tự hiển thị trong danh sách bài học</small>
+                                                </div>
+                                                
+                                                <div class="col-md-6">
+                                                    <label class="form-label fw-semibold">
+                                                        <i class="fas fa-globe me-1 text-primary"></i>
+                                                        Trạng thái bài học
+                                                    </label>
+                                                    <div class="form-check form-switch form-switch-lg publish-switch">
+                                                        <input asp-for="IsPublished" class="form-check-input" type="checkbox" />
+                                                        <label asp-for="IsPublished" class="form-check-label ms-2">
+                                                            <span id="lessonPublishStatus">Xuất bản</span>
+                                                            <small class="d-block text-muted" id="lessonPublishHint">Bài học hiển thị công khai khi được xuất bản</small>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="video-upload-section p-4 bg-light rounded-4 mb-4">
+                                                <h4 class="h6 fw-bold d-flex align-items-center mb-3">
+                                                    <span class="icon-circle bg-primary text-white me-2">
+                                                        <i class="fas fa-cloud-upload-alt"></i>
+                                                    </span>
+                                                    Tải lên video bài học
+                                                </h4>
+                                                
+                                                <div class="video-drop-area mb-3" id="videoDropArea">
+                                                    <input asp-for="VideoFile" class="d-none" type="file" accept="video/*" id="videoFileInput" />
+                                                    <label for="videoFileInput" class="video-upload-label">
+                                                        <div class="video-icon-wrapper">
+                                                            <i class="fas fa-cloud-upload-alt fa-2x mb-3"></i>
+                                                        </div>
+                                                        <div class="video-upload-text">
+                                                            <h5 class="h6 mb-2">Kéo thả video vào đây hoặc click để chọn</h5>
+                                                            <p class="text-muted small mb-0">Hỗ trợ các định dạng: MP4, WebM (Tối đa 500MB)</p>
+                                                        </div>
+                                                        
+                                                        <div class="upload-progress d-none">
+                                                            <div class="progress" style="height: 6px;">
+                                                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" 
+                                                                    role="progressbar" style="width: 0%"></div>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                                
+                                                <span asp-validation-for="VideoFile" class="text-danger d-block"></span>
+                                            </div>
+                                            
+                                            <div class="mt-5 d-flex flex-column flex-md-row justify-content-between gap-3">
+                                                <a asp-controller="Course" asp-action="Details" asp-route-id="@Model.CourseId" class="btn btn-outline-secondary rounded-pill">
+                                                    <i class="fas fa-arrow-left me-2"></i> Quay lại
+                                                </a>
+                                                <button type="submit" class="btn btn-primary rounded-pill px-5">
+                                                    <i class="fas fa-save me-2"></i> Lưu bài học
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function() {
+            // Initialize AOS for animations
+            AOS.init({
+                duration: 800,
+                once: true,
+                easing: 'ease-in-out'
+            });
+            
+            // Toggle publish status text with animation
+            $('#IsPublished').change(function() {
+                const statusText = $('#lessonPublishStatus');
+                const hintText = $('#lessonPublishHint');
+                
+                statusText.fadeOut(200, function() {
+                    if ($('#IsPublished').is(':checked')) {
+                        statusText.text('Xuất bản ngay').fadeIn(200);
+                        hintText.text('Bài học sẽ hiển thị công khai');
+                    } else {
+                        statusText.text('Lưu nháp').fadeIn(200);
+                        hintText.text('Bài học sẽ được lưu ở chế độ nháp');
+                    }
+                });
+            });
+            
+            // File input handling with enhanced UI feedback
+            const videoInput = document.getElementById('videoFileInput');
+            const videoPreview = document.getElementById('videoPreview');
+            const videoPreviewContainer = document.getElementById('videoPreviewContainer');
+            const noVideoYet = document.querySelector('.no-video-yet');
+            const videoDropArea = document.getElementById('videoDropArea');
+            const removeVideoBtn = document.getElementById('removeVideo');                    // Handle file selection with validation
+                    videoInput.addEventListener('change', function(e) {
+                        if (this.files && this.files[0]) {
+                            const file = this.files[0];
+                            const fileSize = file.size / 1024 / 1024; // Convert to MB
+                            const fileType = file.type;
+                            
+                            // Check file type
+                            if (fileType !== 'video/mp4' && fileType !== 'video/webm') {
+                                showVideoError('Định dạng không hỗ trợ. Vui lòng sử dụng MP4 hoặc WebM.');
+                                return;
+                            }
+                            
+                            // Check file size (max 500MB)
+                            if (fileSize > 500) {
+                                showVideoError('Kích thước file quá lớn. Tối đa 500MB.');
+                                return;
+                            }
+                            
+                            // Show upload progress bar simulation
+                            const progressBar = videoDropArea.querySelector('.upload-progress');
+                            const progressBarInner = progressBar.querySelector('.progress-bar');
+                            progressBar.classList.remove('d-none');
+                            
+                            let progress = 0;
+                            const progressInterval = setInterval(function() {
+                                progress += 5;
+                                progressBarInner.style.width = progress + '%';
+                                progressBarInner.setAttribute('aria-valuenow', progress);
+                                
+                                if (progress >= 100) {
+                                    clearInterval(progressInterval);
+                                    
+                                    // Valid file, show preview
+                                    setTimeout(function() {
+                                        progressBar.classList.add('d-none');
+                                        const videoUrl = URL.createObjectURL(file);
+                                        videoPreview.src = videoUrl;
+                                        videoPreviewContainer.classList.remove('d-none');
+                                        noVideoYet.classList.add('d-none');
+                                        
+                                        // Show success message
+                                        $('.video-upload-section').append(
+                                            `<div class="alert alert-success mt-3 fade show" role="alert">
+                                                <i class="fas fa-check-circle me-2"></i> Video đã được tải lên thành công!
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                            </div>`
+                                        );
+                                        
+                                        setTimeout(() => {
+                                            $('.alert').alert('close');
+                                        }, 3000);
+                                    }, 500);
+                                }
+                            }, 100);
+                        }
+                    });
+            
+            function showVideoError(message) {
+                videoInput.value = '';
+                $('.video-upload-section').append(
+                    `<div class="alert alert-danger mt-3 fade show" role="alert">
+                        <i class="fas fa-exclamation-circle me-2"></i> ${message}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>`
+                );
+                
+                setTimeout(() => {
+                    $('.alert').alert('close');
+                }, 5000);
+            }
+            
+            // Handle remove video button with animation
+            removeVideoBtn.addEventListener('click', function() {
+                $(videoPreviewContainer).fadeOut(300, function() {
+                    videoInput.value = '';
+                    videoPreview.src = '';
+                    videoPreviewContainer.classList.add('d-none');
+                    videoPreviewContainer.style.display = '';
+                    $(noVideoYet).fadeIn(300);
+                    noVideoYet.classList.remove('d-none');
+                });
+            });
+            
+            // Enhanced drag and drop
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                videoDropArea.addEventListener(eventName, preventDefaults, false);
+            });
+            
+            function preventDefaults(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            
+            ['dragenter', 'dragover'].forEach(eventName => {
+                videoDropArea.addEventListener(eventName, highlight, false);
+            });
+            
+            ['dragleave', 'drop'].forEach(eventName => {
+                videoDropArea.addEventListener(eventName, unhighlight, false);
+            });
+            
+            function highlight() {
+                videoDropArea.classList.add('highlight');
+                $('.video-icon-wrapper').addClass('animated pulse');
+            }
+            
+            function unhighlight() {
+                videoDropArea.classList.remove('highlight');
+                $('.video-icon-wrapper').removeClass('animated pulse');
+            }
+            
+            videoDropArea.addEventListener('drop', handleDrop, false);
+            
+            function handleDrop(e) {
+                const dt = e.dataTransfer;
+                const files = dt.files;
+                
+                if (files.length) {
+                    videoInput.files = files;
+                    const event = new Event('change');
+                    videoInput.dispatchEvent(event);
+                }
+            }
+            
+            // Add form validation animation
+            $('form').on('submit', function(e) {
+                if (!this.checkValidity()) {
+                    e.preventDefault();
+                    $(this).addClass('was-validated');
+                    
+                    // Scroll to first error with animation
+                    const firstError = $('.is-invalid:first');
+                    if (firstError.length) {
+                        $('html, body').animate({
+                            scrollTop: firstError.offset().top - 150
+                        }, 500);
+                    }
+                } else {
+                    // Show loading state on submit button
+                    const submitBtn = $(this).find('button[type="submit"]');
+                    const originalText = submitBtn.html();
+                    submitBtn.html('<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Đang lưu...');
+                    submitBtn.prop('disabled', true);
+                    
+                    // Return to normal after a few seconds (in case of slow response)
+                    setTimeout(() => {
+                        submitBtn.html(originalText);
+                        submitBtn.prop('disabled', false);
+                    }, 8000);
+                }
+            });
+            
+            // Form input focus effects
+            $('.form-control').on('focus', function() {
+                $(this).closest('.form-group').addClass('focused');
+            }).on('blur', function() {
+                $(this).closest('.form-group').removeClass('focused');
+            });
+        });
+    </script>
+}

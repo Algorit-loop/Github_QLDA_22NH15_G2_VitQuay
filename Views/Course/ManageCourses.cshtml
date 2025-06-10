@@ -1,0 +1,338 @@
+@model List<AppEL.Models.Course>
+
+@{
+    ViewData["Title"] = "Quản lý khóa học";
+}
+
+<div class="admin-section py-5">
+    <div class="container">
+        <!-- Header Section -->
+        <div class="admin-header mb-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2 class="admin-title text-gradient">
+                        <i class="fas fa-books me-2"></i>@ViewData["Title"]
+                    </h2>
+                    <p class="text-muted">Quản lý tất cả khóa học của bạn</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a asp-controller="Course" asp-action="Create" class="btn btn-primary px-4 py-2">
+                        <i class="fas fa-plus-circle me-2"></i> Tạo khóa học mới
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="stat-card bg-gradient-primary">
+                    <div class="stat-card-body">
+                        <div class="stat-card-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="stat-card-info">
+                            <h5 class="stat-card-title">Tổng khóa học</h5>
+                            <p class="stat-card-value">@Model.Count</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-card bg-gradient-info">
+                    <div class="stat-card-body">
+                        <div class="stat-card-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="stat-card-info">
+                            <h5 class="stat-card-title">Tổng học viên</h5>
+                            <p class="stat-card-value">@Model.Sum(c => c.EnrollmentCount)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-card bg-gradient-warning">
+                    <div class="stat-card-body">
+                        <div class="stat-card-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="stat-card-info">
+                            <h5 class="stat-card-title">Tổng bài học</h5>
+                            <p class="stat-card-value">@Model.Sum(c => c.Lessons.Count)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search & Filter -->
+        <div class="card shadow-sm border-0 mb-4">
+            <div class="card-body p-3">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <div class="input-group">
+                            <span class="input-group-text bg-transparent border-end-0">
+                                <i class="fas fa-search text-muted"></i>
+                            </span>
+                            <input type="text" id="courseSearch" class="form-control border-start-0" placeholder="Tìm kiếm khóa học...">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <select id="statusFilter" class="form-select">
+                            <option value="all" selected>Tất cả trạng thái</option>
+                            <option value="published">Đã xuất bản</option>
+                            <option value="draft">Bản nháp</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @if (!Model.Any())
+        {
+            <div class="empty-state text-center py-5">
+                <div class="empty-state-icon">
+                    <i class="fas fa-book-open fa-4x mb-3 text-muted"></i>
+                </div>
+                <h4>Chưa có khóa học nào</h4>
+                <p class="text-muted mb-4">Bạn chưa tạo khóa học nào. Hãy bắt đầu bằng cách tạo khóa học đầu tiên của bạn.</p>
+                <a asp-controller="Course" asp-action="Create" class="btn btn-primary px-4">
+                    <i class="fas fa-plus-circle me-2"></i> Tạo khóa học mới
+                </a>
+            </div>
+        }
+        else
+        {
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle" id="coursesTable">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="ps-4">Khóa học</th>
+                                    <th>Danh mục</th>
+                                    <th>Bài học</th>
+                                    <th>Trạng thái</th>
+                                    <th>Lượt đăng ký</th>
+                                    <th class="text-end pe-4">Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var course in Model)
+                                {
+                                    <tr class="course-row" data-status="@(course.IsPublished ? "published" : "draft")">
+                                        <td class="ps-4">
+                                            <div class="d-flex align-items-center">
+                                                <div class="course-thumbnail me-3">
+                                                    <img src="@(string.IsNullOrEmpty(course.ImageUrl) ? "/images/course-default.jpg" : course.ImageUrl)" 
+                                                         alt="@course.Title" class="rounded" width="70" height="70" style="object-fit: cover;">
+                                                </div>
+                                                <div>
+                                                    <h6 class="mb-1">@course.Title</h6>
+                                                    <div class="small text-muted d-flex align-items-center">
+                                                        <i class="far fa-calendar-alt me-2"></i>
+                                                        Tạo ngày @course.CreatedAt.ToString("dd/MM/yyyy")
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="category-badge category-badge-@GetCategoryClass(course.Category)">
+                                                @course.Category
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <span class="badge rounded-pill bg-secondary me-2">@course.Lessons.Count</span> bài học
+                                            </div>
+                                        </td>
+                                        <td>
+                                            @if (course.IsPublished)
+                                            {
+                                                <div class="status-badge status-published">
+                                                    <i class="fas fa-check-circle me-1"></i> Đã xuất bản
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="status-badge status-draft">
+                                                    <i class="fas fa-pencil-alt me-1"></i> Bản nháp
+                                                </div>
+                                            }
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <span class="badge rounded-pill bg-info text-white me-2">@course.EnrollmentCount</span> 
+                                                <span>học viên</span>
+                                            </div>
+                                        </td>
+                                        <td class="text-end pe-4">
+                                            <div class="dropdown">
+                                                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-h me-1"></i> Thao tác
+                                                </button>
+                                                <ul class="dropdown-menu dropdown-menu-end">
+                                                    <li>
+                                                        <a asp-action="Edit" asp-route-id="@course.Id" class="dropdown-item">
+                                                            <i class="fas fa-edit me-2 text-primary"></i> Chỉnh sửa
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a asp-controller="Lesson" asp-action="Index" asp-route-courseId="@course.Id" class="dropdown-item">
+                                                            <i class="fas fa-tasks me-2 text-info"></i> Quản lý bài học
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a asp-action="Details" asp-route-id="@course.Id" class="dropdown-item">
+                                                            <i class="fas fa-eye me-2 text-secondary"></i> Xem chi tiết
+                                                        </a>
+                                                    </li>
+                                                    <li><hr class="dropdown-divider"></li>
+                                                    <li>
+                                                        <a href="#" class="dropdown-item text-danger" onclick="showDeleteModal('@course.Id', '@course.Title')">
+                                                            <i class="fas fa-trash me-2"></i> Xóa
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Delete Course Modal -->
+<div class="modal fade" id="deleteCourseModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header bg-danger text-white border-0">
+                <h5 class="modal-title">Xác nhận xóa khóa học</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex align-items-center">
+                    <div class="modal-icon bg-danger text-white rounded-circle me-3">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div>
+                        <p>Bạn có chắc chắn muốn xóa khóa học <strong id="courseNameToDelete"></strong>?</p>
+                        <p class="text-danger mb-0"><small>Lưu ý: Hành động này không thể hoàn tác.</small></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" id="confirmDeleteBtn" class="btn btn-danger">
+                    <i class="fas fa-trash me-1"></i> Xác nhận xóa
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@functions {
+    string GetCategoryClass(string category)
+    {
+        return category.ToLower() switch
+        {
+            var c when c.Contains("lập trình") => "programming",
+            var c when c.Contains("thiết kế") => "design",
+            var c when c.Contains("kinh doanh") => "business",
+            var c when c.Contains("ngôn ngữ") => "language",
+            _ => "default"
+        };
+    }
+}
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Search functionality
+            $("#courseSearch").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#coursesTable tbody tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+            
+            // Filter by status
+            $("#statusFilter").on("change", function() {
+                var value = $(this).val();
+                if (value === "all") {
+                    $(".course-row").show();
+                } else {
+                    $(".course-row").hide();
+                    $(".course-row[data-status='" + value + "']").show();
+                }
+            });
+        });
+
+        function showDeleteModal(courseId, courseTitle) {
+            $('#courseNameToDelete').text(courseTitle);
+            $('#confirmDeleteBtn').data('course-id', courseId);
+            $('#deleteCourseModal').modal('show');
+        }
+        
+        $('#confirmDeleteBtn').on('click', function() {
+            const courseId = $(this).data('course-id');
+            
+            $.ajax({
+                url: '@Url.Action("Delete", "Course")',
+                type: 'POST',
+                data: { id: courseId },
+                success: function(response) {
+                    if (response.success) {
+                        showToast('Thành công', 'Khóa học đã được xóa thành công!', 'success');
+                        setTimeout(() => location.reload(), 1500);
+                    } else {
+                        showToast('Lỗi', response.message, 'error');
+                    }
+                    $('#deleteCourseModal').modal('hide');
+                },
+                error: function() {
+                    showToast('Lỗi', 'Có lỗi xảy ra khi xóa khóa học.', 'error');
+                    $('#deleteCourseModal').modal('hide');
+                }
+            });
+        });
+        
+        // Toast notification function
+        function showToast(title, message, type) {
+            // Check if we have a toast container
+            if ($('#toast-container').length === 0) {
+                $('body').append('<div id="toast-container" class="position-fixed bottom-0 end-0 p-3" style="z-index: 5"></div>');
+            }
+            
+            // Toast class based on type
+            const toastClass = type === 'success' ? 'text-bg-success' : 'text-bg-danger';
+            const iconClass = type === 'success' ? 'fas fa-check-circle' : 'fas fa-exclamation-circle';
+            
+            const toast = `
+                <div class="toast align-items-center ${toastClass} border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            <i class="${iconClass} me-2"></i>
+                            <strong>${title}:</strong> ${message}
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                </div>
+            `;
+            
+            $('#toast-container').append(toast);
+            const toastEl = $('#toast-container .toast:last');
+            const bsToast = new bootstrap.Toast(toastEl, {
+                autohide: true,
+                delay: 3000
+            });
+            bsToast.show();
+        }
+    </script>
+}

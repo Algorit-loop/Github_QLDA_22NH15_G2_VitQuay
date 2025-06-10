@@ -1,0 +1,141 @@
+@{
+    ViewData["Title"] = "Chatbot Hỗ Trợ";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0">Chatbot Hỗ Trợ</h2>
+                </div>
+                <div class="card-body">
+                    <div id="chat-container" class="mb-3" style="height: 400px; overflow-y: auto; border: 1px solid #ddd; padding: 15px; border-radius: 5px;">
+                        <div class="system-message">
+                            <p>Xin chào! Tôi là chatbot của E-Learning. Tôi có thể giúp gì cho bạn hôm nay?</p>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" id="message-input" class="form-control" placeholder="Nhập tin nhắn của bạn...">
+                        <div class="input-group-append">
+                            <button id="send-button" class="btn btn-primary">Gửi</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Xử lý gửi tin nhắn
+            function sendMessage() {
+                var message = $('#message-input').val().trim();
+                if (!message) return;
+
+                // Hiển thị tin nhắn người dùng
+                appendMessage('user', message);
+                $('#message-input').val('');
+
+                // Hiển thị đang tải
+                appendLoadingMessage();
+
+                // Gửi tin nhắn tới server
+                $.ajax({
+                    url: '/api/ChatbotApi/SendMessage',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ message: message }),
+                    headers: {
+                        'RequestVerificationToken': $('meta[name="__RequestVerificationToken"]').attr('content')
+                    },
+                    success: function (data) {
+                        // Xóa tin nhắn đang tải
+                        $('.loading-message').remove();
+                        
+                        if (data.success) {
+                            // Hiển thị phản hồi
+                            appendMessage('bot', data.response);
+                        } else {
+                            // Hiển thị lỗi
+                            appendMessage('system', 'Đã xảy ra lỗi: ' + (data.message || 'Không thể kết nối với server'));
+                        }
+                    },
+                    error: function () {
+                        // Xóa tin nhắn đang tải
+                        $('.loading-message').remove();
+                        // Hiển thị lỗi
+                        appendMessage('system', 'Không thể kết nối với server. Vui lòng thử lại sau.');
+                    }
+                });
+            }
+
+            // Thêm tin nhắn vào khung chat
+            function appendMessage(sender, message) {
+                var messageClass = (sender === 'user') ? 'user-message' : 
+                                  (sender === 'bot') ? 'bot-message' : 'system-message';
+                
+                var $message = $('<div>').addClass(messageClass)
+                                       .append($('<p>').html(message));
+                
+                $('#chat-container').append($message);
+                
+                // Cuộn xuống dưới
+                $('#chat-container').scrollTop($('#chat-container')[0].scrollHeight);
+            }
+
+            // Thêm tin nhắn đang tải
+            function appendLoadingMessage() {
+                var $loadingMessage = $('<div>').addClass('loading-message system-message')
+                                             .append($('<p>').text('Đang xử lý...'));
+                
+                $('#chat-container').append($loadingMessage);
+                $('#chat-container').scrollTop($('#chat-container')[0].scrollHeight);
+            }
+
+            // Xử lý sự kiện gửi
+            $('#send-button').click(function () {
+                sendMessage();
+            });
+
+            $('#message-input').keypress(function (e) {
+                if (e.which === 13) { // Enter key
+                    sendMessage();
+                }
+            });
+        });
+    </script>
+
+    <style>
+        /* Styles cho các loại tin nhắn */
+        .user-message, .bot-message, .system-message {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            max-width: 80%;
+        }
+
+        .user-message {
+            background-color: #dcf8c6;
+            margin-left: auto;
+            margin-right: 0;
+        }
+
+        .bot-message {
+            background-color: #f1f1f1;
+        }
+
+        .system-message {
+            background-color: #e3f2fd;
+            width: 100%;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .user-message p, .bot-message p, .system-message p {
+            margin: 0;
+        }
+    </style>
+}

@@ -1,0 +1,298 @@
+@model AppEL.ViewModels.CourseLessonsViewModel
+
+@{
+    ViewData["Title"] = "Quản lý bài học";
+}
+
+<div class="admin-section py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <!-- Header Area -->
+                <div class="page-header mb-4" data-aos="fade-up">
+                    <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between">
+                        <div>
+                            <h1 class="h2 fw-bold mb-1">Quản lý bài học</h1>
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a asp-controller="Course" asp-action="ManageCourses">Khóa học của tôi</a></li>
+                                    <li class="breadcrumb-item"><a asp-controller="Course" asp-action="Details" asp-route-id="@Model.CourseId">Chi tiết khóa học</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Quản lý bài học</li>
+                                </ol>
+                            </nav>
+                        </div>
+                        <div class="mt-3 mt-md-0">
+                            <a asp-controller="Lesson" asp-action="Create" asp-route-courseId="@Model.CourseId" class="btn btn-primary rounded-pill">
+                                <i class="fas fa-plus me-2"></i>Thêm bài học mới
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Title Card -->
+                <div class="card shadow-sm mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="course-icon me-3">
+                                <i class="fas fa-graduation-cap fa-2x text-primary"></i>
+                            </div>
+                            <div>
+                                <h2 class="h5 mb-1">Khóa học: @Model.CourseTitle</h2>
+                                <p class="small text-muted mb-0">@Model.Lessons.Count bài học</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lessons Management Card -->
+                <div class="card shadow-sm" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card-header bg-white py-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h3 class="h5 mb-0">Danh sách bài học</h3>
+                            <div class="search-wrapper">
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light border-0">
+                                        <i class="fas fa-search text-muted"></i>
+                                    </span>
+                                    <input type="text" id="lessonSearchInput" class="form-control border-0 bg-light" placeholder="Tìm kiếm bài học...">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        @if (Model.Lessons.Any())
+                        {
+                            <div class="table-responsive">
+                                <table class="table table-hover align-middle mb-0" id="lessonsTable">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th style="width: 70px" class="text-center">STT</th>
+                                            <th>Tiêu đề</th>
+                                            <th class="text-center" style="width: 120px">Video</th>
+                                            <th class="text-center" style="width: 120px">Trạng thái</th>
+                                            <th class="text-center" style="width: 150px">Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var lesson in Model.Lessons.OrderBy(l => l.Order))
+                                        {
+                                            <tr>
+                                                <td class="text-center fw-medium">@lesson.Order</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="lesson-icon me-2">
+                                                            @if (!string.IsNullOrEmpty(lesson.VideoPath))
+                                                            {
+                                                                <i class="fas fa-film text-success"></i>
+                                                            }
+                                                            else
+                                                            {
+                                                                <i class="fas fa-file-alt text-secondary"></i>
+                                                            }
+                                                        </div>
+                                                        <div>
+                                                            <h6 class="mb-0">@lesson.Title</h6>
+                                                            @if (!string.IsNullOrEmpty(lesson.Description) && lesson.Description.Length > 50)
+                                                            {
+                                                                <small class="text-muted">@lesson.Description.Substring(0, 50)...</small>
+                                                            }
+                                                            else if (!string.IsNullOrEmpty(lesson.Description))
+                                                            {
+                                                                <small class="text-muted">@lesson.Description</small>
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    @if (!string.IsNullOrEmpty(lesson.VideoPath))
+                                                    {
+                                                        <span class="badge bg-success-subtle text-success">
+                                                            <i class="fas fa-check-circle me-1"></i> Có
+                                                        </span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="badge bg-secondary-subtle text-secondary">
+                                                            <i class="fas fa-times-circle me-1"></i> Không
+                                                        </span>
+                                                    }
+                                                </td>
+                                                <td class="text-center">
+                                                    @if (lesson.IsPublished)
+                                                    {
+                                                        <span class="badge bg-success-subtle text-success">
+                                                            <i class="fas fa-check-circle me-1"></i> Xuất bản
+                                                        </span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="badge bg-warning-subtle text-warning">
+                                                            <i class="fas fa-pencil-alt me-1"></i> Nháp
+                                                        </span>
+                                                    }
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex justify-content-center">
+                                                        <a asp-controller="Lesson" asp-action="Edit" asp-route-courseId="@Model.CourseId" asp-route-id="@lesson.Id" class="btn btn-outline-primary btn-sm me-2" title="Chỉnh sửa">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                        <button type="button" class="btn btn-outline-danger btn-sm" onclick="confirmDeleteLesson('@Model.CourseId','@lesson.Id', '@lesson.Title')" title="Xóa">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="empty-state text-center py-5">
+                                <div class="empty-state-icon">
+                                    <i class="fas fa-film fa-3x"></i>
+                                </div>
+                                <h3 class="h5 mb-3">Chưa có bài học nào</h3>
+                                <p class="text-muted mb-3">Bắt đầu tạo nội dung cho khóa học của bạn bằng cách thêm bài học mới.</p>
+                                <a asp-controller="Lesson" asp-action="Create" asp-route-courseId="@Model.CourseId" class="btn btn-primary">
+                                    <i class="fas fa-plus me-2"></i>Thêm bài học đầu tiên
+                                </a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Lesson Confirmation Modal -->
+<div class="modal fade" id="deleteLessonModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">
+                    <i class="fas fa-exclamation-triangle me-2"></i>Xác nhận xóa
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body py-4">
+                <div class="text-center mb-3">
+                    <div class="modal-icon text-danger mb-3">
+                        <i class="fas fa-trash fa-3x"></i>
+                    </div>
+                    <h4 class="h5" id="deleteLessonTitle">Bạn có chắc muốn xóa bài học này?</h4>
+                    <p class="text-muted" id="deleteLessonConfirmText">Hành động này không thể hoàn tác. Tất cả nội dung video và dữ liệu liên quan sẽ bị xóa vĩnh viễn.</p>
+                </div>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Hủy bỏ</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteLessonBtn">
+                    <i class="fas fa-trash me-2"></i>Xóa bài học
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Initialize AOS animations
+            AOS.init({
+                duration: 800,
+                once: true
+            });
+            
+            // Search functionality
+            $("#lessonSearchInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#lessonsTable tbody tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+        });
+        
+        // Delete lesson confirmation
+        function confirmDeleteLesson(courseId, lessonId, lessonTitle) {
+            $('#deleteLessonTitle').text('Bạn có chắc muốn xóa bài học "' + lessonTitle + '"?');
+            
+            $('#confirmDeleteLessonBtn').off('click').on('click', function() {
+                deleteLesson(courseId, lessonId);
+            });
+            
+            var deleteModal = new bootstrap.Modal(document.getElementById('deleteLessonModal'));
+            deleteModal.show();
+        }
+        
+        // Delete lesson AJAX
+        function deleteLesson(courseId, lessonId) {
+            $.ajax({
+                url: '@Url.Action("Delete", "Lesson")',
+                type: 'POST',
+                data: {
+                    courseId: courseId,
+                    id: lessonId
+                },
+                success: function (result) {
+                    if (result.success) {
+                        // Close modal
+                        $('#deleteLessonModal').modal('hide');
+                        
+                        // Show success toast
+                        showToast('Thành công!', 'Đã xóa bài học thành công.', 'success');
+                        
+                        // Reload page after slight delay
+                        setTimeout(function() {
+                            window.location.reload();
+                        }, 1000);
+                    } else {
+                        // Show error toast
+                        showToast('Lỗi!', result.message || 'Không thể xóa bài học.', 'error');
+                    }
+                },
+                error: function () {
+                    showToast('Lỗi!', 'Đã xảy ra lỗi khi xóa bài học.', 'error');
+                }
+            });
+        }
+        
+        // Toast notification function
+        function showToast(title, message, type) {
+            const toastClass = type === 'success' ? 'bg-success' : 'bg-danger';
+            const icon = type === 'success' ? 'fas fa-check-circle' : 'fas fa-exclamation-circle';
+            
+            const toastHtml = `
+                <div class="toast align-items-center ${toastClass} text-white border-0 fade hide mb-3" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            <i class="${icon} me-2"></i>
+                            <strong>${title}</strong> ${message}
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                </div>
+            `;
+            
+            const toastContainer = document.createElement('div');
+            toastContainer.className = 'toast-container position-fixed bottom-0 end-0 p-3';
+            toastContainer.style.zIndex = '5';
+            toastContainer.innerHTML = toastHtml;
+            document.body.appendChild(toastContainer);
+            
+            const toastElement = toastContainer.querySelector('.toast');
+            const toast = new bootstrap.Toast(toastElement, { 
+                animation: true,
+                autohide: true,
+                delay: 4000
+            });
+            toast.show();
+            
+            // Remove toast from DOM after it's hidden
+            toastElement.addEventListener('hidden.bs.toast', function() {
+                toastContainer.remove();
+            });
+        }
+    </script>
+}

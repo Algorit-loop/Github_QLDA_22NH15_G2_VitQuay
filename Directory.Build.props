@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup>
+    <!-- Disable static web assets compression to avoid the issue -->
+    <StaticWebAssetCompressionEnabled>false</StaticWebAssetCompressionEnabled>
+  </PropertyGroup>
+</Project>
